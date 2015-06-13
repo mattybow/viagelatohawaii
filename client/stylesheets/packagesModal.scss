@@ -1,0 +1,13 @@
+#packagesModal{
+	background-color:rgba(220, 233, 239,0.9);
+	transition:transform 800ms cubic-bezier(.19,1,.22,1) 0ms;
+	transform:translateX(100%);
+
+	&.open{
+		transform:translateX(0%);
+	}
+}
+.catering-modal-price{
+	font-size: 3em;
+	line-height: 2em;
+}
