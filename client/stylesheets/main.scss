@@ -1,7 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,600);
 $via-text-grey:#6c6861;
+$via-text-black:#1A1816;
 $via-blue:#e2f0f7;
+$via-yellow:#fffdf2;
+$via-dark-yellow:#fef3c8;
 body{
 	font-family: 'Raleway', sans-serif;
 	font-weight:400;
@@ -9,10 +12,10 @@ body{
 }
 
 .via-yellow{
-	background-color:#fffdf2;
+	background-color:$via-yellow;
 }
 .via-dark-yellow{
-  background-color:#fef3c8;
+  background-color:$via-dark-yellow;
 }
 .via-blue{
 	background-color:$via-blue;
@@ -107,6 +110,10 @@ button:focus, button:active{
 .icon-angle-right:before { content: '\e804'; } /* '' */
 .icon-close:before { content: '\e807'; } /* '' */
 .icon-arrow:before { content: '\e808'; } /* '' */
+
+.icon-90:before{
+  transform:rotateZ(90deg);
+}
 
 .section{
 	padding:5% 15%;

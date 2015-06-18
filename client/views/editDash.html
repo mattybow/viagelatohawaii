@@ -1,9 +1,48 @@
 <template name="editDash">
 	<div id="edit-dashboard">
-		{{> loginButtons }}
-		<h3>This is the edit dashboard</h3>
-		<button>flavors</button>
-		<button>press</button>
-		<button>special message</button>
+		<nav class={{showInputCtrls}}>
+			<div class="brand">
+				<a href="/"><img src="images/via-logo-small.png" alt=""></a>
+				<span><b>admin</b></span>
+			</div>
+			<div class="login-ctrls">
+			{{#if currentUser}}
+				<div class="login-button" id="show-login-ctrls-button">
+					{{currentUser.username}} <span class="icon-angle-right icon-90"></span>
+				</div>
+				<button id="logout-button">logout</button>
+			{{else}}
+				{{#if loggingIn}}
+					<div id="logging-in">logging in...</div>
+				{{else}}
+					<div class="login-button" id="show-login-ctrls-button">
+						login <span class="icon-angle-right icon-90"></span>
+					</div>
+					<div class="login-fields">
+						<form action="">
+							<div class="login-input-container {{showUsernameInput}}" id="username-field">
+								<input class="login-input" type="text" name="username-input">
+								<label class="login-input-label" for="username-input">
+									<span class="input-label-content">username</span>
+								</label>
+							</div>
+							<div class="login-input-container {{showPasswordInput}}" id="password-field">
+								<input class="login-input" type="password" name="password-input">
+								<label class="login-input-label" for="password-input">
+									<span class="input-label-content">password</span>
+								</label>
+							</div>
+							<button id="login-submit">log in</button>
+						</form>
+					</div>
+				{{/if}}
+			{{/if}}
+			</div>
+		</nav>
+		<div class="tab-bar">
+			<div class="tab active-tab" id="edit-flavor-tab">flavors</div>
+			<div class="tab" id="edit-press-tab">press</div>
+			<div class="tab" id="edit-special-message-tab">message</div>
+		</div>
 	</div>
 </template>

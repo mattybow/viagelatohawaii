@@ -15,4 +15,6 @@ http
 stevezhu:lodash
 momentjs:moment
 accounts-password
-accounts-ui
+accounts-ui-unstyled
+reactive-var
+rubaxa:sortable
