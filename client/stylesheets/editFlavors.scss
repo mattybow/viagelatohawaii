@@ -1,0 +1,171 @@
+#editFlavors{
+	height:100%;
+	&> *{
+		float:left;
+		height:100%;
+	}
+}
+
+.top-bar{
+	width:100%;
+	background-color:rgba(255,255,255,.9);
+	border-bottom:1px solid rgba(0,0,0,.1);
+	height:auto;
+	display:flex;
+	flex-flow:row nowrap;
+	padding:10px 20px;
+	position:relative;
+	z-index:9;
+
+	&>*{
+		flex:1 1 auto;
+	}
+}
+
+#lib-title{
+	width:30%;
+	padding-top:10px;
+	font-size:1.2em;
+}
+#flavor-library-ctrls{
+	text-align:right;
+	width:70%;
+}
+
+#editFlavorsDayPreview{
+	width:70%;
+}
+#editFlavorLibrary{
+	width:30%;
+}
+
+#editFlavorLibrary, #editFlavorsDayPreview{
+	position:relative;
+
+	.content{
+		height:100%;
+		overflow-y: scroll; /* has to be scroll, not auto */
+  		position: absolute;
+		-webkit-overflow-scrolling: touch;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+	
+}
+#flavors-preview-title{
+	font-size:28px;
+}
+
+#flavor-preview-ctrls{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	z-index:1;
+	padding:20px 10px;
+	text-align:center;
+	
+	& > *{
+		margin:0;
+	}
+}
+
+.flavor-list{
+	display:flex;
+	flex-flow:row wrap;
+	justify-content:center;
+	padding-top: 63px;
+}
+
+.lib-flavor{
+	position:relative;
+	width: 350px;
+	padding: 20px;
+	flex:1 1 auto;
+	&>*{
+		float:left;
+	}
+}
+
+.lib-flavor-name{
+	min-width:100px;
+	width:calc(100% - 110px);
+	height:100px;
+	padding:10px 0;
+	border-top: 1px solid rgba(0,0,0,.1);
+	position:relative;
+}
+
+.lib-flavor-img-holder{
+	width:100px;
+	height:100px;
+	display:inline-block;
+	vertical-align:middle;
+	margin-right:10px;
+	img{
+		width:100px;
+		height:auto;
+	}
+}
+
+.lib-flavor-buttons{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+.btn-solid{
+	padding:10px;
+	background-color:rgba(0,0,0,.2);
+	border-radius:0;
+	border:none
+}
+.btn-line{
+	margin-left:5px;
+	padding:10px;
+	border:1px solid rgba(0,0,0,.2);
+	border-radius:0;
+}
+
+@media (max-width:768px){
+	#editFlavorsDayPreview{
+		width:60%;
+	}
+	#editFlavorLibrary{
+		width:40%;
+	}
+}
+
+@media (min-width:375px){
+	span.sm-screen{
+		display:none;
+	}
+}
+
+@media (max-width:375px){
+	#editFlavorsDayPreview{
+		width:20%;
+	}
+	#editFlavorLibrary{
+		width:80%;
+	}
+	.flavor-list{
+		padding-top:60px;
+	}
+	.lib-flavor{
+		padding:10px;
+	}
+	.top-bar{
+		padding:10px;
+	}
+	span.sm-screen{
+		display:inline-block;
+		font-size:20px;
+	}
+	span.lg-screen{
+		display:none;
+	}
+
+}

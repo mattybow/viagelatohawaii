@@ -1,0 +1,36 @@
+<template name="newFlavorForm">
+	<div id="new-flavor-form" class="{{showNewForm}}">
+		<div id="new-form-txfm">
+			<div class="top-bar">
+				<h3>new flavor</h3>
+			</div>
+			<form action="" class="flavor-form-content">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="new-flavor-img-preview">
+							<img src="/images/butter-pecan.jpg" alt="">
+						</div>
+						<h3>flavor name</h3>
+					</div>
+					<div class="col-sm-8">
+						<div class="new-flavor-name form-item">
+							<label for="new-flavor-name">name</label>
+							<input type="text" name="new-flavor-name">
+						</div>
+						<div class="new-flavor-textarea form-item">
+							<label for="new-flavor-descript">description</label>
+							<textarea name="new-flavor-descript" id="" cols="30" rows="10"></textarea>
+						</div>
+						<div class="form-item">
+							<label for="season-selector">seasonal</label>
+							<span class="toggle">
+								<span>yes</span>
+								<span>no</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</template>

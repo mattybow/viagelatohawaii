@@ -1,0 +1,33 @@
+<template name="editFlavorLibrary">
+	<div id="editFlavorLibrary">
+		<div class="top-bar">
+			<div id="lib-title">
+				<b>Library</b>
+			</div>
+			<div id="flavor-library-ctrls">
+				<button class="btn-line">clear all</button>
+				<button class="btn-line" id="new-flavor-button">new</button>
+			</div>
+		</div>
+		
+		<div class="content">
+			<div class="flavor-list">
+				{{#each allFlavors}}
+					<div class="lib-flavor">
+						
+						<div class="lib-flavor-img-holder">
+							<img src="/images/butter-pecan.jpg" alt="">
+						</div>
+						<div class="lib-flavor-name">
+							<div>{{this}}</div>
+							<div class="lib-flavor-buttons">
+								<button class="btn-solid">edit</button>
+								<button class="btn-line">add &nbsp; <span class="icon-arrow"></span></button>
+							</div>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</template>
