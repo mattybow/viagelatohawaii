@@ -6,3 +6,12 @@ Meteor.publish('instagramFeed', function () {
 Meteor.publish('flavorsOfTheDay', function () {
   return Flavors.getFlavorsOfDay();
 });
+
+Meteor.publish("userAuth", function () {
+  if (this.userId) {
+    return Meteor.users.find({_id: this.userId},
+                             {fields: {'authorizations':1}});
+  } else {
+    this.ready();
+  }
+});

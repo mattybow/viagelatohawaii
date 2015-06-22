@@ -5,6 +5,7 @@ $via-text-black:#1A1816;
 $via-blue:#e2f0f7;
 $via-yellow:#fffdf2;
 $via-dark-yellow:#fef3c8;
+$via-green:#e7f5ee;
 body{
 	font-family: 'Raleway', sans-serif;
 	font-weight:400;
@@ -21,7 +22,7 @@ body{
 	background-color:$via-blue;
 }
 .via-green{
-	background-color:#e7f5ee;
+	background-color:$via-green;
 }
 .via-purple{
 	background-color:#C9D7F8;
@@ -49,11 +50,11 @@ button:focus, button:active{
 
 @font-face {
   font-family: 'fontello';
-  src: url('font/fontello.eot?45292298');
-  src: url('font/fontello.eot?45292298#iefix') format('embedded-opentype'),
-       url('font/fontello.woff?45292298') format('woff'),
-       url('font/fontello.ttf?45292298') format('truetype'),
-       url('font/fontello.svg?45292298#fontello') format('svg');
+  src: url('font/fontello.eot?55637154');
+  src: url('font/fontello.eot?55637154#iefix') format('embedded-opentype'),
+       url('font/fontello.woff?55637154') format('woff'),
+       url('font/fontello.ttf?55637154') format('truetype'),
+       url('font/fontello.svg?55637154#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -63,7 +64,7 @@ button:focus, button:active{
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?45292298#fontello') format('svg');
+    src: url('../font/fontello.svg?55637154#fontello') format('svg');
   }
 }
 */
@@ -108,8 +109,15 @@ button:focus, button:active{
 .icon-facebook:before { content: '\e802'; } /* '' */
 .icon-right-dir:before { content: '\e803'; } /* '' */
 .icon-angle-right:before { content: '\e804'; } /* '' */
+.icon-magnifying-glass:before { content: '\e805'; } /* '' */
+.icon-check-mark:before { content: '\e806'; } /* '' */
 .icon-close:before { content: '\e807'; } /* '' */
 .icon-arrow:before { content: '\e808'; } /* '' */
+.icon-upload:before { content: '\e809'; } /* '' */
+.icon-trash-bin:before { content: '\e80a'; } /* '' */
+.icon-notifications:before { content: '\e80b'; } /* '' */
+.icon-plus:before { content: '\e80c'; } /* '' */
+.icon-download:before { content: '\e80d'; } /* '' */
 
 .icon-90:before{
   transform:rotateZ(90deg);
@@ -155,6 +163,10 @@ b{
 }
 .text-left{
   text-align: left;
+}
+
+label{
+  margin:0;
 }
 
 @media (max-width:375px){

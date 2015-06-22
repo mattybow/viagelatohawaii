@@ -1,7 +1,19 @@
+var tabNames = {
+	flavors:{templateName:'editFlavors'},
+	press:{templateName:'editPress'},
+	text:{templateName:'editText'},
+	users:{templateName:'editUsers'}
+};
+
 Template.editDash.onCreated(function(){
+	var initialTab = 'flavors';
+	var routeData = this.data;
+	if(routeData) initialTab = routeData.tab || initialTab;
 	this.showInputCtrls = new ReactiveVar(false);
 	this.usernameInput = new ReactiveVar(false);
 	this.passwordInput = new ReactiveVar(false);
+	this.activeTab = new ReactiveVar(initialTab);
+	Meteor.subscribe("userAuth");
 });
 
 Template.editDash.helpers({
@@ -13,6 +25,27 @@ Template.editDash.helpers({
 	},
 	showPasswordInput:function(){
 		return Template.instance().passwordInput.get() ? 'input-filled' : '';
+	},
+	getTabs:function(){
+		var user = Meteor.user();
+		if('authorizations' in user){
+			return user.authorizations.map(function(auth){
+				return {
+					tabName:auth,
+					templateName:tabNames[auth].templateName
+				};
+			});
+		} else {
+			return [];
+		}
+		
+	},
+	isActiveTabClass:function(a){
+		return this.tabName===Template.instance().activeTab.get() ? 'active-tab' : ''
+	},
+	getTabTemplate:function(){
+		var activeTabName = Template.instance().activeTab.get();
+		return tabNames[activeTabName].templateName;
 	}
 });
 
@@ -68,5 +101,14 @@ Template.editDash.events({
 		e.stopPropagation();
 		e.preventDefault();
 		Meteor.logout();
+	},
+	'click .tab':function(e){
+		var currentActiveTemplate = Template.instance().activeTab.get();
+		if(this.tabName !== currentActiveTemplate){
+			Template.instance().activeTab.set(this.tabName);
+		}
+	},
+	'click .freak-button':function(){
+		console.log('omg');
 	}
 });
