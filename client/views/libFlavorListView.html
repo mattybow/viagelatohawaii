@@ -1,0 +1,23 @@
+<template name="libFlavorListView">
+	<div class="lib-flavor">
+		<div class="lib-flavor-img-holder">
+			<img src="/images/butter-pecan.jpg" alt="">
+		</div>
+		<div class="lib-flavor-name">
+			<div>{{flavorName}}</div>
+			<div class="lib-flavor-buttons {{addOrRemove}}">
+				<button class="btn-solid">edit</button>
+				<button class="btn-line lg-screen">
+					<div class="button-text-container">
+						<div class="button-texts">
+							<div>add</div>
+							<div>remove</div>	
+						</div>
+					</div>
+					<span class="icon-arrow"></span>
+				</button>
+				<button class="btn-line sm-screen"><span class="icon-arrow"></span></button>
+			</div>
+		</div>
+	</div>
+</template>

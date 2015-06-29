@@ -9,5 +9,23 @@ Meteor.methods({
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
       return false;
     }
+  },
+  updateFlavorsOfTheDay:function(data){
+    console.log(data);
+    try {
+      var userData = Meteor.user();
+      var docs;
+      if(userData && userData.authorizations.indexOf('flavors') >= 0){
+        console.log('ok');
+        Flavors.update({},{$set:{day:false}},{multi:true});
+        docs = Flavors.update({_id:{$in:data.data}},
+                              {$set:{day:true}},
+                              {multi:true});
+      }
+      return docs;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
   }
 });

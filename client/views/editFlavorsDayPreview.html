@@ -1,12 +1,22 @@
 <template name="editFlavorsDayPreview">
-	<div id="editFlavorsDayPreview" class="via-green">
+	<div id="editFlavorsDayPreview" class="via-offwhite">
 		<div id="flavor-preview-ctrls">
 			<div class="handwriting" id="flavors-preview-title">
 				<span class="lg-screen">Flavors of the Day</span>
-				<span class="sm-screen">Flaves</span>
+			</div>
+			<div class="flavor-preview-buttons sm-screen">
+				<button class="btn-no-line apply-changes {{isDisabled}}"><span class="icon-check-mark"></span></button>
+				<button class="btn-no-line discard-changes {{isDisabled}}"><span class="icon-close"></span></button>
+			</div>
+			<div class="flavor-preview-buttons lg-screen">
+				<button class="btn-line apply-changes {{isDisabled}}">apply changes</button>
+				<button class="btn-line discard-changes {{isDisabled}}">discard changes</button>
 			</div>
 		</div>
-		<div class="content">
+		<div class="content flavors">
+			{{#each getSelectedFlavors}}
+				{{> flavorDayPreview}}
+			{{/each}}
 		</div>
 				
 	</div>

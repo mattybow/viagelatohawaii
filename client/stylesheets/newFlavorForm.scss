@@ -4,12 +4,17 @@
 	bottom:0;
 	right:0;
 	pointer-events:none;
-	overflow:hidden;
+	overflow:auto;
 	z-index:11;
-	width:70%;
+	width:calc(100% - 300px);
 
 	.top-bar{
+		position:absolute;
+		top:0;
+		left:0;
 		background-color:rgba(255,255,255,.5);
+		border:none;
+		padding: 10px 30px;
 	}
 
 	.kaede-input-container{
@@ -53,8 +58,14 @@
 	transition: transform .3s ease, opacity .2s ease;
 	opacity:0;
     transform: translate3d(0px,-100%,0px);
-    background-color:#d3d3d3;
-    height:100%;
+    background-color:#E4E2E2;
+    min-height:100%;
+}
+
+@media (max-width:375px){
+	#new-form-txfm{
+	    transform: translate3d(100%,0px,0px);
+	}
 }
 
 .opened #new-form-txfm{
@@ -101,5 +112,39 @@
 	}
 }
 .flavor-form-content{
-	padding:30px 40px;
+	padding:100px 40px 30px 40px;
+}
+
+@media (max-width:375px){
+	#new-flavor-form{
+		top:0;
+		left: 0;
+  		width: 100%;
+  		.top-bar{
+  			position:fixed;
+  			padding:10px 0;
+  		}
+  		label{
+  			display:block;
+  			margin-bottom:5px;
+  			text-align:left;
+  		}
+  		input,textarea{
+  			width:100%;
+  		}
+
+	}
+	.img-uploader-container{
+		text-align:center;
+		.new-flavor-img-preview{
+			margin:auto;
+		}
+	}
+	.form-title{
+		text-align:center;
+	}
+	.icon-arrow.icon-180{
+		font-size:2em;
+		padding-bottom:2px;
+	}
 }

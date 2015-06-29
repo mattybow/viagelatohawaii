@@ -2,6 +2,10 @@ Meteor.publish('instagramFeed', function () {
   return InstagramData.latest();
 });
 
+Meteor.publish('allFlavors', function () {
+  return Flavors.getAll();
+});
+
 
 Meteor.publish('flavorsOfTheDay', function () {
   return Flavors.getFlavorsOfDay();

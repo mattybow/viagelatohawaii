@@ -17,5 +17,6 @@ momentjs:moment
 accounts-password
 accounts-ui-unstyled
 reactive-var
-rubaxa:sortable
 edgee:slingshot
+richsilv:dumb-collections
+rubaxa:sortable

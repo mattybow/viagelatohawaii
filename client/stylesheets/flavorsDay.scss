@@ -11,12 +11,23 @@
 .day-flavor{
 	width:150px;
 	margin-bottom:20px;
+	position:relative;
 }
 .day-flavor-image{
 	width:80%;
 	margin:auto;
 	border-radius:100px;
+	overflow:hidden;
+	position:relative;
 	background-color:rgba(0,0,0,.1);
+
+	img{
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:auto;
+	}
 }
 .day-flavor-image:before{
 	content:'';

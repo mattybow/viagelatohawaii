@@ -1,8 +1,40 @@
 #editFlavors{
 	height:100%;
+	overflow:hidden;
 	&> *{
-		float:left;
 		height:100%;
+	}
+}
+
+.flavor-list .icon-arrow{
+	&:before{
+		transform-origin:40% 50%;
+		transform:rotateY(0deg);
+		transition:transform .3s ease;
+	}
+}
+
+.button-text-container{
+	display:inline-block;
+	width:50px;
+	height: 20px;
+	overflow:hidden;
+	vertical-align: top;
+	.button-texts{
+		transition:transform .2s ease;
+	}
+}
+
+.lib-flavor-buttons.remove{
+	.button-texts{
+		transform:translate3d(0,-20px,0);
+	}
+	.icon-arrow:before{
+		transform:rotateY(180deg);
+	}
+	.btn-line{
+		color:rgb(255, 109, 109);
+		border:1px solid rgb(255, 109, 109);
 	}
 }
 
@@ -15,7 +47,8 @@
 	flex-flow:row nowrap;
 	padding:10px 20px;
 	position:relative;
-	z-index:9;
+	z-index:3;
+	align-items:center;
 
 	&>*{
 		flex:1 1 auto;
@@ -24,7 +57,6 @@
 
 #lib-title{
 	width:30%;
-	padding-top:10px;
 	font-size:1.2em;
 }
 #flavor-library-ctrls{
@@ -32,15 +64,70 @@
 	width:70%;
 }
 
+button{
+	transition:opacity .3s ease;
+	opacity:1;
+	pointer-events:auto;
+}
+
+.disabled-button{
+	pointer-events:none;
+	opacity:.5;
+}
+
 #editFlavorsDayPreview{
-	width:70%;
+	z-index:1;
+
+	.flavors{
+		margin:0;
+		padding:164px 40px 20px;
+		text-align:center;
+		z-index:0;
+	}
+	.day-flavor{
+		cursor:pointer;
+		
+		&:hover{
+			.day-flavor-image{
+				opacity:.7;
+			}
+			.icon-star, .icon-close{
+				opacity:1;
+			}
+		}
+		.icon-star, .icon-close{
+			opacity:0;
+			transition:opacity .3s ease;
+			position:absolute;
+			top:0;
+		}
+		.icon-star{
+			left:20px;
+		}
+		.icon-close{
+			right:20px;
+		}
+	}
+	.day-flavor-image{
+		width:65%;
+		position:relative;
+		z-index:1;
+		opacity:1;
+		transition:opacity .3s ease;
+	}
+	.day-flavor-descript{
+		padding-top:10px;
+	}
 }
 #editFlavorLibrary{
-	width:30%;
+	box-shadow: -10px 0px 26px 0px rgba(0, 0, 0, 0.75);
+	z-index:2;
+	max-width:300px;
 }
 
 #editFlavorLibrary, #editFlavorsDayPreview{
 	position:relative;
+	flex: 1 1 auto;
 
 	.content{
 		height:100%;
@@ -54,7 +141,8 @@
 	
 }
 #flavors-preview-title{
-	font-size:28px;
+	font-size: 30px;
+	margin-bottom: 10px;
 }
 
 #flavor-preview-ctrls{
@@ -65,9 +153,23 @@
 	z-index:1;
 	padding:20px 10px;
 	text-align:center;
-	
-	& > *{
-		margin:0;
+	background-color:rgba(255,255,255,.9);
+}
+
+.flavor-preview-buttons{
+	width:100%;
+	display:flex;
+	flex-flow:row nowrap;
+	justify-content:center;
+
+	button{
+		text-align:center;
+		margin: 0 10px 10px;
+		width:20%;
+
+		&:last-child{
+			border-left:1px solid rgba(0,0,0,.2);
+		}
 	}
 }
 
@@ -76,6 +178,7 @@
 	flex-flow:row wrap;
 	justify-content:center;
 	padding-top: 63px;
+	background-color:white;
 }
 
 .lib-flavor{
@@ -92,7 +195,7 @@
 	min-width:100px;
 	width:calc(100% - 110px);
 	height:100px;
-	padding:10px 0;
+	padding:10px 10px 10px 0;
 	border-top: 1px solid rgba(0,0,0,.1);
 	position:relative;
 }
@@ -116,19 +219,6 @@
 	right:0;
 }
 
-.btn-solid{
-	padding:10px;
-	background-color:rgba(0,0,0,.2);
-	border-radius:0;
-	border:none
-}
-.btn-line{
-	margin-left:5px;
-	padding:10px;
-	border:1px solid rgba(0,0,0,.2);
-	border-radius:0;
-}
-
 @media (max-width:768px){
 	#editFlavorsDayPreview{
 		width:60%;
@@ -138,18 +228,28 @@
 	}
 }
 
-@media (min-width:375px){
-	span.sm-screen{
-		display:none;
-	}
-}
-
 @media (max-width:375px){
+	#editFlavorsDayPreview {
+		.flavors{
+			padding:64px 5px 0;
+			word-wrap: break-word;
+		}
+		.day-flavor-image{
+			width:70%;
+		}
+	}
+	.flavor-preview-buttons button{
+		width:50%;
+		margin: 0 0 10px 0;
+	}
 	#editFlavorsDayPreview{
-		width:20%;
+		width:25%;
+	}
+	#flavor-preview-ctrls{
+		padding:10px 0;
 	}
 	#editFlavorLibrary{
-		width:80%;
+		width:75%;
 	}
 	.flavor-list{
 		padding-top:60px;
@@ -160,12 +260,4 @@
 	.top-bar{
 		padding:10px;
 	}
-	span.sm-screen{
-		display:inline-block;
-		font-size:20px;
-	}
-	span.lg-screen{
-		display:none;
-	}
-
 }

@@ -3,6 +3,11 @@ $login-width-md:200px;
 $login-width-sm:150px;
 $edit-nav-height:60px;
 
+#editFlavors{
+	display:flex;
+	flex-flow:row nowrap;
+}
+
 #edit-dashboard{
 	height:100vh;
 	padding-top:$edit-nav-height;
@@ -25,7 +30,11 @@ $edit-nav-height:60px;
 }
 .login-msg-container{
 	height:100vh;
-	padding-top:$edit-nav-height;
+	position:absolute;
+	z-index:0;
+	width:100%;
+	top:0;
+	left:0;
 
 	.login-msg{
 		height:100%;
@@ -256,15 +265,14 @@ $edit-nav-height:60px;
 	.tab-content{
 		top: 97px;
 	}
+	#login-submit, #logout-button{
+		margin:1.2em 0;
+	}
 
 }
 
 @media(max-width:320px){
-	#login-submit, #logout-button{
-		margin:1.2em 0;
-	}
 	.login-ctrls{
 		width:150px;
 	}
-	
 }

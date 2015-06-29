@@ -23,13 +23,15 @@
 							<div class="login-input-container {{showUsernameInput}}" id="username-field">
 								<input class="login-input" type="text" name="username-input">
 								<label class="login-input-label" for="username-input">
-									<span class="input-label-content">username</span>
+									<span class="input-label-content lg-screen">username</span>
+									<span class="input-label-content sm-screen">user</span>
 								</label>
 							</div>
 							<div class="login-input-container {{showPasswordInput}}" id="password-field">
 								<input class="login-input" type="password" name="password-input">
 								<label class="login-input-label" for="password-input">
-									<span class="input-label-content">password</span>
+									<span class="input-label-content lg-screen">password</span>
+									<span class="input-label-content sm-screen">pass</span>
 								</label>
 							</div>
 							<button id="login-submit">log in</button>
@@ -54,7 +56,7 @@
 			<div class="login-msg-container">
 				<div class="login-msg">
 					<h2>please login to make changes</h2>
-					<img src="images/via-logo-small.png" alt="">
+					<img src="/images/via-logo-small.png" alt="">
 				</div>
 			</div>
 		{{/if}}
