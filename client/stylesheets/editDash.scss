@@ -67,6 +67,9 @@ $edit-nav-height:60px;
 	overflow:hidden;
 }
 .show-inputs {
+	.logged-in.login-ctrls{
+		height:100px;
+	}
 	.login-ctrls{
 		height:250px;
 		background-color:rgba(255,255,255,.8);
@@ -259,6 +262,9 @@ $edit-nav-height:60px;
 		width:$login-width-md;
 		right:10px;
 	}
+	.show-inputs .login-ctrls{
+		height:200px;
+	}
 	.brand{
 		padding:10px;
 	}
@@ -273,6 +279,6 @@ $edit-nav-height:60px;
 
 @media(max-width:320px){
 	.login-ctrls{
-		width:150px;
+		width:$login-width-sm;
 	}
 }

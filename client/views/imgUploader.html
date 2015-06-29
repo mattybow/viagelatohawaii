@@ -1,0 +1,16 @@
+<template name="imgUploader">
+	<div id="addFlavorPhotoDropzone" class="{{isDragEnter}}">
+		<input type="file" class="hidden-input" id="hidden-file-input">
+		<input type="text" class="hidden-input" value="{{getS3Url}}">
+		<div class="dz-window">
+			<div class="dz-holder {{displayDefaultMsg}}">
+				<div class="dz-message">upload an image</div>
+				<div class="dz-preview">{{getFileName}}</div>
+			</div>
+		</div>
+		<div class="dz-status {{getStatus}}">
+			<span class="{{getStatusIcon}}"></span>
+		</div>
+		<div class="dz-progress-loader {{displayProgress}}" style="right:{{getRemaining}}%;"></div>
+	</div>
+</template>

@@ -40,6 +40,9 @@ Template.editDash.helpers({
 		}
 		
 	},
+	isLoggedIn:function(){
+		return Meteor.userId() ? 'logged-in' : '';
+	},
 	isActiveTabClass:function(a){
 		return this.tabName===Template.instance().activeTab.get() ? 'active-tab' : ''
 	},

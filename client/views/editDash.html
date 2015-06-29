@@ -5,7 +5,7 @@
 				<a href="/"><img src="/images/via-logo-small.png" alt=""></a>
 				<span><b>admin</b></span>
 			</div>
-			<div class="login-ctrls">
+			<div class="login-ctrls {{isLoggedIn}}">
 			{{#if currentUser}}
 				<div class="login-button" id="show-login-ctrls-button">
 					{{currentUser.username}} <span class="icon-angle-right icon-90"></span>
