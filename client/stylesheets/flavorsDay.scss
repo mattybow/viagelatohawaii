@@ -40,12 +40,22 @@
 	width:auto;
 }
 .flavors{
+	margin-top:50px;
 	display:flex;
 	flex-flow:row wrap;
 	justify-content:center;
 }
-@media(max-width:375px){
+/*6plus*/
+@media(max-width:414){
+	.flavors{
+		margin-top:20px;
+	}
 	.day-flavor{
 		width:100px;
+	}
+}
+@media(max-width:375px){
+	.day-flavor{
+		width:90px;
 	}
 }

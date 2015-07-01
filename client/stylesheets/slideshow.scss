@@ -5,13 +5,28 @@
 	margin-top: 160px;
 	position:relative;
 }
+#slideshow-arrow-holder{
+	position:absolute;
+	width:100%;
+	height:100%;
+	display:flex;
+	flex-flow:row nowrap;
+	&>*{
+		flex:1 1 auto;
+		height:100%;
+	}
+}
+.no-touch #slideshow-arrow-holder{
+	z-index:1;
+}
 #slickSlides{
 	margin-bottom:0;
-	overflow:hidden;
 }
 
 .slide{
 	position: relative;
+	background-size:cover;
+	background-repeat:norepeat;
 	
 	img{
 		width: auto;
@@ -27,12 +42,44 @@
 }
 #openSign{
 	padding: 3px 10px;
-	background-color: rgba(255,255,255,.2);
-	border-radius: 0 0 4px 4px;
 	margin:auto;
-	width: 150px;
+	width: 250px;
   	text-align: center;
   	font-size:24px;
+  	position:relative;
+}
+.open-text-container{
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+}
+.open-text{
+	text-align:center;
+	width:100%;
+	padding-top:20px;
+}
+.open-hours{
+	font-size:12px;
+	letter-spacing:1px;
+	font-weight:500;
+}
+
+.slick-dots{
+	z-index:1;
+	li button:before{
+		transition:font-size .2s ease;
+		content: "\20DD";			//open dot
+		opacity:1;
+	}
+	li.slick-active button:before{  //solid dot
+		content: "\2B24";
+		font-size: 7px;
+	}
 }
 
 /** 
@@ -84,5 +131,29 @@
 @media (max-width : 768px){
 	#slideshow{
 		margin-top: 110px;
+	}
+}
+
+@media (max-width : 414px){
+	#openSign{
+		width:150px;
+	}
+	.open-text{
+		padding-top:15px;
+	}
+	.open-msg{
+		font-size:16px;
+	}
+	.open-hours{
+		font-size:8px;
+	}
+	.slick-dots{
+		bottom:-35px;
+	}
+}
+
+@media (max-width:375px) and (orientation: portrait){
+	#slideshow{
+		margin-top: 70px;
 	}
 }

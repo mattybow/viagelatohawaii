@@ -1,3 +1,5 @@
+$flavor-list-height-mobile:85px;
+
 #editFlavors{
 	height:100%;
 	overflow:hidden;
@@ -213,9 +215,20 @@ button{
 	display:inline-block;
 	vertical-align:middle;
 	margin-right:10px;
+	overflow: hidden;
+  	border-radius: 100px;
+  	position:relative;
 	img{
 		width:100px;
 		height:auto;
+	}
+	.edit-annotation-for-mobile{
+		text-align:center;
+		position:absolute;
+		top:5px;
+		left:0;
+		right:0;
+		color:rgba(255,255,255,.5);
 	}
 }
 
@@ -242,8 +255,31 @@ button{
 			word-wrap: break-word;
 		}
 		.day-flavor-image{
-			width:70%;
+			width:30%;
 		}
+		.day-flavor-descript{
+			padding-top:5px;
+		}
+	}
+	.lib-flavor-img-holder{
+		width:$flavor-list-height-mobile;
+		height:$flavor-list-height-mobile;
+	}
+	.lib-flavor-buttons{
+		.btn-line{
+			margin-left:0;
+			width:100%;
+		}
+		&.remove .button-texts{
+			transform:translate3d(0,-17px,0);
+		}
+	}
+	.btn-line .icon-arrow,.button-texts{
+		padding-top: 2px;
+	}
+	.lib-flavor-name{
+		padding-top:5px;
+		height:$flavor-list-height-mobile;
 	}
 	.flavor-preview-buttons button{
 		width:50%;
@@ -256,7 +292,7 @@ button{
 		padding:10px 0;
 	}
 	#editFlavorLibrary{
-		width:75%;
+		width:65%;
 	}
 	.flavor-list{
 		padding-top:60px;

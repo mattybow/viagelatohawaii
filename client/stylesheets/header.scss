@@ -58,12 +58,13 @@
   margin:auto;
   position:relative;
   z-index:1000;
+  transition:transform .3s ease;
 }
 $burger-size:1.8em;
 
 .burger-container{
   position: absolute;
-  right: 30px;
+  right: 20px;
   bottom: 50%;
   width: $burger-size;
   height: $burger-size;
@@ -76,9 +77,10 @@ $burger-size:1.8em;
   background-color:$via-text-grey;
   position:relative;
   bottom: -$burger-size/2;
+  transition:background-color .2s ease;
 
   &:before, &:after {
-   
+    transition:transform .2s ease;
     height:3px;
     width:$burger-size;
     background-color:$via-text-grey;
@@ -89,6 +91,15 @@ $burger-size:1.8em;
   }
   &:before { top: $burger-size*0.33; }
   &:after { top: -$burger-size*0.33; }
+}
+.mobile-burger.opened{
+  background-color:transparent;
+  &:before{
+    transform: translateX(3px) rotateZ(-45deg) ;
+  }
+  &:after{
+    transform: translateX(3px) rotateZ(45deg) ;
+  }
 }
 #mobile-nav{
   height:100vh;
@@ -160,7 +171,7 @@ $burger-size:1.8em;
 }
 
 /*iPad in portrait and below*/
-@media (max-width : 768px)  { 
+@media (max-width : 768px) and (orientation: portrait) { 
   .desktop{
     display:none;
   }
@@ -170,14 +181,27 @@ $burger-size:1.8em;
   .logo{
     height:90px;
     width:90px;
+    &.opened{
+      transform:translateY(40px);
+    }
   }
   .nav{
     padding:10px 0;
   }
+
 }
 
 /* iPhone 6 and below */
-@media (max-width:375px){
-  
-  
+@media (max-width:375px) and (orientation: portrait){
+  .logo{
+    height:60px;
+    width:60px;
+    &.opened{
+      transform:translateY(20px);
+    }
+  }
+
+  .nav{
+    padding:5px 0;
+  }
 }

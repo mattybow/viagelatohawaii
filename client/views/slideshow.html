@@ -1,15 +1,23 @@
 <template name="slideshow">
 	<div class="via-yellow" id="slideshow">
+		<div id="slideshow-arrow-holder">
+			<div id="slideshow-prev-arrow"></div>
+			<div id="slideshow-next-arrow"></div>
+		</div>
 		<div id="slickSlides">
-			<div class="slide"><img src="images/via_slideshow_1.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_2.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_3.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_4.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_5.jpg" alt=""></div>
+			{{#each getSlideshowImgs}}
+				<div class="slide" style="background-image: url('{{this}}');"></div>
+			{{/each}}
 		</div>
 		<div class="abs-full-width">
-			<div id="openSign" class="handwriting">
-				We&apos;re Open
+			<div id="openSign">
+				<img src="/images/paperNote.svg" alt="">
+				<div class="open-text-container">
+					<div class="open-text">
+						<div class="open-msg handwriting">Open today!</div>
+						<div class="open-hours">11:00 AM - 10:00 PM</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="lines">

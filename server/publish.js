@@ -19,3 +19,7 @@ Meteor.publish("userAuth", function () {
     this.ready();
   }
 });
+
+Meteor.publish('slideshowMedia',function(){
+	return SiteMedia.getSlideshowMedia();
+});
