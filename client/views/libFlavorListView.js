@@ -6,6 +6,9 @@ Template.libFlavorListView.helpers({
 		var id = Template.instance().data ? Template.instance().data._id : null;
 		var session = Session.get('dayFlavors');
 		return session.indexOf(id) >= 0 ? 'remove' : '';
+	},
+	getImgPath:function(){
+		return Template.instance().data ? Template.instance().data.imgPath : 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
 	}
 });
 

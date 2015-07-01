@@ -15,11 +15,10 @@ Template.imgUploader.onCreated(function(v){
 	});
 	this.uploader = new Slingshot.Upload(imgUploaderDirective);
 	var _self = this;
-	this.data.parent.uploadImage = function(filename){
+	this.data.parent.uploadImage = function(){
 		return new Promise(function(resolve,reject){
 			if(Meteor.userId()){									//user is AUTHORIZED
-				var domNode = _self.find('#hidden-file-input');
-				var file = domNode.files[0];
+				var file = _self.stagedFile;
 				if(!file){
 					resolve(null);  								//case when user did not upload file
 				} else {
@@ -33,7 +32,6 @@ Template.imgUploader.onCreated(function(v){
 							console.error('Error uploading', _self.uploader.xhr.response);
 							Session.set('flavorPhotoUploadStatus',3);
 						} else {
-							_self.s3Url.set(downloadUrl);			//give parent s3 url
 							Session.set('flavorPhotoUploadStatus',2);				//success updates icon to checkmark
 							resolve(downloadUrl);
 						}
@@ -73,12 +71,17 @@ Template.imgUploader.onCreated(function(v){
 		});
 	}
 
+	this.data.parent.resetUploader = function(){
+		Session.set('flavorPhotoUploadStatus',0);
+		_self.base64Url.set('');
+		_self.stagedFile = '';
+	}
+
 	//INITIALIZE REACTIVE VARIABLES
 	this.isDragEnter = new ReactiveVar(false);
 	this.base64Url = new ReactiveVar('');
 	this.progress = new ReactiveVar(0);
 	this.showProgress = new ReactiveVar(false);
-	this.s3Url = new ReactiveVar('');
 	
 });
 
@@ -111,9 +114,6 @@ Template.imgUploader.helpers({
 	},
 	displayProgress:function(){
 		return Template.instance().showProgress.get() ? '' : 'transparent';
-	},
-	getS3Url:function(){
-		return Template.instance().s3Url.get();
 	},
 	hasImagePreview:function(){
 		var result = Template.instance().base64Url.get() ? 'selection-made' : '';
@@ -156,6 +156,7 @@ Template.imgUploader.events({
 	},
 	'drop #addFlavorPhotoDropzone':function(e){
 		preventAndStop(e);
+		Template.instance().isDragEnter.set(false);
 		var _self = Template.instance();
 		processDrop(e,_self);
 	}
@@ -166,6 +167,7 @@ function processDrop(e,context){
 	var files = e.currentTarget.files || e.originalEvent.dataTransfer.files;
 	if(files.length === 1){
 		var file = files[0];
+		context.stagedFile = file;
 		var fileReader = new FileReader();
 		fileReader.onload = function(){
 			handleLoad(file,fileReader.result,context)

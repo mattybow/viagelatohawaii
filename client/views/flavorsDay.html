@@ -23,7 +23,9 @@
 			<div class="flavors">
 				{{#each getFlavors}}
 					<div class="day-flavor">
-						<div class="day-flavor-image"></div>
+						<div class="day-flavor-image">
+							<img src="{{getFlavorImg this}}" alt="oops">
+						</div>
 						<div class="day-flavor-descript">{{flavorName}}</div>
 					</div>
 				{{/each}}

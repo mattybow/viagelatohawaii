@@ -26,7 +26,13 @@ Slingshot.createDirective(slingshotDirective, Slingshot.S3Storage, {
 	key: function (file) {
 		//Store file into a directory by the user's username.
 		//var user = Meteor.users.findOne(this.userId);
-		console.log(file.name);
-		return 'flavors/'+file.name;
+		var origFileName = file.name;
+		var ext = origFileName.split('.').pop();
+		var index = origFileName.lastIndexOf('.');
+		var fileName = origFileName.slice(0,index);
+		var regex = /\W+/g;
+		var cleanFileName = (fileName.replace(regex,'') + '.' + ext).toLowerCase();
+		console.log(cleanFileName);
+		return 'flavors/'+ cleanFileName;
 	}
 });

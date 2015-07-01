@@ -41,6 +41,8 @@
 	margin-top:20px;
 	height:100px;
 	width:auto;
+	position:relative;
+	z-index:1;
 }
 
 #catering-bg{
@@ -49,10 +51,10 @@
 	height:100%;
 	left:0;
 	top:0;
-	background-image:url('images/via_slideshow_3.jpg');
 	background-repeat:no-repeat;
 	background-size:cover;
 	opacity:0.2;
+	z-index:0;
 }
 
 @media (max-width:768px){

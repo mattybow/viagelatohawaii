@@ -1,10 +1,10 @@
 <template name="libFlavorListView">
 	<div class="lib-flavor">
 		<div class="lib-flavor-img-holder">
-			<img src="/images/butter-pecan.jpg" alt="">
+			<img src="{{getImgPath}}" alt="">
 		</div>
 		<div class="lib-flavor-name">
-			<div>{{flavorName}}</div>
+			<div class="flavor-name-text">{{flavorName}}</div>
 			<div class="lib-flavor-buttons {{addOrRemove}}">
 				<button class="btn-solid">edit</button>
 				<button class="btn-line lg-screen">

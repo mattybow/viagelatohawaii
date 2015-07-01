@@ -7,6 +7,15 @@ Template.flavorDayPreview.helpers({
 			flavorName = doc.flavorName;
 		}
 		return flavorName;
+	},
+	getFlavorImg:function(){
+		var id = Template.instance().data;
+		var imgPath = 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
+		var doc = Flavors.findOne({_id:id});
+		if(doc){
+			imgPath = doc.imgPath;
+		}
+		return imgPath;
 	}
 });
 
