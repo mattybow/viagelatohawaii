@@ -20,14 +20,14 @@
 				<div class="row">
 					<div class="col-sm-4 img-uploader-container">
 						<div class="new-flavor-img-preview">
-							{{> imgUploader}}
+							{{> imgUploader parent=passParentRef}}
 						</div>
-						<h3>filename.ext</h3>
+						<h3 class="new-flavor-file-name  {{getUploadStatus}}">{{getFlavorFileName}}</h3>
 					</div>
 					<div class="col-sm-8">
-						<div class="new-flavor-name form-item">
+						<div class="new-flavor-name form-item {{isInvalid}}" id="flavor-name-field">
 							<label for="new-flavor-name">name</label>
-							<input type="text" name="new-flavor-name">
+							<input class="form-input" type="text" name="new-flavor-name">
 						</div>
 						<div class="new-flavor-textarea form-item">
 							<label for="new-flavor-descript">description</label>

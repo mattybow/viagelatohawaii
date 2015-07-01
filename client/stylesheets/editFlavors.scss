@@ -8,7 +8,8 @@
 
 .flavor-list .icon-arrow{
 	&:before{
-		transform-origin:40% 50%;
+		transform-origin:45% 50%;
+		-webkit-transform:rotateY(0deg) translateZ(0);
 		transform:rotateY(0deg);
 		transition:transform .3s ease;
 	}
@@ -30,6 +31,7 @@
 		transform:translate3d(0,-20px,0);
 	}
 	.icon-arrow:before{
+		-webkit-transform:rotateY(180deg) translateZ(-1px);
 		transform:rotateY(180deg);
 	}
 	.btn-line{
