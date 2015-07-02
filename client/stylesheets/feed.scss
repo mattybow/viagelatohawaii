@@ -27,3 +27,9 @@
 #feed-slide-wrapper{
 	white-space:nowrap;
 }
+
+@media(max-width:414px){
+	.press-slides{
+		margin: 20px 0;
+	}
+}

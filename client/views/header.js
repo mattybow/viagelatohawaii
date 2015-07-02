@@ -8,7 +8,7 @@ Template.header.helpers({
 });
 
 Template.header.events({
-	'click .burger-container':function(){
+	'click .burger-touch-area':function(){
 		var state = !Session.get('isMenuOpen');
 		Session.set('isMenuOpen',state);
 		if(state){

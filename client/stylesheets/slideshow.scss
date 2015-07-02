@@ -2,7 +2,7 @@
 	height:75vh;
 }
 #slideshow{
-	margin-top: 160px;
+	margin-top: 140px;
 	position:relative;
 }
 #slideshow-arrow-holder{
@@ -149,6 +149,12 @@
 	}
 	.slick-dots{
 		bottom:-35px;
+	}
+	.slick-dots li.slick-active button:before {
+		font-size:5px;
+	}
+	.slick-dots li button:before{
+		font-size:4px;
 	}
 }
 
