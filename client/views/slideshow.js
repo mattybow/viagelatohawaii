@@ -44,8 +44,10 @@ Template.slideshow.onRendered(function(){
 		}
 		self.slideshowImgs.set(imgs);
 		Tracker.afterFlush(function(){							//disgusting hack need to find better way of tapping into lifecycle
-			if(self.findAll('.slide')){
-				console.log('got something');
+			if(self.findAll('.slide').length){
+				// console.log('unslick',self.findAll('.slide'));
+				// self.$('#slickSlides').slick('unslick');
+				console.log('slicking',self.findAll('.slide').length);
 				self.$('#slickSlides').slick({
 					dots:true,
 					prevArrow:'#slideshow-prev-arrow',
