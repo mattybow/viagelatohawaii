@@ -43,14 +43,14 @@ Template.slideshow.onRendered(function(){
 			});
 		}
 		self.slideshowImgs.set(imgs);
-		Meteor.setTimeout(function(){							//disgusting hack need to find better way of tapping into lifecycle
+		Tracker.afterFlush(function(){							//disgusting hack need to find better way of tapping into lifecycle
 			self.$('#slickSlides').slick({
 				dots:true,
 				prevArrow:'#slideshow-prev-arrow',
 				nextArrow:'#slideshow-next-arrow'
 			});
 			console.log('init slick',self.findAll('.slide'));
-		},300);
+		});
 		
 	});
 });
