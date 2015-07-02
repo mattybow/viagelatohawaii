@@ -49,7 +49,8 @@ Template.slideshow.onRendered(function(){
 				prevArrow:'#slideshow-prev-arrow',
 				nextArrow:'#slideshow-next-arrow'
 			});
-		},100);
+			console.log('init slick',self.findAll('.slide'));
+		},300);
 		
 	});
 });
