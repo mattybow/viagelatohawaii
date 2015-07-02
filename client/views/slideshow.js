@@ -44,12 +44,14 @@ Template.slideshow.onRendered(function(){
 		}
 		self.slideshowImgs.set(imgs);
 		Tracker.afterFlush(function(){							//disgusting hack need to find better way of tapping into lifecycle
-			self.$('#slickSlides').slick({
-				dots:true,
-				prevArrow:'#slideshow-prev-arrow',
-				nextArrow:'#slideshow-next-arrow'
-			});
-			console.log('init slick',self.findAll('.slide'));
+			if(self.findAll('.slide')){
+				console.log('got something');
+				self.$('#slickSlides').slick({
+					dots:true,
+					prevArrow:'#slideshow-prev-arrow',
+					nextArrow:'#slideshow-next-arrow'
+				});
+			}
 		});
 		
 	});
@@ -58,6 +60,11 @@ Template.slideshow.onRendered(function(){
 
 Template.slideshow.helpers({
 	getSlideshowImgs:function(){
+		console.log('GET SLIDESHOW IMGS')
 		return Template.instance().slideshowImgs.get();
+	},
+	somethingToLog:function(){
+		console.log('render slide');
+		return "someClass";
 	}
 })
