@@ -7,7 +7,16 @@ MEDIA_BREAK_POINTS = {
 
 Template.slideshow.onCreated(function(){
 	var self = this;
-	this.subscribe('slideshowMedia');
+	this.subscribe('slideshowMedia',function(){
+		Tracker.afterFlush(function(){
+				console.log('slick init');
+				self.$('#slickSlides').slick({
+					dots:true,
+					prevArrow:'#slideshow-prev-arrow',
+					nextArrow:'#slideshow-next-arrow'
+				});
+			});
+	});
 	this.initialDevice = 'desktop';
 	if(Meteor.isClient){
 		var mediaWidth = window.innerWidth;
@@ -21,41 +30,34 @@ Template.slideshow.onCreated(function(){
 			this.initialDevice = 'desktop';
 		}
 	}
-	this.slideshowImgs = new ReactiveVar([]);
+	//this.slideshowImgs = new ReactiveVar([]);
 	
-});
-
-Template.slideshow.onRendered(function(){
-	var self = this;
-	this.autorun(function(){
-		var suffix = self.initialDevice;
-		var records = SiteMedia.getSlideshowMedia().fetch();
-		var regex = /\-(12345)\./;
-		var replacementVal = '-' + suffix + '.';
-		var imgs = [];
-
-		if(records){
-			imgs = lodash.map(records,function(record){
-				return record.imgPath.replace(regex,replacementVal);
-			});
-		}
-		self.slideshowImgs.set(imgs);
-		Tracker.afterFlush(function(){							//disgusting hack need to find better way of tapping into lifecycle
-			if(self.findAll('.slide').length){
-				self.$('#slickSlides').slick({
-					dots:true,
-					prevArrow:'#slideshow-prev-arrow',
-					nextArrow:'#slideshow-next-arrow'
-				});
-			}
-		});
-		
-	});
 });
 
 
 Template.slideshow.helpers({
 	getSlideshowImgs:function(){
-		return Template.instance().slideshowImgs.get();
+		var self = Template.instance();
+		var suffix = self.initialDevice;
+		var records = SiteMedia.getSlideshowMedia().fetch();
+		var regex = /\-(12345)\./;
+		var replacementVal = '-' + suffix + '.';
+		var imgs = [];
+		if(records){
+			imgs = lodash.map(records,function(record){
+				return record.imgPath.replace(regex,replacementVal);
+			});
+		}
+		
+		return imgs;
 	}
-})
+});
+
+
+
+
+
+
+
+
+
