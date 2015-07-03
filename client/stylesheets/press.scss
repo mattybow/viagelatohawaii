@@ -1,0 +1,40 @@
+
+.slide-holder{
+	position:relative;
+	display:inline-block;
+	margin-right:60px;
+}
+.press-img{
+	width:100%;
+	height:auto;
+}
+.press-img-cropper{
+	position:absolute;
+	width:100%;
+	height:100%;
+	padding:0;
+	z-index:0;
+	top:0;
+	left:0;
+
+	svg{
+		opacity:0;
+	}
+}
+.press-img-holder{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	
+}
+.frame-img{
+	position:relative;
+	z-index:1;
+	height:auto;
+	opacity:.6;
+}
+.press-pub-title{
+	text-align:center;
+	text-transform:uppercase;
+	color:rgba(0,0,0,.7);
+}

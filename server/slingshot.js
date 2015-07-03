@@ -1,4 +1,4 @@
-var slingshotDirective = 'viaFlavorImgUpload'
+var slingshotDirective = 'viaImgUpload'
 
 Slingshot.fileRestrictions(slingshotDirective, {
   allowedFileTypes: ["image/png", "image/jpeg", "image/gif"],
@@ -23,16 +23,16 @@ Slingshot.createDirective(slingshotDirective, Slingshot.S3Storage, {
 		return true;
 	},
 
-	key: function (file) {
+	key: function (file,metaContext) {
 		//Store file into a directory by the user's username.
 		//var user = Meteor.users.findOne(this.userId);
 		var origFileName = file.name;
 		var ext = origFileName.split('.').pop();
 		var index = origFileName.lastIndexOf('.');
-		var fileName = origFileName.slice(0,index);
+		var fileName = metaContext.newFileName || origFileName.slice(0,index);		//uses the new file name if passed
 		var regex = /\W+/g;
 		var cleanFileName = (fileName.replace(regex,'') + '.' + ext).toLowerCase();
 		console.log(cleanFileName);
-		return 'flavors/'+ cleanFileName;
+		return metaContext.s3Folder + '/' + cleanFileName;
 	}
 });

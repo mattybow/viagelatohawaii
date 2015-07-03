@@ -18,7 +18,4 @@ accounts-password
 accounts-ui-unstyled
 reactive-var
 edgee:slingshot
-richsilv:dumb-collections
-rubaxa:sortable
-dbarrett:dropzonejs
 mvrx:bluebird

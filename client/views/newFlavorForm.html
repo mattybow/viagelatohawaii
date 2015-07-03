@@ -16,11 +16,11 @@
 					<button class="btn-line lg-screen cancel-create-flavor">cancel</button>
 				</div>
 			</div>
-			<form action="" class="flavor-form-content">
+			<form action="" class="via-edit-form via-form-content">
 				<div class="row">
 					<div class="col-sm-4 img-uploader-container">
 						<div class="new-flavor-img-preview">
-							{{> imgUploader parent=passParentRef}}
+							{{> imgUploader parent=passParentRef s3Folder="flavors"}}
 						</div>
 						<h3 class="new-flavor-file-name  {{getUploadStatus}}">{{getFlavorFileName}}</h3>
 					</div>

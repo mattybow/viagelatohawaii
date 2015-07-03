@@ -29,14 +29,14 @@ Template.slideshow.onRendered(function(){
 	var self = this;
 	this.autorun(function(){
 		var suffix = self.initialDevice;
-		var records = SiteMedia.getSlideshowMedia().fetch()[0];
+		var records = SiteMedia.getSlideshowMedia().fetch();
 		var regex = /\-(12345)\./;
 		var replacementVal = '-' + suffix + '.';
 		var imgs = [];
 
 		if(records){
-			imgs = lodash.map(records.values,function(url){
-				return url.replace(regex,replacementVal);
+			imgs = lodash.map(records,function(record){
+				return record.imgPath.replace(regex,replacementVal);
 			});
 		}
 		self.slideshowImgs.set(imgs);

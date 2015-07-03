@@ -33,9 +33,12 @@ Template.editFlavorsDayPreview.events({
 		var data = Session.get('dayFlavors');
 		Meteor.call('updateFlavorsOfTheDay',{data:data},function(err,res){
 			//console.log(err, res);
-			if(!err){
+			if(err){
+				Growler.fail(err,"Fishy...");
+			} else {
 				var newOrig = Session.get('dayFlavors');
 				Session.set('originalFlavors',newOrig);
+				Growler.success('applied your changes','Got it!');
 			}
 		});
 	}

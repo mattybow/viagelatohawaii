@@ -69,11 +69,11 @@ Template.newFlavorForm.events({
 		}
 		_self.createStatus.set('creating');
 
-		_self.uploadImage().then(function(assetUrl){
-			var imgPath = assetUrl ? assetUrl : null;
+		var newFileName = _self.newFlavorFileName.get();
+		_self.uploadImage(newFileName).then(function(assetUrl){
 			var data = {
 				flavorName:_self.find('input[name="new-flavor-name"]').value,
-				imgPath:imgPath,
+				imgPath:assetUrl || null,
 				seasonal:false,
 				description:_self.find('textarea[name="new-flavor-descript"]').value
 			};

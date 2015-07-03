@@ -47,6 +47,7 @@
   	text-align: center;
   	font-size:24px;
   	position:relative;
+  	pointer-events:none;
 }
 .open-text-container{
 	position:absolute;
@@ -70,15 +71,15 @@
 }
 
 .slick-dots{
-	z-index:1;
+	z-index:100;
 	li button:before{
-		transition:font-size .2s ease;
 		content: "\20DD";			//open dot
 		opacity:1;
 	}
 	li.slick-active button:before{  //solid dot
-		content: "\2B24";
-		font-size: 7px;
+		content: "\25CF";
+		font-size: 20px;
+		transform: translateY(-2px);
 	}
 }
 
@@ -151,7 +152,9 @@
 		bottom:-35px;
 	}
 	.slick-dots li.slick-active button:before {
-		font-size:5px;
+		font-size:10px;
+		padding-bottom:2px;
+		transform: translateY(-1px);
 	}
 	.slick-dots li button:before{
 		font-size:4px;

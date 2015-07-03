@@ -1,4 +1,72 @@
 <template name="editPress">
-	<h2>edit press page</h2>
-	<button class="freak-button">try me</button>
+	<div id="edit-press-content">
+		<div class="top-bar">
+			<div class="left-form-ctrls sm-screen" id="new-form-ctrls">
+				<button class="btn-no-line cancel-create-flavor">
+					<span class="icon-arrow icon-180"></span>
+					<span class="mobile-back-action-title">cancel</span>
+				</button>
+			</div>
+			<div class="form-title">
+				<h3>Add Press</h3>
+			</div>
+			<div class="right-form-ctrls" id="new-form-ctrls">
+				<button class="btn-line" id="create-press">create</button>
+				<button class="btn-line lg-screen cancel-create-flavor">clear</button>
+			</div>
+		</div>
+		<form action="" class="via-edit-form via-form-content dark-inputs">
+			<div class="row">
+				<div class="col-sm-4 img-uploader-container">
+					<div class="new-flavor-img-preview">
+						{{> imgUploader parent=passParentRef s3Folder="images"}}
+					</div>
+					<h3 class="new-flavor-file-name  {{getUploadStatus}}">{{getNewPressFileName}}</h3>
+				</div>
+				<div class="col-sm-8">
+					<div class="new-flavor-name form-item">
+						<label for="new-press-name">title</label>
+						<input class="form-input is-required" type="text" id="input-press-title" name="new-press-title">
+					</div>
+					<div class="form-item {{pubInvalid}}">
+						<label for="new-press-name">publication</label>
+						<input class="form-input" type="text" name="input-press-publication">
+					</div>
+					<div class="form-item">
+						<label for="new-press-name">author</label>
+						<input class="form-input" type="text" name="input-press-author">
+					</div>
+					<div class="form-item">
+						<label for="new-flavor-name">caption</label>
+						<input class="form-input" type="text" name="input-press-caption">
+					</div>
+					<div class="form-item">
+						<label for="new-flavor-name">link</label>
+						<input class="form-input" type="text" name="input-press-link" data-key="link">
+					</div>
+					<div class="form-item">
+						<label for="new-flavor-name">date published</label>
+						<input class="form-input" type="date" name="input-press-date">
+					</div>
+					<div class="form-item">
+						<label for="active-selector">active</label>
+						<span class="toggle">
+							<span>yes</span>
+							<span>no</span>
+						</span>
+					</div>
+					<div class="form-item {{frameInvalid}}" id="frame-form-item">
+						<label for="frame-selector">frame</label>
+						<span class="">
+						{{#each frames}}
+							<div class="frame-choice {{chosen _id}}">
+								<img src="{{url}}" alt="">
+							</div>
+						{{/each}}
+						</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </template>

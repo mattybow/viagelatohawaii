@@ -1,4 +1,4 @@
-var imgUploaderDirective = 'viaFlavorImgUpload';
+var imgUploaderDirective = 'viaImgUpload';
 FLAVOR_PHOTO_STATUSES = {
 	0:'none',
 	1:'uploading',
@@ -7,15 +7,13 @@ FLAVOR_PHOTO_STATUSES = {
 }
 Session.setDefault('flavorPhotoUploadStatus',0);
 
-Template.imgUploader.onCreated(function(v){
-	
+Template.imgUploader.onCreated(function(){
 	Slingshot.fileRestrictions(imgUploaderDirective, {				//only allow images to upload
 	  allowedFileTypes: ["image/png", "image/jpeg", "image/gif"],
 	  maxSize: 10 * 1024 * 1024 									// 10 MB (use null for unlimited).
 	});
-	this.uploader = new Slingshot.Upload(imgUploaderDirective);
 	var _self = this;
-	this.data.parent.uploadImage = function(){
+	this.data.parent.uploadImage = function(fileName){
 		return new Promise(function(resolve,reject){
 			if(Meteor.userId()){									//user is AUTHORIZED
 				var file = _self.stagedFile;
@@ -23,13 +21,16 @@ Template.imgUploader.onCreated(function(v){
 					resolve(null);  								//case when user did not upload file
 				} else {
 					Session.set('flavorPhotoUploadStatus',1);
+					var metaContext = {s3Folder: _self.data.s3Folder, newFileName:fileName};
+					console.log(metaContext);
+					var uploader = new Slingshot.Upload(imgUploaderDirective, metaContext);
 					_self.showProgress.set(true);
 
-					_self.uploader.send(file,function(err,downloadUrl){
+					uploader.send(file,function(err,downloadUrl){
 						if (err) {
 							// Log service detailed response.
 							console.error(err);
-							console.error('Error uploading', _self.uploader.xhr.response);
+							console.error('Error uploading', uploader.xhr.response);
 							Session.set('flavorPhotoUploadStatus',3);
 						} else {
 							Session.set('flavorPhotoUploadStatus',2);				//success updates icon to checkmark
@@ -46,7 +47,7 @@ Template.imgUploader.onCreated(function(v){
 					};
 
 					var checkProgress = Meteor.setInterval(function(){
-						var updatedProgress = Math.round(_self.uploader.progress()* 100);
+						var updatedProgress = Math.round(uploader.progress()* 100);
 						var prevProgress = _self.progress.get();
 						if(updatedProgress !== prevProgress){
 							_self.progress.set(updatedProgress);

@@ -58,5 +58,36 @@ Meteor.methods({
         return false;
       }
     }
+  },
+  createNewPress:function(data){
+    this.unblock();
+    try{
+      var docId;
+      if(checkAuth('press')){
+        var time = new Date().valueOf();
+        var newDoc = lodash.assign(data,{
+          lastUpdated:time,
+          created:time,
+          assetType:'pressMedia',
+          assetAlias: 'Press Media'
+        });
+
+        docId = SiteMedia.insert(newDoc);
+      } else {
+        console.log('NOT AUTHORIZED');
+      }
+      return docId;
+    } catch (e){
+      console.error(e);
+      return false;
+    }
   }
 });
+
+function checkAuth(cred){
+  var userData = Meteor.user();
+  if(userData && userData.authorizations.indexOf(cred) >= 0){
+    return true;
+  }
+  return false;
+}

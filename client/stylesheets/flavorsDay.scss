@@ -13,6 +13,11 @@
 	margin-bottom:20px;
 	position:relative;
 }
+.day-flavor-descript {
+  max-height: 4em;
+  overflow: hidden;
+  word-wrap:break-word;
+}
 .day-flavor-image{
 	width:80%;
 	margin:auto;
