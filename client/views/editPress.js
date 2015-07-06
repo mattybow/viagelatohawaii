@@ -76,6 +76,7 @@ Template.editPress.events({
 					frame:frame.url,
 					imgPath:assetUrl || null
 				};
+				console.log(data);
 
 				return new Promise(function(resolve,reject){
 					Meteor.call('createNewPress',data,function(err,res){

@@ -1,5 +1,12 @@
+#press{
+	.press-slides{
+		width:auto;
+		min-width:100%;
+	}
+}
 .slide-holder{
 	margin-right:50px;
+	min-width:120px;
 }
 .press-pub-title{
 	text-transform:uppercase;
