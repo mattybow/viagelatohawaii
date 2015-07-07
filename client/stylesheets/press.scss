@@ -7,6 +7,10 @@
 .slide-holder{
 	margin-right:50px;
 	min-width:120px;
+
+	&.vert{
+		max-width:150px;
+	}
 }
 .press-pub-title{
 	text-transform:uppercase;

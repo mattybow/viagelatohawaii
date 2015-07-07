@@ -42,5 +42,9 @@ Template.pressSlide.helpers({
 	},
 	getSvgVB:function(id){
 		return SVG_PATHS[id].viewBox;
+	},
+	getOrientation:function(){
+		console.log(this);
+		return this.orientation==='V' ? 'vert' : 'hor'
 	}
 })
