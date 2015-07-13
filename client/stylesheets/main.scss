@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day);
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 $via-text-grey:#6c6861;
 $via-text-black:#1A1816;
 $via-blue:#e2f0f7;
@@ -34,6 +34,16 @@ body{
 }
 .via-offwhite{
   background-color:$via-offwhite;
+}
+
+a{
+  color:$via-text-grey;
+  &:visited{
+    color:$via-text-grey;
+  }
+  &:hover{
+    text-decoration:none;
+  }
 }
 
 .handwriting{

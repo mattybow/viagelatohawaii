@@ -105,29 +105,18 @@
 /**
  * iPhone 6
  */
-@media screen and (device-aspect-ratio: 375/667) {
-  #slideshow, .slide {
-    height: 267px;  //667*.4
-  }
-}
+// @media screen and (device-aspect-ratio: 375/667) {
+  
+// }
  
-/**
- * iPhone 5
- */
-@media screen and (device-aspect-ratio: 40/71) {
-  #slideshow, .slide {
-    height: 227px;  //568*.4
-  }
-}
+
 
 /**
  * iPhone 4
  */
-@media screen and (device-aspect-ratio: 320/480) {
-  #slideshow, .slide {
-    height: 192px;  //480*.4
-  }
-}
+// @media screen and (device-aspect-ratio: 320/480) {
+  
+// }
 
 /* iPhone 6 and below */
 @media (max-width : 768px){
@@ -137,6 +126,9 @@
 }
 
 @media (max-width : 414px){
+	#slideshow, .slide {
+		height: 300px;  //667*.4
+	}
 	#openSign{
 		width:150px;
 	}
@@ -166,9 +158,23 @@
 	#slideshow{
 		margin-top: 70px;
 	}
+	#slideshow, .slide {
+		height: 267px;  //667*.4
+	}
+}
+/**
+ * iPhone 5
+ */
+@media screen and (device-aspect-ratio: 40/71) {
+  #slideshow, .slide {
+    height: 227px;  //568*.4
+  }
 }
 
 @media (max-width:320px){
+	#slideshow, .slide {
+		height: 192px;  //480*.4
+	}
 	#openSign {
 		img{
 			width:120px;

@@ -1,5 +1,7 @@
 if (Meteor.isClient) {
-
+	// Template.viagelato.onRendered(function(){
+		
+	// })
 }
 
 if (Meteor.isServer) {
