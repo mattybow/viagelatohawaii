@@ -1,6 +1,8 @@
 Template.feed.onCreated(function(){
 	this.subscribe('instagramFeed',function(){
-		initializeSly(this);
+		this.slyFeed = initializeSly(this);
+		this.slyFeed.init();
+		this.slyPos = 0;
 	}.bind(this));
 
 });
@@ -23,11 +25,27 @@ Template.feed.helpers({
 			return null;
 		}
 		return moment(value).format('dddd, MMM D');
+	},
+	getPhotoUrl:function(){
+		var width = window.innerWidth;
+		if(width > TABLET_LANDSCAPE){
+			return this.images.standard_resolution.url;
+		}
+		return this.images.thumbnail.url;
+	}
+});
+
+Template.feed.events({
+	"click #feed-nav-forward":function(){
+		var sly = Template.instance().slyFeed;
+		var pos = ++Template.instance().slyPos;
+		//console.log(pos);
+		sly.slideTo(sly.items[pos].start);
 	}
 })
 
 function initializeSly(template){
-	var scroller = new Sly(template.$('#feed-scroller'),{
+	return new Sly(template.$('#feed-scroller'),{
 		horizontal: 1,
 		itemNav: 'basic',
 		smart: 1,
@@ -38,5 +56,5 @@ function initializeSly(template){
 		scrollBy: 1,
 		speed: 300,
 		elasticBounds: 1
-    }).init();
+    })
 }

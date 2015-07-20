@@ -4,6 +4,9 @@ Template.modalHolder.helpers({
 	},
 	isActive:function(){
 		return Session.get('activeModal') ? 'active' : '';
+	},
+	nothing:function(){
+		return '';
 	}
 });
 

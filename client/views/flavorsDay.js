@@ -10,4 +10,10 @@ Template.flavorsDay.helpers({
 		var imgPath = data ? data.imgPath : 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
 		return imgPath;
 	}
+});
+
+Template.flavorsDay.events({
+	'click #read-only-flavor-library':function(){
+		Session.set('activeModal','library');
+	}
 })

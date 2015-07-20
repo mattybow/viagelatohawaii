@@ -36,17 +36,20 @@
 				</g>
 				</svg>
 		</div>
-		<div class="section-header">Follow us</div>
+		<div class="section-header">Follow us and get social!</div>
 		<div class="section-content">
-			<div class="press-slides" id="feed-scroller">
+			<div class="feed-slides" id="feed-scroller">
 				<div id="feed-slide-wrapper">
 					{{#each getFeedPhotos}}
 						<div class="slide_holder">
-							<img src="{{images.thumbnail.url}}" alt="">
+							<img src="{{getPhotoUrl}}" alt="">
 							<div class="insta-text handwriting">{{getTime created_time}}</div>
 						</div>
 					{{/each}}
 				</div>
+			</div>
+			<div class="feed-nav" id="feed-nav-forward">
+				<span class="icon-angle-right"></span>
 			</div>
 		</div>
 		<div class="lines">

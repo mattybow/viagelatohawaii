@@ -5,13 +5,13 @@
   top: 0;
   left: 0;
   font-weight:600;
-  transition:top .3s ease;
+  transition:transform .3s ease;
 }
 .touch .minimized#header{
-  top:-110px;
+  transform:translateY(-100%);
 }
 .no-touch .minimized#header{
-  top:-160px;
+  transform:translateY(-100%);
 }
 .nav{
   text-align:center;
@@ -24,7 +24,7 @@
 .nav-items{
   padding:10px;
   position:absolute;
-  top:45px;
+  top:38px;
 }
 .left-nav{
   right: 50%;
@@ -40,14 +40,12 @@
 .nav-items li{
   list-style:none;
   display:inline;
-  padding:10px;
+  padding:0 10px;
   font-size:.8em;
   letter-spacing:2px;
 }
 .nav-items .social-links{
-  position:absolute;
-  right: 20px;
-  top: -25px;
+
 }
 .social-links > *{
   display:inline;
@@ -64,8 +62,7 @@ $burger-size:1.8em;
 
 .burger-touch-area{
   position: absolute;
-  right: 10px;
-  top: 15px;
+  left: 10px;
   width: 40px;
   height: 40px;
   padding-top: 6px;
@@ -192,10 +189,13 @@ $burger-size:1.8em;
   .nav{
     padding:10px 0;
   }
+  .burger-touch-area{
+    top: 35px;
+  }
 
 }
 
-/* iPhone 6 and below */
+/* iPhone 6 plus and below */
 @media (max-width:375px) and (orientation: portrait){
   .logo{
     height:60px;
@@ -203,6 +203,10 @@ $burger-size:1.8em;
     &.opened{
       transform:translateY(20px);
     }
+  }
+
+  .burger-touch-area{
+    top: 15px;
   }
 
   .nav{

@@ -1,6 +1,7 @@
 .flavors{
 	margin-left:-15px;
 	margin-right:-15px;
+	letter-spacing:0;
 }
 .flavor-slide{
 	display:inline-block;
@@ -40,10 +41,7 @@
 	display:block;
 	padding-top:100%;
 }
-#cones-icon{
-	height:80px;
-	width:auto;
-}
+
 .flavors{
 	margin-top:50px;
 	display:flex;
@@ -51,16 +49,17 @@
 	justify-content:center;
 }
 /*6plus*/
-@media(max-width:414){
+@media(max-width:414px){
 	.flavors{
 		margin-top:20px;
 	}
 	.day-flavor{
-		width:100px;
+		width:90px;
 	}
+
 }
 @media(max-width:375px){
 	.day-flavor{
-		width:90px;
+		width:80px;
 	}
 }
