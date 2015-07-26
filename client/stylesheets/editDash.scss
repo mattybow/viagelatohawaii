@@ -12,6 +12,7 @@ $edit-nav-height:60px;
 	height:100vh;
 	padding-top:$edit-nav-height;
 	position:relative;
+	letter-spacing:0;
 }
 
 #show-login-ctrls-button{
@@ -257,10 +258,16 @@ $edit-nav-height:60px;
 	
 }
 
-@media(max-width:375px){
+@media(max-width:414px){
 	.login-ctrls{
 		width:$login-width-md;
 		right:10px;
+	}
+	.tab{
+		padding:5px 0;
+		&:hover:after{
+			height:3px;
+		}
 	}
 	.show-inputs .login-ctrls{
 		height:200px;
@@ -269,7 +276,7 @@ $edit-nav-height:60px;
 		padding:10px;
 	}
 	.tab-content{
-		top: 97px;
+		top: 87px;
 	}
 	#login-submit, #logout-button{
 		margin:1.2em 0;
