@@ -26,15 +26,42 @@
 	position: absolute;
 	bottom: -1em;
 	width: 100%;
-}
-@media (max-width:414px){
-	.slide-holder{
-		margin-right:30px;
-	}
+	line-height: 1.2em;
 }
 
 @media (min-width:769px){
+	#press{
+		padding:5% 10%;
+	}
 	.slide-holder{
 		width:200px;
+	}
+}
+
+@media (max-width:414px){
+	.slide-holder{
+		max-width: 130px;
+		height: 180px;
+		margin: 0 10px;
+		&.vert{
+			max-width: 125px;
+			height: 220px;
+		}
+		  
+	}
+}
+
+
+
+@media (max-width:320px){
+	.slide-holder{
+		max-width: 100px;
+		height: 180px;
+		margin: 0 4px;
+		&.vert{
+			max-width: 105px;
+			height: 220px;
+		}
+		  
 	}
 }
