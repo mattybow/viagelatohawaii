@@ -30,3 +30,7 @@ Meteor.publish('slideshowMedia',function(){
 Meteor.publish('pressMedia',function(){
   return SiteMedia.getPressMedia();
 });
+
+Meteor.publish('hours',function(){
+  return Hours.getHours();
+});

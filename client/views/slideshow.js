@@ -7,6 +7,7 @@ MEDIA_BREAK_POINTS = {
 
 Template.slideshow.onCreated(function(){
 	var self = this;
+	this.subscribe('hours');
 	this.subscribe('slideshowMedia',function(){
 		Tracker.afterFlush(function(){
 				console.log('slick init');
@@ -50,10 +51,26 @@ Template.slideshow.helpers({
 		}
 		
 		return imgs;
+	},
+	openOrClosed:function(){
+		var hours = getTodaysHours();
+		return hours.openHour ? 'Open today!' : 'Closed today';
+	},
+	getHours:function(){
+		var hours = getTodaysHours();
+		if(hours.openHour){
+			return hours.openHour+':00 AM - '+(hours.closeHour-12)+':00 PM';
+		} else {
+			return '';
+		}
 	}
 });
 
-
+function getTodaysHours(){
+	var dayIndex = new Date().getDay();
+	var hours = Hours.findOne({dayIndex:dayIndex});
+	return hours;
+}
 
 
 
