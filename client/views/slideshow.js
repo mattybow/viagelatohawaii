@@ -54,11 +54,12 @@ Template.slideshow.helpers({
 	},
 	openOrClosed:function(){
 		var hours = getTodaysHours();
+		if(!hours) return '';
 		return hours.openHour ? 'Open today!' : 'Closed today';
 	},
 	getHours:function(){
 		var hours = getTodaysHours();
-		if(hours.openHour){
+		if(hours && hours.openHour){
 			return hours.openHour+':00 AM - '+(hours.closeHour-12)+':00 PM';
 		} else {
 			return '';

@@ -19,3 +19,4 @@ accounts-ui-unstyled
 reactive-var
 edgee:slingshot
 mvrx:bluebird
+email

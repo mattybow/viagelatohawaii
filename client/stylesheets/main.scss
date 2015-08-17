@@ -30,7 +30,7 @@ body{
 	background-color:$via-green;
 }
 .via-purple{
-	background-color:#C9D7F8;
+	background-color:#eee7f4;
 }
 .via-pink{
   background-color:#fed3d2;
@@ -47,6 +47,9 @@ a{
   &:hover, &:focus{
     color:$via-text-grey;
     text-decoration:none;
+  }
+  &.dotted{
+    border-bottom: 1px dotted black;
   }
 }
 

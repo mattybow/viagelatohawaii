@@ -24,7 +24,23 @@
 	label{
 		display:block;
 	}
+	.submit-contents{
+		transition: margin .2s ease;
+		&.show-recaptcha{
+			margin-top:-80px;
+		}
+		&.show-submit{
+			margin-top:0;
+		}
+	}
 }
 .no-margin-bottom{
 	margin-bottom:0;
+}
+#submit-container{
+	height:80px;
+	overflow:hidden;
+}
+.recaptcha{
+	margin-top:40px;
 }

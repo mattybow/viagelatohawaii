@@ -1,8 +1,11 @@
 Template.feed.onCreated(function(){
+	this.slyPos = new ReactiveVar(0);
 	this.subscribe('instagramFeed',function(){
 		this.slyFeed = initializeSly(this);
 		this.slyFeed.init();
-		this.slyPos = 0;
+		this.slyFeed.on('moveEnd', function(ev){
+			this.slyFeed.pos.cur
+		}.bind(this));
 	}.bind(this));
 
 });
@@ -11,7 +14,6 @@ Template.feed.onRendered(function(){
 	/*Meteor.call('checkInstagram',function(err,res){
 		console.log(err,res);
 	});*/
-	
 
 });
 
@@ -32,17 +34,42 @@ Template.feed.helpers({
 			return this.images.standard_resolution.url;
 		}
 		return this.images.thumbnail.url;
-	}
+	},
+	getIgUrl:function(){
+		return this.link;
+	},
+	showBack:function(){
+		return Template.instance().slyPos.get() > 0 ? 'opaque' : 'transparent';
+	},
+	showForward:function(){
+		return Template.instance().slyPos.get() === 6 ? 'transparent' : 'opaque';
+	},
 });
 
 Template.feed.events({
 	"click #feed-nav-forward":function(){
-		var sly = Template.instance().slyFeed;
-		var pos = ++Template.instance().slyPos;
-		//console.log(pos);
-		sly.slideTo(sly.items[pos].start);
+		var self = Template.instance();
+		//self.slyFeed.reload();
+		var sly = self.slyFeed;
+		var oldPos = self.slyPos.get();
+		var newPos = Math.min(oldPos+1, sly.items.length-4);
+		if(oldPos !== newPos){
+			//console.log(newPos, sly.items.map(function(item){return item.start;}));
+			self.slyPos.set(newPos)
+			sly.slideTo(sly.items[newPos].start + 4*newPos);
+		}
+	},
+	"click #feed-nav-backward":function(){
+		var self = Template.instance();
+		var sly = self.slyFeed;
+		var oldPos = self.slyPos.get();
+		var newPos = Math.max(oldPos-1, 0);
+		if(oldPos !== newPos){
+			self.slyPos.set(newPos)
+			sly.slideTo(sly.items[newPos].start + 4*newPos);
+		}
 	}
-})
+});
 
 function initializeSly(template){
 	return new Sly(template.$('#feed-scroller'),{

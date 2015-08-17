@@ -2,7 +2,7 @@ Meteor.methods({
   checkInstagram: function () {
     this.unblock();
     try {
-      var url = "https://api.instagram.com/v1/users/20072241/media/recent/?access_token=20072241.912429c.a8acdc2815e2429a80b8d5addae810b1"
+      var url = process.env.INSTAGRAM_KEY;
       var result = HTTP.get(url);
       return result;
     } catch (e) {
@@ -81,6 +81,26 @@ Meteor.methods({
       console.error(e);
       return false;
     }
+  },
+  sendEmail: function (data) {
+    var fromAddress = data.address;
+    var name = data.name;
+    var text = data.text;
+    var to = 'mattybow@gmail.com';
+    check([fromAddress, text], [String]);
+
+    // Let other method calls from the same client start running,
+    // without waiting for the email sending to complete.
+    this.unblock();
+    var subjectLine = name + ' writes from viagelatohawaii.com';
+    var email = {
+      to: to,
+      from: fromAddress,
+      subject: subjectLine,
+      text: text
+    };
+    console.log('attempting to send email',email);
+    Email.send(email);
   }
 });
 

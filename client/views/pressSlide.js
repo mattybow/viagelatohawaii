@@ -44,7 +44,7 @@ Template.pressSlide.helpers({
 		return SVG_PATHS[id].viewBox;
 	},
 	getOrientation:function(){
-		console.log(this);
+		//console.log(this);
 		return this.orientation==='V' ? 'vert' : 'hor'
 	}
 })

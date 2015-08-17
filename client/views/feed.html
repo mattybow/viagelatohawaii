@@ -1,5 +1,5 @@
 <template name="feed">
-	<div class="via-blue section" id="instafeed">
+	<div class="via-purple section" id="instafeed">
 		<div class="section-icon">
 			<svg width="100%" height="100%" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
 				<g>
@@ -37,19 +37,45 @@
 				</svg>
 		</div>
 		<div class="section-header">Follow us and get social!</div>
-		<div class="section-content">
+		<div class="section-subheader">
+			We post daily flavors and announcements on <a class="dotted" href="https://instagram.com/viagelatohawaii/" target="_blank"><b>Instagram</b></a>, <a class="dotted" href="https://twitter.com/VIAgelato" target="_blank"><b>Twitter</b></a>, and <a class="dotted" href="https://www.facebook.com/viagelato" target="_blank"><b>Facebook</b></a>
+		</div>
+		<div class="section-content" style="-webkit-user-select:none; user-select:none;">
+			<div class="feed-nav feed-nav-left {{showBack}}" id="feed-nav-backward">
+				<div class="svg-holder">
+					<svg width="30" height="100%" viewBox="0 0 29 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+					    <g transform="matrix(1,0,0,1,-0,-1)">
+					        <g transform="matrix(-1,3.21625e-16,-3.21625e-16,-1,31.4208,60.1972)">
+					            <g id="Layer1">
+					                <path d="M3.565,2.508L30,30L3.565,57.886" style="fill:none;stroke-width:1px;stroke:grey;"/>
+					            </g>
+					        </g>
+					    </g>
+					</svg>
+				</div>
+			</div>
 			<div class="feed-slides" id="feed-scroller">
 				<div id="feed-slide-wrapper">
 					{{#each getFeedPhotos}}
 						<div class="slide_holder">
-							<img src="{{getPhotoUrl}}" alt="">
+							<a href="{{getIgUrl}}" target="_blank"><img src="{{getPhotoUrl}}" alt=""></a>
 							<div class="insta-text handwriting">{{getTime created_time}}</div>
 						</div>
 					{{/each}}
 				</div>
 			</div>
-			<div class="feed-nav" id="feed-nav-forward">
-				<span class="icon-angle-right"></span>
+			<div class="feed-nav feed-nav-right {{showForward}}" id="feed-nav-forward">
+				<div class="svg-holder">
+					<svg width="30" height="100%" viewBox="0 0 29 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+					    <g transform="matrix(1,0,0,1,-0,-1)">
+					        <g transform="matrix(1,0,0,1,-2.14402,-0.197166)">
+					            <g id="Layer1">
+					                <path d="M3.565,2.508L30,30L3.565,57.886" style="fill:none;stroke-width:1px;stroke:grey;"/>
+					            </g>
+					        </g>
+					    </g>
+					</svg>
+				</div>
 			</div>
 		</div>
 		<div class="lines">
