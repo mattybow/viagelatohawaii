@@ -92,6 +92,11 @@ Meteor.methods({
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     this.unblock();
+    var verifyCaptchaResponse = verifyCaptcha(this.connection.clientAddress, data.recaptchaResponse);
+    //console.log(verifyCaptchaResponse);
+    if(verifyCaptchaResponse.data.success === false){
+      return {ok:false, err:'could not verify captcha response'};
+    }
     var subjectLine = name + ' writes from viagelatohawaii.com';
     var email = {
       to: to,
@@ -101,6 +106,7 @@ Meteor.methods({
     };
     console.log('attempting to send email',email);
     Email.send(email);
+    return {ok:true};
   }
 });
 
@@ -110,4 +116,37 @@ function checkAuth(cred){
     return true;
   }
   return false;
+}
+
+function verifyCaptcha(clientIP, response) {
+  var captcha_data = {
+      privatekey: process.env.RECAPTCHA_KEY,
+      remoteip: clientIP,
+      response: response
+  };
+
+  var serialized_captcha_data =
+      'secret=' + captcha_data.privatekey +
+      '&remoteip=' + captcha_data.remoteip +
+      '&response=' + captcha_data.response;
+      
+  var captchaVerificationResult = null;
+
+  try {
+      captchaVerificationResult = HTTP.call("POST", "https://www.google.com/recaptcha/api/siteverify", {
+          content: serialized_captcha_data.toString('utf8'),
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Content-Length': serialized_captcha_data.length
+          }
+      });
+  } catch (e) {
+      console.log(e);
+      return {
+          'success': false,
+          'error-codes': 'reCaptcha service not available'
+      };
+  }
+
+  return captchaVerificationResult;
 }

@@ -20,3 +20,4 @@ reactive-var
 edgee:slingshot
 mvrx:bluebird
 email
+meteorhacks:fast-render

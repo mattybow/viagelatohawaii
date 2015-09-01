@@ -1,13 +1,25 @@
+#contact{
+	overflow-x:hidden;
+}
 #contact-form{
 	margin-top:30px;
 
 	input, textarea{
 		width:100%;
 		font-size:1.5em;
-		line-height: 2em;
+		line-height: 1.5em;
 		border:2px solid transparent;
 		background-color:$via-blue;
 		transition:background-color 0.25s, border-color 0.25s;
+		
+	}
+
+	textarea{
+		padding:10px;
+	}
+
+	input{
+		height:2.5em;
 		padding:0 10px;
 	}
 
@@ -17,8 +29,12 @@
 		border:2px solid #749EB9;
 	}
 
-	.row{
+	.name-and-email{
 		margin-bottom:30px;
+	}
+
+	.comment{
+		margin-bottom:1em;
 	}
 
 	label{
@@ -27,7 +43,7 @@
 	.submit-contents{
 		transition: margin .2s ease;
 		&.show-recaptcha{
-			margin-top:-80px;
+			margin-top:-7em;
 		}
 		&.show-submit{
 			margin-top:0;
@@ -42,5 +58,44 @@
 	overflow:hidden;
 }
 .recaptcha{
-	margin-top:40px;
+	margin-top:4.2em;
+}
+.extended-content-container{
+	width: 200%;
+    margin-left: -50%;
+}
+
+#contact-form{
+	.input-not-ok, .input-not-ok:focus{
+		border:2px solid #EA3D3D;
+	}
+}
+.error-msg{
+	color:#EA3D3D;
+	font-size:.8em;
+	height:2em;
+}
+.submission-feedback-container{
+	height:2em;
+	overflow:hidden;
+}
+.submission-feedback{
+	transition: transform .2s ease;
+	transform: translateY(-2em);
+	&.error{
+		color:#EA3D3D;
+	}
+}
+.show .submission-feedback{
+	transform:translateY(0);
+}
+@media(max-width:767px){
+	#contact-form{
+		.name-and-email{
+			margin-bottom:0;
+		}
+		.error-msg{
+			margin-bottom:10px;
+		}
+	}
 }

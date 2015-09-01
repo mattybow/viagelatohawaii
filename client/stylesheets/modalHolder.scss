@@ -15,3 +15,24 @@
 .modal{
 	min-height:100%;
 }
+.modal-close-icon{
+    position: absolute;
+    top: 20px;
+    right: 5%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    font-size: 2em;
+    border: 1px solid rgba(0,0,0,.4);
+    border-radius: 30px;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+}
+
+@media(min-width:415px){
+	.modal-close-icon{
+		top:30px;
+	}
+}

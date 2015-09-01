@@ -7,3 +7,10 @@ Template.libraryModal.helpers({
 		return Flavors.getAll();
 	},
 })
+
+Template.libraryModal.events({
+	'click .modal-close-icon':function(){
+		Session.set('activeModal','');
+		$('body').removeClass('modal-open');
+	}
+})

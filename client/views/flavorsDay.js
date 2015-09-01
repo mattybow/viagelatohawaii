@@ -15,5 +15,6 @@ Template.flavorsDay.helpers({
 Template.flavorsDay.events({
 	'click #read-only-flavor-library':function(){
 		Session.set('activeModal','library');
+		$('body').addClass('modal-open');
 	}
 })

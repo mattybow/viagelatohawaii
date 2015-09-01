@@ -62,7 +62,7 @@ $burger-size:1.8em;
 
 .burger-touch-area{
   position: absolute;
-  left: 10px;
+  left: 5%;
   width: 40px;
   height: 40px;
   padding-top: 6px;
@@ -211,5 +211,16 @@ $burger-size:1.8em;
 
   .nav{
     padding:5px 0;
+  }
+}
+
+@media(max-width:320px){
+  #mobile-nav{
+    li{
+      padding:5px;
+    }
+    ul{
+      padding:10px 0 30px 0;
+    }
   }
 }

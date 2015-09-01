@@ -11,9 +11,7 @@ Template.modalHolder.helpers({
 });
 
 Template.modalHolder.events({
-	'click':function(){
-		Session.set('activeModal','');
-	}
+	
 })
 
 Template.modalHolder.rendered=function(){

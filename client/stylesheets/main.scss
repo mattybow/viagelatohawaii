@@ -12,6 +12,9 @@ body{
   letter-spacing:1px;
 	font-weight:400;
 	color:$via-text-grey;
+  &.modal-open{
+    overflow:hidden;
+  }
 }
 
 .via-yellow{
@@ -237,8 +240,23 @@ button>span{
 .left-form-ctrls{
   text-align:left;
 }
+.half-top-margin{
+  margin-top:.5em;
+  line-height:1em;
+}
+.single-line-height{
+  line-height:1em;
+}
 .mobile-back-action-title{
   margin-left:-9px;
+}
+.flex-parent-row{
+  display:flex;
+  flex-flow:row nowrap;
+  justify-content:center;
+}
+.flex-child-expand{
+  flex: 1 1 auto;
 }
 input,textarea{
   -webkit-appearance:none;

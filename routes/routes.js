@@ -3,7 +3,10 @@ Router.configure({
 });
 Router.route('/',function(){
 	this.render('Via');
-},{name:'home'});
+},{
+	name:'home',
+	fastRender:true
+});
 Router.route('/edit',function(){
 	this.render('editDash');
 });
