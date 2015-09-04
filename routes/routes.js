@@ -6,6 +6,12 @@ Router.route('/',function(){
 },{
 	name:'home',
 	fastRender:true,
+	waitOn: function(){
+		return [Meteor.subscribe('flavorsOfTheDay'),
+				Meteor.subscribe('slideshowMedia'),
+				Meteor.subscribe('hours')
+		];
+	},
 	onRun:function(){						//on initial load, will scrollTo hash
 		var hash = window.location.hash;
 		Meteor.setTimeout(function(){
