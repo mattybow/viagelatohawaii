@@ -41,5 +41,8 @@ Template.editFlavorsDayPreview.events({
 				Growler.success('applied your changes','Got it!');
 			}
 		});
+	},
+	'click .discard-changes':function(){
+		Session.set('dayFlavors',Session.get('originalFlavors'));
 	}
 })

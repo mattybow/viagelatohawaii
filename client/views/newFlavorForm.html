@@ -1,5 +1,5 @@
 <template name="newFlavorForm">
-	<div id="new-flavor-form" class="{{showNewForm}}">
+	<div id="new-flavor-form" class="edit-form-container {{showNewForm}}">
 		<div id="new-form-txfm">
 			<div class="top-bar">
 				<div class="left-form-ctrls sm-screen" id="new-form-ctrls">
@@ -9,7 +9,7 @@
 					</button>
 				</div>
 				<div class="form-title">
-					<h3>{{getFlavorName}}</h3>
+					<h3 class="form-title-text">{{getFlavorName}}</h3>
 				</div>
 				<div class="right-form-ctrls" id="new-form-ctrls">
 					<button class="btn-line" id="create-flavor">{{getCreateStatus}}</button>
@@ -20,14 +20,14 @@
 				<div class="row">
 					<div class="col-sm-4 img-uploader-container">
 						<div class="new-flavor-img-preview">
-							{{> imgUploader parent=passParentRef s3Folder="flavors"}}
+							{{> imgUploader parent=passParentRef s3Folder="flavors" resolutions=getResolutions}}
 						</div>
 						<h3 class="new-flavor-file-name  {{getUploadStatus}}">{{getFlavorFileName}}</h3>
 					</div>
 					<div class="col-sm-8">
 						<div class="new-flavor-name form-item {{isInvalid}}" id="flavor-name-field">
 							<label for="new-flavor-name">name</label>
-							<input class="form-input" type="text" name="new-flavor-name">
+							<input class="form-input" type="text" name="new-flavor-name" id="new-flavor-name-input">
 						</div>
 						<div class="new-flavor-textarea form-item">
 							<label for="new-flavor-descript">description</label>

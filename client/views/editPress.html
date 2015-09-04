@@ -19,7 +19,7 @@
 			<div class="row">
 				<div class="col-sm-4 img-uploader-container">
 					<div class="new-flavor-img-preview">
-						{{> imgUploader parent=passParentRef s3Folder="images"}}
+						{{> imgUploader parent=passParentRef s3Folder="images" resolutions=getResolutions}}
 					</div>
 					<h3 class="new-flavor-file-name  {{getUploadStatus}}">{{getNewPressFileName}}</h3>
 				</div>

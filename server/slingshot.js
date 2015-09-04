@@ -29,10 +29,9 @@ Slingshot.createDirective(slingshotDirective, Slingshot.S3Storage, {
 		var origFileName = file.name;
 		var ext = origFileName.split('.').pop();
 		var index = origFileName.lastIndexOf('.');
-		var fileName = metaContext.newFileName || origFileName.slice(0,index);		//uses the new file name if passed
-		var regex = /\W+/g;
-		var cleanFileName = (fileName.replace(regex,'') + '.' + ext).toLowerCase();
-		console.log(cleanFileName);
-		return metaContext.s3Folder + '/' + cleanFileName;
+		var newFileName = metaContext.newFileName || origFileName.slice(0,index);		//uses the new file name if passed
+		var fullFileName = (newFileName + '.' + ext).toLowerCase();
+		console.log(fullFileName);
+		return metaContext.s3Folder + '/' + fullFileName;
 	}
 });

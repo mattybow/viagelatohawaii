@@ -2,6 +2,7 @@ $login-width-lg:300px;
 $login-width-md:200px;
 $login-width-sm:150px;
 $edit-nav-height:60px;
+$edit-nav-height-mobile:50px;
 
 #editFlavors{
 	display:flex;
@@ -13,6 +14,9 @@ $edit-nav-height:60px;
 	padding-top:$edit-nav-height;
 	position:relative;
 	letter-spacing:0;
+	.btn-line, .btn-solid{
+		border-radius:2px;
+	}
 }
 
 #show-login-ctrls-button{
@@ -173,7 +177,7 @@ $edit-nav-height:60px;
 }
 .brand{
 	padding: 10px 20px;
-	height:60px;
+	height:$edit-nav-height;
 	overflow:hidden;
 	position:relative;
 
@@ -189,13 +193,16 @@ $edit-nav-height:60px;
 		font-size:1.2em;
 		color:$via-text-black;
 		border-left:1px solid rgba(0,0,0,.2);
+		display: inline-block;
+    	vertical-align: middle;
 	}
 }
 .tab-bar{
 	display:flex;
 	flex-flow:row nowrap;
-	justify-content:left;
-	background-color:$via-yellow;
+	justify-content:center;
+	background-color:#fff;
+	border-bottom:1px solid rgba(0,0,0,.1);
 	z-index:1;
 
 	a{
@@ -207,10 +214,6 @@ $edit-nav-height:60px;
 			text-decoration: none;
 		}
 	}
-
-	.tab:last-child{
-		margin-right:0;
-	}
 }
 
 .tab{
@@ -219,25 +222,26 @@ $edit-nav-height:60px;
 	text-align:center;
 	border-bottom:0px solid rgba(0,0,0,0.2);
 	padding:10px 0;
+	margin-right:1px;
 
 	&:after{
 		content:'';
 		height:0;
-		bottom:0;
+		bottom:-1px;
 		left:0;
 		position:absolute;
 		width:100%;
-		background-color:rgba(255, 218, 160,.8);
+		background-color:#2F86B1;
 		transition:height .2s ease;
 	}
 
 	&:hover:after{
-		height:5px;
+		height:1px;
 	}
 }
 .tab-content{
 	position: absolute;
-	top: 100px;
+	top: 101px;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -245,11 +249,10 @@ $edit-nav-height:60px;
 
 .active-tab{
 	position:relative;
-	color:$via-text-black;
-	background-color:papayawhip;
+	color:#2F86B1;
 
 	&:after{
-		height:5px;
+		height:1px;
 	}
 
 }
@@ -259,7 +262,14 @@ $edit-nav-height:60px;
 }
 
 @media(max-width:414px){
+	#edit-dashboard{
+		padding-top:$edit-nav-height-mobile;
+	}
+	#edit-nav, .brand{
+		height:$edit-nav-height-mobile;
+	}
 	.login-ctrls{
+		top:5px;
 		width:$login-width-md;
 		right:10px;
 	}
@@ -273,10 +283,13 @@ $edit-nav-height:60px;
 		height:200px;
 	}
 	.brand{
-		padding:10px;
+		padding:10px 15px;
+		img{
+			height: 30px;
+		}
 	}
 	.tab-content{
-		top: 87px;
+		top: 78px;
 	}
 	#login-submit, #logout-button{
 		margin:1.2em 0;

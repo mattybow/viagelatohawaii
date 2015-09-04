@@ -170,10 +170,6 @@ button{
 		text-align:center;
 		margin: 0 10px 10px;
 		width:20%;
-
-		&:last-child{
-			border-left:1px solid rgba(0,0,0,.2);
-		}
 	}
 }
 
@@ -199,13 +195,13 @@ button{
 	min-width:100px;
 	width:calc(100% - 110px);
 	height:100px;
-	padding:10px 10px 10px 0;
+	padding:5px 10px 10px 0;
 	border-top: 1px solid rgba(0,0,0,.1);
 	position:relative;
 }
 
 .flavor-name-text{
-	max-height: 2.5em;
+	max-height: 3em;
 	overflow: hidden;
 }
 
@@ -248,10 +244,10 @@ button{
 	}
 }
 
-@media (max-width:375px){
+@media (max-width:414px){
 	#editFlavorsDayPreview {
 		.flavors{
-			padding:64px 5px 0;
+			padding:70px 5px 0;
 			word-wrap: break-word;
 		}
 		.day-flavor-image{
@@ -280,10 +276,34 @@ button{
 	.lib-flavor-name{
 		padding-top:5px;
 		height:$flavor-list-height-mobile;
+		width:calc(100% - 95px);
 	}
-	.flavor-preview-buttons button{
-		width:50%;
-		margin: 0 0 10px 0;
+	#edit-dashboard .flavor-preview-buttons button{
+		width:40px;
+		height:40px;
+		margin: 0 2px;
+		border-radius:100px;
+
+		&.apply-changes{
+			border-color:rgba(0, 128, 0, .5);
+		}
+		&.discard-changes{
+			border-color:rgba(255, 109, 109, .5);
+		}
+
+		&.disabled-button{
+			border-color:rgba(0,0,0,.2);
+			.icon-check-mark, .icon-close{
+				color:$via-text-grey;
+			}
+		}
+
+		.icon-check-mark{
+			color:green;
+		}
+		.icon-close{
+			color:#ff6d6d;
+		}
 	}
 	#editFlavorsDayPreview{
 		width:25%;
@@ -291,8 +311,11 @@ button{
 	#flavor-preview-ctrls{
 		padding:10px 0;
 	}
+	#flavors-preview-title{
+		margin-bottom: 0;
+	}
 	#editFlavorLibrary{
-		width:65%;
+		width:60%;
 	}
 	.flavor-list{
 		padding-top:60px;

@@ -1,13 +1,13 @@
 <template name="libFlavorListView">
 	<div class="lib-flavor">
-		<div class="lib-flavor-img-holder">
+		<div class="lib-flavor-img-holder {{getMobileEditClass}}">
 			<img src="{{getImgPath}}" alt="">
 			<div class="edit-annotation-for-mobile sm-screen">edit</div>
 		</div>
 		<div class="lib-flavor-name">
 			<div class="flavor-name-text">{{flavorName}}</div>
 			<div class="lib-flavor-buttons {{addOrRemove}}">
-				<button class="btn-solid lg-screen">edit</button>
+				<button class="btn-solid lg-screen edit-flavor-button">edit</button>
 				<button class="btn-line">
 					<div class="button-text-container">
 						<div class="button-texts">

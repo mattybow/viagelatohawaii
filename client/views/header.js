@@ -16,11 +16,14 @@ Template.header.events({
 		} else {
 			$('#mobile-nav .mobile-nav-text').velocity('byeByeNav',{stagger:50, backwards:true});
 		}
+	},
+	'click .desktop-nav-link':function(){
+		Session.set('isNavHidden',true);
 	}
 });
 
 Template.header.onRendered(function(){
-	scrollIntervalID = Meteor.setInterval(updatePage, 10);
+	scrollIntervalID = Meteor.setInterval(updatePage, 1000/60);
 });
 
 var prevScrollPos = 0;
@@ -35,6 +38,21 @@ function updatePage(){
 			Session.set('isNavHidden',false);
 		}
 		prevScrollPos = scrollPos;
+		updateLocation(scrollDir);
+	}
+}
+
+function updateLocation(dir){
+	var sections = ['#flavorsDay','#story','#location','#catering','#contact','#press'];
+	var bodyTop = document.body.scrollTop;
+	//var winHeight = window.innerHeight;
+	var hash = _.find(sections.reverse(),function(selector){
+			return $(selector).offset().top < bodyTop ;
+		}) || "/";
+	if(hash !== (window.location.hash || '/')){
+		if (history && history.replaceState) {
+			history.replaceState({}, "", hash);
+		}
 	}
 }
 

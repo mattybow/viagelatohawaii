@@ -13,4 +13,17 @@ Template.catering.events({
 		});
 		$('body').addClass('modal-open');
 	}
+});
+
+Template.catering.helpers({
+	getBackgroundImage:function(){
+		var width = window.innerWidth;
+		if (width <= MEDIA_BREAK_POINTS.mobile){
+			return "https://s3-us-west-2.amazonaws.com/viagelato/images/catering-background-mobile-sm.jpeg"
+		} else if (width <= MEDIA_BREAK_POINTS.tablet){
+			return "https://s3-us-west-2.amazonaws.com/viagelato/images/catering-background-mobile-lg.jpeg"
+		} else {
+			return "https://s3-us-west-2.amazonaws.com/viagelato/images/catering-background-desktop.JPG"
+		}
+	}
 })

@@ -12,6 +12,11 @@ body{
   letter-spacing:1px;
 	font-weight:400;
 	color:$via-text-grey;
+  background-color:$via-yellow;
+  background-image:url('https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png');
+  background-position:50% 30px;
+  background-repeat:no-repeat;
+  background-size:30px 30px;
   &.modal-open{
     overflow:hidden;
   }
@@ -27,7 +32,7 @@ body{
 	background-color:$via-blue;
 }
 .via-blue-trans{
-  background-color:rgba(226, 240, 247, 0.9);
+  background-color:rgba(226, 240, 247, 0.6);
 }
 .via-green{
 	background-color:$via-green;
@@ -52,7 +57,7 @@ a{
     text-decoration:none;
   }
   &.dotted{
-    border-bottom: 1px dotted black;
+    border-bottom: 1px dotted rgba(0,0,0,.3);
   }
 }
 
@@ -72,6 +77,9 @@ button{
 
 button:focus, button:active{
   outline:none;
+}
+.btn-light-border{
+  border:1px solid #B1B1B1;
 }
 
 @font-face {
@@ -218,9 +226,9 @@ button>span{
 
 .btn-solid{
   padding:10px;
-  background-color:rgba(0,0,0,.2);
+  background-color:rgba(110,110,110,.2);
+  border: 1px solid transparent;
   border-radius:0;
-  border:none
 }
 .btn-line, .btn-no-line{
   margin-left:5px;

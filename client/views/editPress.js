@@ -36,6 +36,13 @@ Template.editPress.helpers({
 	},
 	frameInvalid:function(){
 		return Template.instance().frameInvalid.get() ? 'invalid' : '';
+	},
+	getResolutions:function(){
+		return [
+			{key:'thumbnail', size:150},
+			{key:'low_resolution', size:360 },
+			{key:'standard_resolution', size:800}
+		];
 	}
 });
 

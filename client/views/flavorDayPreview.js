@@ -13,7 +13,8 @@ Template.flavorDayPreview.helpers({
 		var imgPath = 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
 		var doc = Flavors.findOne({_id:id});
 		if(doc){
-			imgPath = doc.imgPath;
+			imgPath = doc.imgPath || doc.images.thumbnail.url;
+
 		}
 		return imgPath;
 	}

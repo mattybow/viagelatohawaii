@@ -28,7 +28,7 @@ Template.editFlavorLibrary.helpers({
 Template.editFlavorLibrary.events({
 	'click #new-flavor-button': function(){
 		console.log(utils.isMobile());
-		Session.set('newFormOpened',true);
+		Session.set('flavorFormOpened',{opened:true,_id:''});
 	},
 	'click #clear-all-selected-flavors':function(){
 		Session.set('dayFlavors',[]);

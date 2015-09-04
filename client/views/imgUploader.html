@@ -19,11 +19,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="dz-progress-loader-container {{displayProgress}}">
-			<div class="dz-progress-loader" style="right:{{getRemaining}}%;"></div>
-			<div class="dz-status {{getStatus}}">
-				<span class="{{getStatusIcon}}"></span>
-			</div>
-		</div>
+		
+		{{#each getResolutions}}
+			{{> uploaderFileProgress}}
+		{{/each}}
 	</div>
 </template>

@@ -8,13 +8,19 @@ Template.libFlavorListView.helpers({
 		return session.indexOf(id) >= 0 ? 'remove' : '';
 	},
 	getImgPath:function(){
-		return Template.instance().data ? Template.instance().data.imgPath : 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
+		return Template.instance().data ? this.imgPath  || this.images.thumbnail.url : 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
+	},
+	getMobileEditClass:function(){
+		if(window.innerWidth <= 414){
+			return "edit-flavor-button";
+		}
+		return '';
 	}
 });
 
 Template.libFlavorListView.events({
 	'click .btn-line':function(ev){
-		var id = Template.instance().data._id;
+		var id = this._id;
 		var session = Session.get('dayFlavors');
 		if(session.indexOf(id) >= 0){
 			Session.set('dayFlavors',lodash.pull(session,id)); //remove from array
@@ -25,5 +31,8 @@ Template.libFlavorListView.events({
 			Session.set('dayFlavors',newSessionData);
 		}
 		
+	},
+	'click .edit-flavor-button':function(){
+		Session.set('flavorFormOpened',{opened:true,_id:this._id});
 	}
 });

@@ -1,11 +1,11 @@
 var imgUploaderDirective = 'viaImgUpload';
-FLAVOR_PHOTO_STATUSES = {
-	0:'none',
-	1:'uploading',
-	2:'success',
-	3:'error'
-}
-Session.setDefault('flavorPhotoUploadStatus',0);
+var INITIAL_UPLOAD_STATE = {
+	progress:0,
+	isUploading: false,
+	downloadUrl:'',
+	uploadResult:'none',
+	error:''
+};
 
 Template.imgUploader.onCreated(function(){
 	Slingshot.fileRestrictions(imgUploaderDirective, {				//only allow images to upload
@@ -14,75 +14,133 @@ Template.imgUploader.onCreated(function(){
 	});
 	var _self = this;
 	this.data.parent.uploadImage = function(fileName){
-		return new Promise(function(resolve,reject){
-			if(Meteor.userId()){									//user is AUTHORIZED
-				var file = _self.stagedFile;
-				if(!file){
-					resolve(null);  								//case when user did not upload file
-				} else {
-					Session.set('flavorPhotoUploadStatus',1);
-					var metaContext = {s3Folder: _self.data.s3Folder, newFileName:fileName};
-					console.log(metaContext);
-					var uploader = new Slingshot.Upload(imgUploaderDirective, metaContext);
-					_self.showProgress.set(true);
-
-					uploader.send(file,function(err,downloadUrl){
-						if (err) {
-							// Log service detailed response.
-							console.error(err);
-							console.error('Error uploading', uploader.xhr.response);
-							Session.set('flavorPhotoUploadStatus',3);
+		if(Meteor.userId()){
+			var files = _self.stagedFiles;
+			return Promise.all(
+				_.map(files,function(file){
+					return new Promise(function(resolve,reject){
+						if(!file){
+							resolve(null);  								//case when user did not upload file
 						} else {
-							Session.set('flavorPhotoUploadStatus',2);				//success updates icon to checkmark
-							resolve(downloadUrl);
+							_self.overallUploadStatus.set(1);
+							var resolutionName = file.key
+							var newFileName = fileName + '_' + resolutionName;
+							var metaContext = {s3Folder: _self.data.s3Folder, newFileName:newFileName};
+							console.log(metaContext);
+							var uploader = new Slingshot.Upload(imgUploaderDirective, metaContext);
+							_self.updateResolution(resolutionName,{
+								isUploading:true
+							});
+
+							uploader.send(file.file,function(err,downloadUrl){
+								if (err) {
+									// Log service detailed response.
+									console.error(err);
+									console.error('Error uploading', uploader.xhr.response);
+									_self.updateResolution(resolutionName,{				//error in upload
+										isUploading:false,
+										uploadResult:'error',
+										error:uploader.xhr.response
+									});
+									resolve({key:resolutionName, url:null});
+								} else {
+									_self.updateResolution(resolutionName,{				//success updates icon to checkmark
+										isUploading:false,
+										uploadResult:'success',
+										downloadUrl:downloadUrl
+									});
+									resolve({key:resolutionName, url:downloadUrl});
+								}
+							});
+
+							var hideProgress = function(){
+								_self.isDragEnter.set(false);
+								Meteor.setTimeout(function(){
+									_self.updateResolution(resolutionName,{
+										progress:0
+									});
+								},200);
+							};
+
+							var checkProgress = Meteor.setInterval(function(){
+								var updatedProgress = Math.round(uploader.progress()* 100);
+								var prevProgress = _self.getResolution(resolutionName).progress;
+								if(updatedProgress !== prevProgress){
+									_self.updateResolution(resolutionName,{
+										progress:updatedProgress
+									});
+								}
+								if(updatedProgress === 100){
+									Meteor.clearInterval(checkProgress);
+									Meteor.clearTimeout(cancelCheckProgress);
+									hideProgress();
+								}
+							},16);
+
+							var cancelCheckProgress = Meteor.setTimeout(function(){
+								Meteor.clearInterval(checkProgress);
+								_self.updateResolution(resolutionName,{
+									isUploading:false,
+									uploadResult:'error',
+									error:'timeout after 10s, client cancelled upload'
+								});
+							},10000);
 						}
 					});
+				}.bind(this))
+			);
+		} else {
+			return Promise.reject('you are not authorized');
+		}
+	};
 
-					var hideProgress = function(){
-						_self.showProgress.set(false);
-						_self.isDragEnter.set(false);
-						Meteor.setTimeout(function(){
-							_self.progress.set(0);
-						},200);
-					};
-
-					var checkProgress = Meteor.setInterval(function(){
-						var updatedProgress = Math.round(uploader.progress()* 100);
-						var prevProgress = _self.progress.get();
-						if(updatedProgress !== prevProgress){
-							_self.progress.set(updatedProgress);
-						}
-						if(updatedProgress === 100){
-							Meteor.clearInterval(checkProgress);
-							Meteor.clearTimeout(cancelCheckProgress);
-							hideProgress();
-						}
-					},16);
-
-					var cancelCheckProgress = Meteor.setTimeout(function(){
-						Meteor.clearInterval(checkProgress);
-						Session.set('flavorPhotoUploadStatus',3);
-					},10000);
-				}
-			} else {
-				reject('asdf');
+/*				reject('you need a login to continue');
 				// _self.isDragEnter.set(false);
 				// toastr.error('please login to perform this transaction','TRANSACTION DENIED');
-			}
+
 		});
-	}
+	}*/
 
 	this.data.parent.resetUploader = function(){
-		Session.set('flavorPhotoUploadStatus',0);
+		_self.clearResolutions();
+		_self.overallUploadStatus.set(0);
 		_self.base64Url.set('');
-		_self.stagedFile = '';
+		_self.stagedFiles = [];
 	}
+
+	this.clearResolutions = function(){
+		this.resolutions.set(this.getInitialResolutions());
+	};
 
 	//INITIALIZE REACTIVE VARIABLES
 	this.isDragEnter = new ReactiveVar(false);
 	this.base64Url = new ReactiveVar('');
 	this.progress = new ReactiveVar(0);
-	this.showProgress = new ReactiveVar(false);
+	this.overallUploadStatus = new ReactiveVar(0);
+
+	this.getInitialResolutions = function(){
+		return lodash.map(this.data.resolutions,function(resolution){
+			return lodash.assign(resolution, INITIAL_UPLOAD_STATE);
+		});
+	}
+
+	this.resolutions = new ReactiveVar(this.getInitialResolutions());
+
+	this.updateResolution = function(key,newData){
+		var newResolutions = lodash.map(this.resolutions.get(), function(resolution){
+			if(resolution.key === key){
+				return lodash.assign(resolution,newData);
+			}
+			return resolution;
+		});
+		this.resolutions.set(newResolutions);
+	};
+
+	this.getResolution = function(key){
+		return lodash.find(this.resolutions.get(),function(resolution){
+			return resolution.key === key;
+		});
+	};
 	
 });
 
@@ -90,31 +148,9 @@ Template.imgUploader.helpers({
 	isDragEnter:function(){
 		return Template.instance().isDragEnter.get() ? 'dragenter' : '';
 	},
-	getStatus:function(){
-		var index = Session.get('flavorPhotoUploadStatus');
-		return FLAVOR_PHOTO_STATUSES[index];
-	},
+	
 	displayDefaultMsg:function(){
-		return Session.get('flavorPhotoUploadStatus')>0 ? "hidden" : "";
-	},
-	getStatusIcon:function(){
-		var index = Session.get('flavorPhotoUploadStatus');
-		switch (index){
-			case 0:
-				return '';
-			case 1:
-				return 'icon-upload';
-			case 2:
-				return 'icon-check-mark';
-			case 3:
-				return 'icon-notifications';
-		}
-	},
-	getRemaining:function(){
-		return 100 - Template.instance().progress.get();
-	},
-	displayProgress:function(){
-		return Template.instance().showProgress.get() ? '' : 'transparent';
+		return Template.instance().overallUploadStatus.get()>0 ? "hidden" : "";
 	},
 	hasImagePreview:function(){
 		var result = Template.instance().base64Url.get() ? 'selection-made' : '';
@@ -123,6 +159,9 @@ Template.imgUploader.helpers({
 	},
 	getImagePreview:function(){
 		return Template.instance().base64Url.get();
+	},
+	getResolutions:function(){
+		return Template.instance().resolutions.get();
 	}
 })
 
@@ -168,10 +207,11 @@ function processDrop(e,context){
 	var files = e.currentTarget.files || e.originalEvent.dataTransfer.files;
 	if(files.length === 1){
 		var file = files[0];
-		context.stagedFile = file;
 		var fileReader = new FileReader();
 		fileReader.onload = function(){
-			handleLoad(file,fileReader.result,context)
+			context.base64Url.set(fileReader.result);
+			processFileExt(file.name);
+			resizeImages(file,context);
 		}
 		fileReader.readAsDataURL(file);
 	} else if(files.length > 1) {
@@ -181,10 +221,30 @@ function processDrop(e,context){
 	}
 }
 
-function handleLoad(file,imgUrl,context){
-	context.base64Url.set(imgUrl);
-	var ext = file.name.split('.').pop();
+function processFileExt(filename){
+	var ext = filename.split('.').pop();
 	Session.set('newFileExt',ext);
+}
+
+function resizeImages(file,context){
+	context.stagedFiles = [];	//init and clear previous junk
+	_.each(context.data.resolutions,function(resolution){
+		Resizer.resize(file, {
+	        width: resolution.size,	// maximum width
+	        height: 800, 			// maximum height
+	        cropSquare: resolution.square
+	    }, function(err, newFile) {
+	        if(!err){
+	        	console.log(resolution.key, 'COMPLETE');
+	        	context.stagedFiles.push({
+	        		key:resolution.key,
+	        		file:newFile
+	        	});
+	        } else {
+	        	console.log(err);
+	        }
+	    }.bind(this));
+	}.bind(this))
 }
 
 function preventAndStop(e){

@@ -16,6 +16,8 @@ Template.newFlavorForm.onCreated(function(){
 		}
 		return '';
 	}
+	Session.setDefault('flavorFormOpened',{opened:false,_id:''});
+
 });
 
 Template.newFlavorForm.onRendered(function(){
@@ -23,7 +25,7 @@ Template.newFlavorForm.onRendered(function(){
 
 Template.newFlavorForm.helpers({
 	showNewForm:function(){
-		return Session.get('newFormOpened') ? 'opened' : '';
+		return Session.get('flavorFormOpened').opened ? 'opened' : '';
 	},
 	getFlavorFileName:function(){
 		return Template.instance().getFileName();
@@ -40,6 +42,16 @@ Template.newFlavorForm.helpers({
 		return FLAVOR_PHOTO_STATUSES[index];
 	},
 	getCreateStatus:function(){
+		var editId = Session.get('flavorFormOpened')._id;
+		if(editId){
+			var flavorData = Flavors.getFlavorById(editId);
+			if(Meteor.isClient){
+				Template.instance().$('#new-flavor-name-input').val(flavorData.flavorName).change();
+			}
+			return 'save';
+		} else {
+			Template.instance().$('#new-flavor-name-input').val('').change();
+		}
 		return Template.instance().createStatus.get();
 	},
 	isInvalid:function(fieldName){
@@ -47,12 +59,18 @@ Template.newFlavorForm.helpers({
 	},
 	getErrorMsg:function(){
 		return Template.instance().highlightNameField.get() ? Template.instance().errorMsg.get() : '';
+	},
+	getResolutions:function(){
+		return [
+			{key:'thumbnail', size:150, square:true},
+			{key:'standard_resolution', size:400, square:true}
+		];
 	}
 });
 
 Template.newFlavorForm.events({
 	'click .cancel-create-flavor':function(){
-		Session.set('newFormOpened',false);
+		Session.set('flavorFormOpened',{opened:false,_id:''});
 	},
 	'click #create-flavor':function(){
 		var _self = Template.instance();
@@ -70,10 +88,14 @@ Template.newFlavorForm.events({
 		_self.createStatus.set('creating');
 
 		var newFileName = _self.newFlavorFileName.get();
-		_self.uploadImage(newFileName).then(function(assetUrl){
+		_self.uploadImage(newFileName).then(function(assets){
+			var images = lodash.reduce(assets,function(prev,next){
+				prev[next.key] = lodash.omit(next,'key');
+				return prev;
+			},{})
 			var data = {
 				flavorName:_self.find('input[name="new-flavor-name"]').value,
-				imgPath:assetUrl || null,
+				images:images || {},
 				seasonal:false,
 				description:_self.find('textarea[name="new-flavor-descript"]').value
 			};
@@ -98,14 +120,15 @@ Template.newFlavorForm.events({
 				_self.newFlavorFileName.set('');
 			},1500);
 		}).catch(function(err){
+			console.log(err);
 			_self.createStatus.set('error');
 		});
 	},
-	'keyup [name="new-flavor-name"]':function(e){
+	'keyup #new-flavor-name-input, change #new-flavor-name-input':function(e){
 		var dirtyVal = e.currentTarget.value;
 		Template.instance().newFlavorName.set(dirtyVal);
-		var regex = /\W+/g;
-		var cleanVal = dirtyVal.replace(regex,'');
+		var specialCharRegex = /\W+/g;
+		var cleanVal = dirtyVal.replace(/\s/g,'_').replace(specialCharRegex,'');
 		Template.instance().newFlavorFileName.set(cleanVal.toLowerCase());
 	},
 	'focus #flavor-name-field':function(){

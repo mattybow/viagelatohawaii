@@ -3,14 +3,43 @@
 	height:60vh;
 }
 .inline-icon{
-	width:30px;
-	height:30px;
-	margin-right:10px;
+	width:1.8em;
+	height:1.8em;
+	margin:auto;
+	margin-bottom:.5em;
 }
-#store-hours-header > *{
-	display:inline-block;
-	vertical-align:middle;
+.hours-text{
+	margin-top:1em;
+	p{
+		margin:0;
+		margin-bottom:.2em;
+	}
 }
+.hours-flex-parent{
+	display:flex;
+	flex-flow: row nowrap;
+	width:100%;
+	justify-content:center;
+	&>*{
+		flex:1 1 150px;
+	}
+}
+.hours-left{
+	text-align:right;
+	margin-right:5px;
+}
+.hours-right{
+	text-align:left;
+	margin-left:5px;
+}
+.hours-divider{
+	height:1px;
+	width:5%;
+	background-color:rgba(0,0,0,.3);
+	margin:auto;
+	margin-top:.5em;
+}
+
 #handrawn-map{
 	background-image:url('images/map.png');
 	background-position:50% 50%;

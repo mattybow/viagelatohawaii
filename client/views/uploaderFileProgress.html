@@ -1,0 +1,14 @@
+<template name="uploaderFileProgress">
+	<div class="dz-progress-loader-container {{showProgressClass}}">
+		<div class="dz-asset-descriptor">
+			{{#if downloadUrl}}
+				<a href="{{downloadUrl}}" target="_blank">{{downloadUrl}}</a>
+			{{else}}
+				<span>{{key}}</span>
+			{{/if}}</div>
+		<div class="dz-progress-loader" style="right:{{getRemaining}}%;"></div>
+		<div class="dz-status {{uploadStatus}}">
+			<span class="{{statusIconClass}}"></span>
+		</div>
+	</div>
+</template>
