@@ -57,6 +57,8 @@ Meteor.methods({
         console.error(e);
         return false;
       }
+    } else {
+      return {errMsg:'you did not specify a flavor name'};
     }
   },
   createNewPress:function(data){

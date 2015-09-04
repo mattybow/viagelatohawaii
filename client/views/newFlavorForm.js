@@ -42,17 +42,23 @@ Template.newFlavorForm.helpers({
 		return FLAVOR_PHOTO_STATUSES[index];
 	},
 	getCreateStatus:function(){
+		if(Session.get('flavorFormOpened')._id){
+			return 'save';
+		}
+		return Template.instance().createStatus.get();
+	},
+	isInEditMode:function(){
 		var editId = Session.get('flavorFormOpened')._id;
 		if(editId){
 			var flavorData = Flavors.getFlavorById(editId);
 			if(Meteor.isClient){
 				Template.instance().$('#new-flavor-name-input').val(flavorData.flavorName).change();
 			}
-			return 'save';
+			return 'is-editing';
 		} else {
 			Template.instance().$('#new-flavor-name-input').val('').change();
+			return 'is-new';
 		}
-		return Template.instance().createStatus.get();
 	},
 	isInvalid:function(fieldName){
 		return Template.instance().highlightNameField.get() ? 'invalid' : '';
