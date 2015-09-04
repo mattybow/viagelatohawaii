@@ -94,7 +94,7 @@ Template.newFlavorForm.events({
 				return prev;
 			},{})
 			var data = {
-				flavorName:_self.find('input[name="new-flavor-name"]').value,
+				flavorName:_self.find('#new-flavor-name-input').value,
 				images:images || {},
 				seasonal:false,
 				description:_self.find('textarea[name="new-flavor-descript"]').value
