@@ -144,6 +144,16 @@ Template.imgUploader.onCreated(function(){
 	
 });
 
+Template.imgUploader.onRendered(function(){
+	this.autorun(function(){
+		if(Session.get('flavorFormOpened')._id){
+			Session.set('displayExistingImg',true);
+		} else {
+			Session.set('displayExistingImg',false);
+		}
+	});
+})
+
 Template.imgUploader.helpers({
 	isDragEnter:function(){
 		return Template.instance().isDragEnter.get() ? 'dragenter' : '';
@@ -153,11 +163,16 @@ Template.imgUploader.helpers({
 		return Template.instance().overallUploadStatus.get()>0 ? "hidden" : "";
 	},
 	hasImagePreview:function(){
-		var result = Template.instance().base64Url.get() ? 'selection-made' : '';
-		console.log(result);
-		return result;
+		if (Template.instance().base64Url.get() || (Session.get('flavorFormOpened')._id && Session.get('displayExistingImg'))){
+			return 'selection-made'
+		}
+		return '';
 	},
 	getImagePreview:function(){
+		var editId = Session.get('flavorFormOpened')._id;
+		if(editId){
+			return Flavors.getFlavorById(editId).images.standard_resolution.url;
+		}
 		return Template.instance().base64Url.get();
 	},
 	getResolutions:function(){
@@ -172,6 +187,7 @@ Template.imgUploader.events({
 		_self.base64Url.set('');
 		_self.find('#hidden-file-input').value = '';
 		Session.set('newFileExt','');
+		Session.set('displayExistingImg',false);
 	},
 	'click #addFlavorPhotoDropzone':function(e){
 		preventAndStop(e);

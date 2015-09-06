@@ -61,6 +61,15 @@ Meteor.methods({
       return {errMsg:'you did not specify a flavor name'};
     }
   },
+
+  deleteFlavor:function(id){
+    this.unblock();
+    if(id){
+      var result = Flavors.remove({_id:id});
+      return result;
+    }
+    return {errMsg:'you did not specify a flavor id'};
+  },
   createNewPress:function(data){
     this.unblock();
     try{

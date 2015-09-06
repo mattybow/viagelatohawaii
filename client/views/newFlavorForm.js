@@ -4,6 +4,7 @@ Template.newFlavorForm.onCreated(function(){
 	this.highlightNameField = new ReactiveVar(false);
 	this.createStatus = new ReactiveVar('create');
 	this.errorMsg = new ReactiveVar('');
+	this.isDirty = new ReactiveVar(false);
 
 	this.getFileName = function(){
 		var ext = Session.get('newFileExt');
@@ -21,6 +22,16 @@ Template.newFlavorForm.onCreated(function(){
 });
 
 Template.newFlavorForm.onRendered(function(){
+	this.autorun(function(){
+		var editId = Session.get('flavorFormOpened')._id;
+		if(editId){
+			this.isDirty.set(false);
+			var flavorData = Flavors.getFlavorById(editId);
+			this.$('#new-flavor-name-input').val(flavorData.flavorName).change();
+		} else {
+			this.$('#new-flavor-name-input').val('').change();
+		}
+	}.bind(this));
 });
 
 Template.newFlavorForm.helpers({
@@ -48,16 +59,11 @@ Template.newFlavorForm.helpers({
 		return Template.instance().createStatus.get();
 	},
 	isInEditMode:function(){
-		var editId = Session.get('flavorFormOpened')._id;
-		if(editId){
-			var flavorData = Flavors.getFlavorById(editId);
-			if(Meteor.isClient){
-				Template.instance().$('#new-flavor-name-input').val(flavorData.flavorName).change();
-			}
-			return 'is-editing';
-		} else {
-			Template.instance().$('#new-flavor-name-input').val('').change();
-			return 'is-new';
+		return Session.get('flavorFormOpened')._id ? 'is-editing' : 'is-new';
+	},
+	isDirty:function(){
+		if(Session.get('flavorFormOpened')._id){
+			return Template.instance().isDirty.get() ? 'enabled' : 'disabled';
 		}
 	},
 	isInvalid:function(fieldName){
@@ -68,8 +74,8 @@ Template.newFlavorForm.helpers({
 	},
 	getResolutions:function(){
 		return [
-			{key:'thumbnail', size:150, square:true},
-			{key:'standard_resolution', size:400, square:true}
+			{key:'thumbnail', size:130, square:true},
+			{key:'standard_resolution', size:200, square:true}
 		];
 	}
 });
@@ -78,7 +84,7 @@ Template.newFlavorForm.events({
 	'click .cancel-create-flavor':function(){
 		Session.set('flavorFormOpened',{opened:false,_id:''});
 	},
-	'click #create-flavor':function(){
+	'click #submit-flavor-form':function(){
 		var _self = Template.instance();
 		var flavorName = _self.newFlavorName.get();
 		if(!flavorName){
@@ -139,6 +145,20 @@ Template.newFlavorForm.events({
 	},
 	'focus #flavor-name-field':function(){
 		Template.instance().highlightNameField.set(false);
+	},
+	'click #delete-flavor':function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		var id = Session.get('flavorFormOpened')._id;
+		if(id){
+			Meteor.call('deleteFlavor',id,function(err,res){
+				if(err){
+					console.log('DELETE ERROR',err);
+				} else {
+					Session.set('flavorFormOpened',{opened:true,_id:''});
+				}
+			});
+		}
 	}
 });
 

@@ -12,6 +12,7 @@ Slingshot.createDirective(slingshotDirective, Slingshot.S3Storage, {
   	region: "us-west-2",
 	bucket: "viagelato",
 	acl: "public-read",
+	cacheControl: "max-age=604800",
 
 	authorize: function () {
 	//Deny uploads if user is not logged in.

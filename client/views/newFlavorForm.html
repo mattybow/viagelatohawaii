@@ -2,7 +2,7 @@
 	<div id="new-flavor-form" class="edit-form-container {{showNewForm}}  {{isInEditMode}}">
 		<div id="new-form-txfm">
 			<div class="top-bar">
-				<div class="left-form-ctrls sm-screen" id="new-form-ctrls">
+				<div class="left-form-ctrls sm-screen new-form-ctrls">
 					<button class="btn-no-line cancel-create-flavor">
 						<span class="icon-arrow icon-180"></span>
 						<span class="mobile-back-action-title">cancel</span>
@@ -11,8 +11,8 @@
 				<div class="form-title">
 					<h3 class="form-title-text">{{getFlavorName}}</h3>
 				</div>
-				<div class="right-form-ctrls" id="new-form-ctrls">
-					<button class="btn-line" id="create-flavor">{{getCreateStatus}}</button>
+				<div class="right-form-ctrls new-form-ctrls {{isDirty}}">
+					<button class="btn-line" id="submit-flavor-form">{{getCreateStatus}}</button>
 					<button class="btn-line lg-screen cancel-create-flavor">cancel</button>
 				</div>
 			</div>
@@ -41,6 +41,11 @@
 							</span>
 						</div>
 					</div>
+				</div>
+				<div id="delete-flavor">
+					<button class="btn-line flex-parent-row">
+						<span class="icon-trash-bin">DELETE FLAVOR</span>
+					</button>
 				</div>
 			</form>
 		</div>

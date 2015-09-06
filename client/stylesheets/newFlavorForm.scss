@@ -62,8 +62,14 @@
 	}
 }
 
-#create-flavor{
-	transition:all .3 ease;
+#submit-flavor-form{
+	transition:all .3s ease;
+	min-width:58px;
+}
+
+.disabled #submit-flavor-form{
+	opacity: .5;
+	pointer-events:none;
 }
 
 
