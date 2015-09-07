@@ -248,7 +248,7 @@ function resizeImages(file,context){
 		Resizer.resize(file, {
 	        width: resolution.size,	// maximum width
 	        height: 800, 			// maximum height
-	        cropSquare: resolution.square
+	        cropSquare: resolution.square || false
 	    }, function(err, newFile) {
 	        if(!err){
 	        	console.log(resolution.key, 'COMPLETE');

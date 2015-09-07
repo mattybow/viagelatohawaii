@@ -47,4 +47,12 @@ Template.pressSlide.helpers({
 		//console.log(this);
 		return this.orientation==='V' ? 'vert' : 'hor'
 	}
-})
+});
+
+Template.pressSlide.events({
+	'click .press-lightbox-img':function(e){
+		e.preventDefault();
+		Session.set('showLightboxOverlay',true);
+	}
+});
+

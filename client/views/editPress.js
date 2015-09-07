@@ -39,8 +39,8 @@ Template.editPress.helpers({
 	},
 	getResolutions:function(){
 		return [
-			{key:'thumbnail', size:150},
-			{key:'low_resolution', size:360 },
+			{key:'thumbnail', size:120},
+			{key:'low_resolution', size:200 },
 			{key:'standard_resolution', size:800}
 		];
 	}
@@ -50,8 +50,8 @@ Template.editPress.events({
 	'keyup #input-press-title':function(e){
 		var dirtyVal = e.currentTarget.value;
 		Template.instance().newPressName.set(dirtyVal);
-		var regex = /\W+/g;
-		var cleanVal = dirtyVal.replace(regex,'');
+		var specialCharRegex = /\W+/g;
+		var cleanVal = dirtyVal.replace(/\s/g,'_').replace(specialCharRegex,'');
 		Template.instance().newPressFileName.set(cleanVal.toLowerCase());
 	},
 	'click .frame-choice':function(e){
@@ -70,7 +70,11 @@ Template.editPress.events({
 			var newFileName = _self.newPressFileName.get();
 			console.log(newFileName);
 			_self.createStatus.set('error');
-			_self.uploadImage(newFileName).then(function(assetUrl){
+			_self.uploadImage(newFileName).then(function(assets){
+				var images = lodash.reduce(assets,function(prev,next){
+					prev[next.key] = lodash.omit(next,'key');
+					return prev;
+				},{})
 				var data = {
 					title: _self.find('#input-press-title').value || null,
 					publication: publication,
@@ -81,7 +85,7 @@ Template.editPress.events({
 					active:true,
 					svgId: frame.svgId,
 					frame:frame.url,
-					imgPath:assetUrl || null
+					images:images || {}
 				};
 				console.log(data);
 

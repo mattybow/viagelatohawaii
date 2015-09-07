@@ -11,7 +11,7 @@
 .slide-holder{
 	margin:0 22px;
 	min-width:120px;
-	height: 300px;
+	height: 275px;
 	position: relative;
 	display: flex;
 	flex-flow: column nowrap;
@@ -27,6 +27,31 @@
 	bottom: -1em;
 	width: 100%;
 	line-height: 1.2em;
+}
+
+#imagelightbox
+{
+    position: fixed;
+    z-index: 9999;
+ 
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+#imageLightbox-overlay{
+	position:fixed;
+	z-index:9998;
+	background-color:rgba(97, 97, 97, 0.8);
+	pointer-events:none;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	opacity:0;
+	transition: opacity .2s ease;
+	&.show-overlay{
+		opacity:1;
+	}
 }
 
 @media (min-width:769px){

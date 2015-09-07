@@ -6,7 +6,6 @@ Available for use under the MIT License
 ;
 (function($, window, document, undefined) {
     'use strict';
-
     var cssTransitionSupport = function() {
         var s = document.body || document.documentElement,
             s = s.style;
@@ -229,6 +228,7 @@ Available for use under the MIT License
 
         if (options.quitOnDocClick) {
             $(document).on(hasTouch ? 'touchend' : 'click', function(e) {
+                console.log(image);
                 if (image.length && !$(e.target).is(image)) quitLightbox();
             })
         }
