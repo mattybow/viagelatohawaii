@@ -25,9 +25,13 @@
 .press-pub-title{
 	text-transform:uppercase;
 	position: absolute;
-	bottom: -1em;
+	bottom: 0;
 	width: 100%;
 	line-height: 1.2em;
+	height: 2em;
+	h5{
+		margin:0;
+	}
 }
 
 #imagelightbox
@@ -71,9 +75,13 @@
 		height: 180px;
 		margin: 0 10px;
 		&.vert{
-			max-width: 125px;
-			height: 220px;
-			margin: 0 12px;
+			max-width: 90px;
+			height: 180px;
+			margin: 0 30px;
+			.press-pub-title{
+				min-width:130px;
+				left:-20px;
+			}
 		}
 		  
 	}
@@ -90,6 +98,10 @@
 			max-width: 84px;
 			margin: 0 12px;
 			height: 180px;
+			.press-pub-title{
+				min-width:110px;
+				left:-8px;
+			}
 		}
 		  
 	}
