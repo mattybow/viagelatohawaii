@@ -30,7 +30,7 @@ body{
 	background-color:$via-blue;
 }
 .via-blue-trans{
-  background-color:rgba(226, 240, 247, 0.6);
+  background-color:rgba(226, 240, 247, 0.95);
 }
 .via-green{
 	background-color:$via-green;
@@ -197,9 +197,9 @@ button:focus, button:active{
   bottom:0;
   img{
     position:relative;
-    bottom:-20px;
+    bottom:-25px;
     z-index:99;
-    opacity:0.5;
+    opacity:0.3;
   }
 }
 b{

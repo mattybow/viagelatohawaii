@@ -43,7 +43,7 @@ function updatePage(){
 }
 
 function updateLocation(dir){
-	var sections = ['#flavorsDay','#story','#location','#catering','#contact','#press'];
+	var sections = ['#flavorsDay','#story','#location','#hours','#contact','#press'];
 	var bodyTop = document.body.scrollTop;
 	//var winHeight = window.innerHeight;
 	var hash = _.find(sections.reverse(),function(selector){

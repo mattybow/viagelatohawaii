@@ -27,9 +27,6 @@ Router.route('/edit/:tab',function(){
 	var tab = this.params.tab;
 	this.render('editDash',{data:{tab:tab}});
 });
-Router.route('ilima',function(){
-	this.render('ilima');
-});
 
 if(Meteor.isClient){
 	Router._scrollToHash = viaScrollTo;
