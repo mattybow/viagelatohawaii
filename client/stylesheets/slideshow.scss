@@ -221,9 +221,18 @@
 	#slideshow, .slide {
 		height: 192px;  //480*.4
 	}
+	.open-text{
+		padding-top:12px;
+	}
+	.open-msg{
+		font-size:14px;
+	}
+	.open-hours{
+		font-size:7px;
+	}
 	#openSign {
 		img{
-			width:120px;
+			width:100px;
 		}
 		.open-text-container{
 			align-items:flex-start;

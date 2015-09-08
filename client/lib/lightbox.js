@@ -214,6 +214,7 @@ Available for use under the MIT License
             },
 
             quitLightbox = function() {
+                console.log('quitting');
                 if (!image.length) return false;
                 image.animate({
                     'opacity': 0
@@ -225,7 +226,6 @@ Available for use under the MIT License
             };
 
         $(window).on('resize', setImage);
-
         if (options.quitOnDocClick) {
             $(document).on(hasTouch ? 'touchend' : 'click', function(e) {
                 console.log(image);

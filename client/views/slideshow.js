@@ -1,7 +1,7 @@
 MEDIA_BREAK_POINTS = {
 	mobile:414,
 	tablet:768,
-	laptop:1200,
+	laptop:1420,
 	desktop:1600 
 }
 

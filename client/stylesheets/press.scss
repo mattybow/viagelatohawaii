@@ -51,6 +51,7 @@
 	transition: opacity .2s ease;
 	&.show-overlay{
 		opacity:1;
+		pointer-events:auto;
 	}
 }
 

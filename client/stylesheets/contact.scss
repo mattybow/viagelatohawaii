@@ -106,12 +106,10 @@
 		padding: 40px 0;
 	}
 	#contact-form{
-		.name-and-email{
-			padding:0 25px;
-		}
-
-		.comment{
-			padding:0 25px;
+		.name-and-email, .comment{
+			padding:0 5px;
+			margin-left:0;
+			margin-right:0;
 		}
 	}
 }
