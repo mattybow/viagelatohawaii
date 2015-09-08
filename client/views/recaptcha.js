@@ -33,6 +33,7 @@ window.onloadcaptcha = function() {
         callback: function () {
         	var response = grecaptcha.getResponse();
         	if(response){
+                Session.set('submissionFeedback',{type:'success',message:"sending your message"});
         		Meteor.call('sendEmail',
         					prepareInputData(getInputData(),response),
         					function(err,res){
