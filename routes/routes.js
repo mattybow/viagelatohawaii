@@ -27,8 +27,8 @@ Router.route('/edit/:tab',function(){
 	var tab = this.params.tab;
 	this.render('editDash',{data:{tab:tab}});
 });
-Router.route('test',function(){
-	this.render('test');
+Router.route('ilima',function(){
+	this.render('ilima');
 });
 
 if(Meteor.isClient){
