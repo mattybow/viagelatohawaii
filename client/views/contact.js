@@ -6,6 +6,7 @@ Template.contact.onCreated(function(){
 	this.emailError = new ReactiveVar('');
 	this.commentError = new ReactiveVar('');
 	this.submissionFeedback = new ReactiveVar("Thanks! We'll be in touch shortly.");
+	this.grecaptchaLoaded = false;
 	Session.setDefault('submissionFeedback',{type:'success',message:''});
 
 	this.inputData = {};
@@ -57,6 +58,12 @@ Template.contact.helpers({
 })
 
 Template.contact.events({
+	"focus #input-name":function(){
+		if(!Template.instance().grecaptchaLoaded){
+			Template.instance().grecaptchaLoaded = true;
+			$.getScript('//www.google.com/recaptcha/api.js?onload=onloadcaptcha&render=explicit');
+		}
+	},
 	"focus input, focus textarea":function(){
 		Session.set('submissionFeedback',{type:'success',message:""});
 	},

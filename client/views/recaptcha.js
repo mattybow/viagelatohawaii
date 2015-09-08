@@ -7,9 +7,6 @@ Template.recaptcha.onCreated(function(){
 	resetInputForm = this.data.parent.resetInputForm;
 });
 
-Template.recaptcha.onRendered(function(){
-	$.getScript('//www.google.com/recaptcha/api.js?onload=onloadcaptcha&render=explicit');
-});
 
 function prepareInputData(inputData, response){
 	return {
