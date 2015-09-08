@@ -1,5 +1,6 @@
 Template.press.onCreated(function(){
 	this.subscribe('pressMedia');
+	this.subscribe('frames');
 });
 
 Template.press.helpers({
