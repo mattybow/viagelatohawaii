@@ -13,20 +13,25 @@ Template.press.helpers({
 
 Template.press.onRendered(function(){
 	var _self = this;
-	Meteor.setTimeout(function(){
-		_self.imageLightbox = $( 'a.press-lightbox-img' ).imageLightbox({
-			quitOnDocClick: false,
-			onEnd:function(){
-				Session.set('showLightboxOverlay',false);
-			}
-		});
-	},2000);
+	this.autorun(function(c){
+		var media = SiteMedia.getPressMedia().fetch();
+		if(!lodash.isEmpty(media)){
+			console.log('not empty');
+			_self.imageLightbox = $( 'a.press-lightbox-img' ).imageLightbox({
+				quitOnDocClick: false,
+				onEnd:function(){
+					Session.set('showLightboxOverlay',false);
+				}
+			});
+			c.stop();
+		}
+		
+	});
 });
 
 Template.press.events({
 	'click #imageLightbox-overlay':function(e){
 		e.stopPropagation();
-		console.log('accidental click');
 		Template.instance().imageLightbox.quitImageLightbox();
 	}
 })
