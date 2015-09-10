@@ -38,9 +38,9 @@ Template.feed.helpers({
 	getIgUrl:function(){
 		switch (getMobileOperatingSystem()){
 			case 'iOS':
-				return 'instagram://media?id=' + this.id;
+				return 'instagram://media?id=' + this._id;
 			case 'Android':
-				return 'instagram://media?id=' + this.id;
+				return 'instagram://media?id=' + this._id;
 			default:
 				return this.link;
 		}
