@@ -220,6 +220,12 @@
   }
 }
 
+@media(max-width: 480px){
+	#openSign{
+		max-height:80px;
+	}
+}
+
 @media (max-width:320px){
 	#slideshow, .slide {
 		height: 192px;  //480*.4

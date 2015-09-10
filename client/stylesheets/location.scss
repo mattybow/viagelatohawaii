@@ -48,14 +48,21 @@
 	margin:20px 0;
 }
 
-@media (max-width:375px){
-  #handrawn-map{
+@media (max-width:414px) and (orientation:portrait){
+	#handrawn-map{
 		background-position:20% 50%;
 		background-size:cover;
+		height:280px;
 	}
 }
 
-@media (max-width:320px){
+@media (max-width:736px) and (orientation:landscape){
+	#handrawn-map{
+		height:375px;
+	}
+}
+
+@media (max-width:320px) and (orientation:portrait){
 	#handrawn-map{
 		height:240px;
 	}
