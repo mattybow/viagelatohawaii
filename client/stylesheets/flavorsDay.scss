@@ -11,6 +11,7 @@
 }
 .day-flavor{
 	width:150px;
+	max-width:150px;
 	margin-bottom:20px;
 	position:relative;
 }
@@ -51,18 +52,30 @@
 	flex-flow:row wrap;
 	justify-content:center;
 }
+
+
+
+@media(max-width:768px) and (orientation: portrait), (max-width:1024px) and (orientation: landscape){
+	.day-flavor{
+		width:150px;
+	}
+
+}
+
+@media(max-width:667px) and (orientation: landscape){
+	.day-flavor{
+		width:21%;
+	}
+
+}
 /*6plus*/
-@media(max-width:414px){
+@media(max-width:414px) and (orientation: portrait){
 	.flavors{
 		margin-top:20px;
 	}
 	.day-flavor{
-		width:110px;
+		width:33%;
 	}
 
 }
-@media(max-width:320px){
-	.day-flavor{
-		width:90px;
-	}
-}
+

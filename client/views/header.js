@@ -11,6 +11,7 @@ Template.header.events({
 	'click .burger-touch-area, click .mobile-nav-text':function(){
 		var state = !Session.get('isMenuOpen');
 		Session.set('isMenuOpen',state);
+		
 		if(state){
 			$('#mobile-nav .mobile-nav-text').velocity('upAndInNav',{stagger:50, delay:100});
 		} else {
@@ -19,8 +20,27 @@ Template.header.events({
 	},
 	'click .desktop-nav-link':function(){
 		Session.set('isNavHidden',true);
+	},
+	'touchmove .mobile-nav-contents>ul':function(e){
+		e.stopPropagation();
 	}
 });
+
+Template.header.onCreated(function(){
+	Session.setDefault('isMenuOpen',false);
+	this.autorun(function(){
+		var isMenuOpen = Session.get('isMenuOpen');
+		if(isMenuOpen){
+			$('body').addClass('modal-open').on('touchmove',bodyNoScroll);
+		} else {
+			$('body').removeClass('modal-open').off('touchmove',bodyNoScroll);
+		}
+	})
+});
+
+function bodyNoScroll(e){
+	e.preventDefault();
+}
 
 Template.header.onRendered(function(){
 	scrollIntervalID = Meteor.setInterval(updatePage, 1000/60);
@@ -59,12 +79,12 @@ function updateLocation(dir){
 $.Velocity.RegisterEffect('upAndInNav', {
     defaultDuration: 1200,
     calls: [ 
-        [ { top: 0, opacity:1 }, 0.16]
+        [ { translateY: 0, opacity:1 }, 0.16]
     ]
 });
 $.Velocity.RegisterEffect('byeByeNav', {
     defaultDuration: 1200,
     calls: [ 
-        [ {top:50, opacity:0}, 0.16]
+        [ {translateY:50, opacity:0}, 0.16]
     ]
 });

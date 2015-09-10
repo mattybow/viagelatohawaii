@@ -2,7 +2,7 @@
 	height:75vh;
 }
 #slideshow{
-	margin-top: 140px;
+	margin-top: 128px;
 	position:relative;
 }
 #slideshow-arrow-holder{
@@ -165,7 +165,7 @@
 	}
 }
 
-@media (max-width : 414px){
+@media (max-width:414px) and (orientation: portrait), (max-width:736px) and (orientation: landscape){
 	#slideshow, .slide {
 		height: 300px;  //667*.4
 	}
@@ -198,14 +198,17 @@
 	.slick-dots li button:before{
 		font-size:4px;
 	}
-}
-
-@media (max-width:375px) and (orientation: portrait){
 	#slideshow{
 		margin-top: 70px;
 	}
 	#slideshow, .slide {
 		height: 267px;  //667*.4
+	}
+}
+
+@media (max-width:667px) and (orientation: landscape){
+	#slideshow, .slide {
+		height: 270px;  //667*.4
 	}
 }
 /**

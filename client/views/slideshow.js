@@ -14,7 +14,11 @@ Template.slideshow.onCreated(function(){
 				self.$('#slickSlides').slick({
 					dots:true,
 					prevArrow:'#slideshow-prev-arrow',
-					nextArrow:'#slideshow-next-arrow'
+					nextArrow:'#slideshow-next-arrow',
+					autoplay: true,
+  					autoplaySpeed: 3000,
+  					cssEase:'ease-in-out',
+  					pauseOnDotsHover:true
 				});
 			});
 	});

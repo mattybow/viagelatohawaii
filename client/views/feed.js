@@ -30,13 +30,20 @@ Template.feed.helpers({
 	},
 	getPhotoUrl:function(){
 		var width = window.innerWidth;
-		if(width > TABLET_LANDSCAPE){
-			return this.images.standard_resolution.url;
+		if(width >= MEDIA_BREAK_POINTS.tablet){
+			return this.images.low_resolution.url;
 		}
 		return this.images.thumbnail.url;
 	},
 	getIgUrl:function(){
-		return this.link;
+		switch (getMobileOperatingSystem()){
+			case 'iOS':
+				return 'instagram://media?id=' + this.id;
+			case 'Android':
+				return 'instagram://media?id=' + this.id;
+			default:
+				return this.link;
+		}
 	},
 	showBack:function(){
 		return Template.instance().slyPos.get() > 0 ? 'opaque' : 'transparent';
@@ -84,4 +91,23 @@ function initializeSly(template){
 		speed: 300,
 		elasticBounds: 1
     })
+}
+
+function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) )
+  {
+    return 'iOS';
+
+  }
+  else if( userAgent.match( /Android/i ) )
+  {
+
+    return 'Android';
+  }
+  else
+  {
+    return 'unknown';
+  }
 }

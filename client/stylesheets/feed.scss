@@ -80,9 +80,49 @@
 	}
 }
 
-@media(max-width:1024px){
+@media(max-width : 768px) and (orientation: portrait) {
+	.slide_holder{
+		width:260px;
+	}
+	#instafeed{
+		padding-left:30px;
+		padding-right:30px;
+	}
+}
+
+@media(max-width : 1024px) and (orientation: landscape) {
+	.slide_holder{
+		width:250px;
+	}
+	#instafeed{
+		padding-left:40px;
+		padding-right:40px;
+	}
+}
+
+@media(max-width : 736px) and (orientation: landscape) {
+	.slide_holder{
+		width:180px;
+	}
+	#instafeed{
+		padding-left:40px;
+		padding-right:40px;
+	}
+}
+
+@media(max-width : 414px) and (orientation: portrait) {
 	.slide_holder{
 		width:150px;
+	}
+	#instafeed{
+		padding-left:20px;
+		padding-right:20px;
+	}
+}
+
+@media(max-width : 568px) and (orientation: landscape) {
+	.slide_holder{
+		width:180px;
 	}
 	#instafeed{
 		padding-left:20px;
