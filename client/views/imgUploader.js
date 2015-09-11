@@ -101,11 +101,16 @@ Template.imgUploader.onCreated(function(){
 		});
 	}*/
 
-	this.data.parent.resetUploader = function(){
+	this.data.parent.resetUploader = this.resetUploader;
+
+	this.resetUploader = function(){
 		_self.clearUploadData();
 		_self.overallUploadStatus.set(0);
 		_self.base64Url.set('');
 		_self.stagedFiles = [];
+		_self.find('#hidden-file-input').value = '';
+		Session.set('newFileExt','');
+		Session.set('displayExistingImg',false);
 	}
 
 	this.data.parent.injectS3Data = function(images){
@@ -196,11 +201,7 @@ Template.imgUploader.helpers({
 Template.imgUploader.events({
 	'click .flavor-upload-preview-holder':function(e){		//remove file preview
 		preventAndStop(e);
-		var _self = Template.instance();
-		_self.base64Url.set('');
-		_self.find('#hidden-file-input').value = '';
-		Session.set('newFileExt','');
-		Session.set('displayExistingImg',false);
+		Template.instance().resetUploader();
 	},
 	'click #addFlavorPhotoDropzone':function(e){
 		preventAndStop(e);
