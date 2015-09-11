@@ -101,8 +101,6 @@ Template.imgUploader.onCreated(function(){
 		});
 	}*/
 
-	this.data.parent.resetUploader = this.resetUploader;
-
 	this.resetUploader = function(){
 		_self.clearUploadData();
 		_self.overallUploadStatus.set(0);
@@ -112,6 +110,8 @@ Template.imgUploader.onCreated(function(){
 		Session.set('newFileExt','');
 		Session.set('displayExistingImg',false);
 	}
+
+	this.data.parent.resetUploader = this.resetUploader;
 
 	this.data.parent.injectS3Data = function(images){
 		var _this = this;
