@@ -4,7 +4,7 @@ Template.location.helpers({
 			case 'iOS':
 				return 'maps://maps.apple.com/?q=Via+Gelato+Hawaii&center=21.2821321,-157.7992884';
 			case 'Android':
-				return 'comgooglemaps://maps.google.com/?q=Via+Gelato+Hawaii&center=21.2821321,-157.7992884';
+				return 'comgooglemaps://?q=Via+Gelato+Hawaii&center=21.2821321,-157.7992884';
 			default:
 				return 'http://maps.google.com/?q=Via+Gelato+Hawaii&center=21.2821321,-157.7992884';
 		}
