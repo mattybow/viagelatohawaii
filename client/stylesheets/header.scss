@@ -24,6 +24,18 @@
 .nav-items{
   padding:10px;
   flex:1 0 300px;
+  position:relative;
+  z-index:1000;
+  ul{
+    padding:0;
+  }
+  li{
+    list-style:none;
+    display:inline;
+    padding:0 10px;
+    font-size:.8em;
+    letter-spacing:2px;
+  }
 }
 .nav-bar{
   overflow:hidden;
@@ -42,16 +54,6 @@
   margin-left: 50px;
   text-align:left;
 }
-.nav-items ul{
-  padding:0;
-}
-.nav-items li{
-  list-style:none;
-  display:inline;
-  padding:0 10px;
-  font-size:.8em;
-  letter-spacing:2px;
-}
 
 .social-links > *{
   display:inline;
@@ -60,7 +62,7 @@
   width:100%;
   position:absolute;
   top:1em;
-  z-index:1000;
+  z-index:999;
   overflow:hidden;
   transition:transform .2s ease;
 }

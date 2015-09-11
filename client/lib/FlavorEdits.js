@@ -1,4 +1,4 @@
-FlavorEdits = new Mongo.Collection('flavorEdits');
+/*FlavorEdits = new Mongo.Collection('flavorEdits');
 
 FlavorEdits.getAll = function(){
 	return FlavorEdits.find({});
@@ -23,4 +23,4 @@ FlavorEdits.allow({
 	insert:function(){
 		return true;
 	}
-})
+})*/

@@ -1,5 +1,4 @@
 Template.editFlavorLibrary.onCreated(function(){
-	FlavorEdits._collection.remove({});
 	this.subscribe('allFlavors', function(){
 		console.log('setting session var')
 		var data = Flavors.getFlavorsOfDay().fetch();
@@ -15,10 +14,6 @@ Template.editFlavorLibrary.helpers({
 	allFlavors:function(){
 		var data = Flavors.find({},{flavorName:1,sort:{flavorName:1}});
 		return data;
-	},
-	flavorEditsCursor:function(){
-		var id = Template.instance.data._id;
-		return FlavorEdits.findOne({id:_id});
 	},
 	isDisabled:function(){
 		return Session.get('dayFlavors').length ? '' : 'disabled-button'

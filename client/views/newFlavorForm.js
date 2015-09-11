@@ -26,10 +26,18 @@ Template.newFlavorForm.onRendered(function(){
 		var editId = Session.get('flavorFormOpened')._id;
 		if(editId){
 			this.isDirty.set(false);
+			this.createStatus.set('save');
 			var flavorData = Flavors.getFlavorById(editId);
 			this.$('#new-flavor-name-input').val(flavorData.flavorName).change();
+			var descript = flavorData.description || '';
+			this.$('#new-flavor-descript').val(descript).change();
+			console.log('NEW FLAVOR AUTORUN');
+			this.injectS3Data(flavorData.images);
 		} else {
 			this.$('#new-flavor-name-input').val('').change();
+			this.$('#new-flavor-descript').val('').change();
+			this.createStatus.set('create');
+			this.resetUploader();
 		}
 	}.bind(this));
 });
@@ -48,14 +56,7 @@ Template.newFlavorForm.helpers({
 	passParentRef:function(){
 		return Template.instance();
 	},
-	getUploadStatus:function(){
-		var index = Session.get('flavorPhotoUploadStatus');
-		return FLAVOR_PHOTO_STATUSES[index];
-	},
 	getCreateStatus:function(){
-		if(Session.get('flavorFormOpened')._id){
-			return 'save';
-		}
 		return Template.instance().createStatus.get();
 	},
 	isInEditMode:function(){

@@ -28,7 +28,7 @@ Template.imgUploader.onCreated(function(){
 							var metaContext = {s3Folder: _self.data.s3Folder, newFileName:newFileName};
 							console.log(metaContext);
 							var uploader = new Slingshot.Upload(imgUploaderDirective, metaContext);
-							_self.updateResolution(resolutionName,{
+							_self.updateUploadData(resolutionName,{
 								isUploading:true
 							});
 
@@ -37,14 +37,14 @@ Template.imgUploader.onCreated(function(){
 									// Log service detailed response.
 									console.error(err);
 									console.error('Error uploading', uploader.xhr.response);
-									_self.updateResolution(resolutionName,{				//error in upload
+									_self.updateUploadData(resolutionName,{				//error in upload
 										isUploading:false,
 										uploadResult:'error',
 										error:uploader.xhr.response
 									});
 									resolve({key:resolutionName, url:null});
 								} else {
-									_self.updateResolution(resolutionName,{				//success updates icon to checkmark
+									_self.updateUploadData(resolutionName,{				//success updates icon to checkmark
 										isUploading:false,
 										uploadResult:'success',
 										downloadUrl:downloadUrl
@@ -56,7 +56,7 @@ Template.imgUploader.onCreated(function(){
 							var hideProgress = function(){
 								_self.isDragEnter.set(false);
 								Meteor.setTimeout(function(){
-									_self.updateResolution(resolutionName,{
+									_self.updateUploadData(resolutionName,{
 										progress:0
 									});
 								},200);
@@ -64,9 +64,9 @@ Template.imgUploader.onCreated(function(){
 
 							var checkProgress = Meteor.setInterval(function(){
 								var updatedProgress = Math.round(uploader.progress()* 100);
-								var prevProgress = _self.getResolution(resolutionName).progress;
+								var prevProgress = _self.getUploadData(resolutionName).progress;
 								if(updatedProgress !== prevProgress){
-									_self.updateResolution(resolutionName,{
+									_self.updateUploadData(resolutionName,{
 										progress:updatedProgress
 									});
 								}
@@ -79,7 +79,7 @@ Template.imgUploader.onCreated(function(){
 
 							var cancelCheckProgress = Meteor.setTimeout(function(){
 								Meteor.clearInterval(checkProgress);
-								_self.updateResolution(resolutionName,{
+								_self.updateUploadData(resolutionName,{
 									isUploading:false,
 									uploadResult:'error',
 									error:'timeout after 10s, client cancelled upload'
@@ -102,14 +102,27 @@ Template.imgUploader.onCreated(function(){
 	}*/
 
 	this.data.parent.resetUploader = function(){
-		_self.clearResolutions();
+		_self.clearUploadData();
 		_self.overallUploadStatus.set(0);
 		_self.base64Url.set('');
 		_self.stagedFiles = [];
 	}
 
-	this.clearResolutions = function(){
-		this.resolutions.set(this.getInitialResolutions());
+	this.data.parent.injectS3Data = function(images){
+		var _this = this;
+		lodash.each(images,function(data,k){
+			Tracker.nonreactive(function(){
+				_this.updateUploadData(k,{
+					uploadResult:'success',
+					downloadUrl:data.url
+				});
+			});
+		});
+
+	}.bind(this);
+
+	this.clearUploadData = function(){
+		this.uploadData.set(this.getInitialResolutions());
 	};
 
 	//INITIALIZE REACTIVE VARIABLES
@@ -124,20 +137,20 @@ Template.imgUploader.onCreated(function(){
 		});
 	}
 
-	this.resolutions = new ReactiveVar(this.getInitialResolutions());
+	this.uploadData = new ReactiveVar(this.getInitialResolutions());
 
-	this.updateResolution = function(key,newData){
-		var newResolutions = lodash.map(this.resolutions.get(), function(resolution){
-			if(resolution.key === key){
-				return lodash.assign(resolution,newData);
+	this.updateUploadData = function(key,newData){
+		var newUploadData = lodash.map(this.uploadData.get(), function(data){
+			if(data.key === key){
+				return lodash.assign(data,newData);
 			}
-			return resolution;
+			return data;
 		});
-		this.resolutions.set(newResolutions);
+		this.uploadData.set(newUploadData);
 	};
 
-	this.getResolution = function(key){
-		return lodash.find(this.resolutions.get(),function(resolution){
+	this.getUploadData = function(key){
+		return lodash.find(this.uploadData.get(),function(resolution){
 			return resolution.key === key;
 		});
 	};
@@ -175,8 +188,8 @@ Template.imgUploader.helpers({
 		}
 		return Template.instance().base64Url.get();
 	},
-	getResolutions:function(){
-		return Template.instance().resolutions.get();
+	getUploadDatas:function(){
+		return Template.instance().uploadData.get();
 	}
 })
 

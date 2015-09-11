@@ -64,7 +64,7 @@
 
 #submit-flavor-form{
 	transition:all .3s ease;
-	min-width:58px;
+	min-width:62px;
 }
 
 .disabled #submit-flavor-form{
@@ -170,7 +170,12 @@
 			margin:auto;
 		}
 	}
+	#edit-flavor-library .top-bar>*{
+		flex:1 1 60px;
+	}
 	.form-title{
+		align-self:center;
+		flex: 2 1 100px;
 		text-align:center;
 	    .form-title-text{
 			margin:0;

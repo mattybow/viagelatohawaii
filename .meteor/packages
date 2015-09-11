@@ -22,3 +22,5 @@ mvrx:bluebird
 email
 meteorhacks:fast-render
 thinksoftware:image-resize-client
+gadicohen:phantomjs
+spiderable

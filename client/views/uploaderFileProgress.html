@@ -2,7 +2,7 @@
 	<div class="dz-progress-loader-container {{showProgressClass}}">
 		<div class="dz-asset-descriptor">
 			{{#if downloadUrl}}
-				<a href="{{downloadUrl}}" target="_blank">{{downloadUrl}}</a>
+				<a href="{{downloadUrl}}" target="_blank">{{filenameFromUrl downloadUrl}}</a>
 			{{else}}
 				<span>{{key}}</span>
 			{{/if}}</div>

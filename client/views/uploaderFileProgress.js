@@ -26,8 +26,7 @@ Template.uploaderFileProgress.helpers({
 			}
 		}
 	},
-	getStatus:function(){
-		var index = Session.get('flavorPhotoUploadStatus');
-		return FLAVOR_PHOTO_STATUSES[index];
+	filenameFromUrl:function(url){
+		return url.replace(/^.*\//,'');
 	}
 })

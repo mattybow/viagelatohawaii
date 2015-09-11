@@ -54,7 +54,7 @@ $flavor-list-height-mobile:85px;
 		width:100%;
 		margin:0;
 		span{
-			margin-right:1.4em;
+			margin:auto;
 		}
 	}
 }
@@ -267,6 +267,7 @@ button{
 }
 
 @media (max-width:414px){
+
 	#editFlavorsDayPreview {
 		.flavors{
 			padding:70px 5px 0;
@@ -277,6 +278,9 @@ button{
 		}
 		.day-flavor-descript{
 			padding-top:5px;
+		}
+		.day-flavor{
+			width:100%;
 		}
 	}
 	.lib-flavor-img-holder{
