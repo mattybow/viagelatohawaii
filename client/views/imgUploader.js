@@ -40,13 +40,14 @@ Template.imgUploader.onCreated(function(){
 							uploader.send(file.file,function(err,downloadUrl){
 								if (err) {
 									// Log service detailed response.
-									console.error(err);
-									console.error('Error uploading', uploader.xhr.response);
+									console.log(err);
+									console.log('Error uploading', uploader.xhr.response);
 									_self.updateUploadData(resolutionName,{				//error in upload
 										isUploading:false,
 										uploadResult:'error',
 										error:uploader.xhr.response
 									});
+									Growler.error(uploader.xhr.response, 'Upload Error');
 									resolve({key:resolutionName, url:null});
 								} else {
 									_self.updateUploadData(resolutionName,{				//success updates icon to checkmark
