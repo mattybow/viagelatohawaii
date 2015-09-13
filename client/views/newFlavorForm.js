@@ -134,6 +134,7 @@ Template.newFlavorForm.events({
 								_self.createStatus.set('created');
 								console.log('SUCCESS',res);
 								resolve('create');
+								Growler.success("New Flavor Created",'Success!');
 							}
 						});
 					});
@@ -148,7 +149,9 @@ Template.newFlavorForm.events({
 								reject(err);
 							} else {
 								_self.createStatus.set('saved');
+								_self.isDirty.set(false);
 								console.log('SUCCESS',res);
+								Growler.success("Changes Saved",'Success!');
 								resolve('save');
 							}
 						});
@@ -156,13 +159,21 @@ Template.newFlavorForm.events({
 				}
 				
 		}).then(function(returnStatus){
-			Meteor.setTimeout(function(){					//RESET METHOD
-				_self.createStatus.set(returnStatus);		//reset create or save button
-				_self.resetUploader();						//child created this
-				_self.$('form')[0].reset();					//reset input fields
-				_self.newFlavorName.set('');
-				_self.newFlavorFileName.set('');
-			},1500);
+			switch(returnStatus){
+				case 'create':
+					Meteor.setTimeout(function(){					//RESET METHOD
+						_self.createStatus.set(returnStatus);		//reset create or save button
+						_self.resetUploader();						//child created this
+						_self.$('form')[0].reset();					//reset input fields
+						_self.newFlavorName.set('');
+						_self.newFlavorFileName.set('');
+					},1000);
+					break;
+				case 'save':
+					Meteor.setTimeout(function(){					//RESET METHOD
+						_self.createStatus.set(returnStatus);		//reset create or save button
+					},500);
+			}
 		}).catch(function(err){
 			console.log(err);
 			_self.createStatus.set('error');
@@ -174,9 +185,8 @@ Template.newFlavorForm.events({
 		var specialCharRegex = /\W+/g;
 		var cleanVal = dirtyVal.replace(/\s/g,'_').replace(specialCharRegex,'');
 		Template.instance().newFlavorFileName.set(cleanVal.toLowerCase());
-		Template.instance().isDirty.set(true);
 	},
-	'change #new-flavor-descript':function(){
+	'keyup #new-flavor-name-input, keyup #new-flavor-descript':function(){
 		Template.instance().isDirty.set(true);
 	},
 	'focus #flavor-name-field':function(){

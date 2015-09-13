@@ -7,6 +7,13 @@ Template.editPress.onCreated(function(){
 	this.publicationInvalid = new ReactiveVar(false);
 	this.createStatus = new ReactiveVar('create');
 	this.data={};
+	Session.setDefault('pressFormOpened',{opened:true,_id:''});
+
+	this.getAssetInfo = function(){
+		var editId = Session.get('pressFormOpened')._id;
+		var info = Flavors.findOne({_id:editId});
+		return info || {_id:''};
+	}
 })
 
 
