@@ -72,7 +72,7 @@
   margin:auto;
   transition:transform .2s ease;
 }
-$burger-size:1.8em;
+$burger-size:27px;
 
 .burger-touch-area{
   position: absolute;
@@ -102,18 +102,22 @@ $burger-size:1.8em;
     position: absolute;
     left:0;
     content: '';
-    transform-origin: .1em center;
+    transform-origin: 2.5px center;
   }
-  &:before { top: 7px; }
-  &:after { top: -7px; }
+  &:before {
+    top: 8px;
+  }
+  &:after {
+    top: -8px;
+  }
 }
 .mobile-burger.opened{
   background-color:transparent;
   &:before{
-    transform: translateX(3px) rotateZ(-45deg) ;
+    transform: translateX(.1em) rotateZ(-45deg) ;
   }
   &:after{
-    transform: translateX(3px) rotateZ(45deg) ;
+    transform: translateX(.1em) rotateZ(45deg) ;
   }
 }
 #mobile-nav{

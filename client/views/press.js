@@ -17,7 +17,6 @@ Template.press.onRendered(function(){
 	this.autorun(function(c){
 		var media = SiteMedia.getPressMedia().fetch();
 		if(!lodash.isEmpty(media)){
-			console.log('not empty');
 			_self.imageLightbox = $( 'a.press-lightbox-img' ).imageLightbox({
 				quitOnDocClick: false,
 				onEnd:function(){

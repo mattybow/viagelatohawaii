@@ -10,7 +10,6 @@ Template.slideshow.onCreated(function(){
 	this.subscribe('hours');
 	this.subscribe('slideshowMedia',function(){
 		Tracker.afterFlush(function(){
-				console.log('slick init');
 				self.$('#slickSlides').slick({
 					dots:true,
 					prevArrow:'#slideshow-prev-arrow',
@@ -36,7 +35,10 @@ Template.slideshow.onCreated(function(){
 		}
 	}
 	//this.slideshowImgs = new ReactiveVar([]);
-	
+	this.timeChecked = new ReactiveVar(0);
+	Meteor.setInterval(function(){
+		this.timeChecked.set(new Date().valueOf());
+	}.bind(this),60000);
 });
 
 
@@ -62,6 +64,7 @@ Template.slideshow.helpers({
 		return hours.openHour ? 'Open today!' : 'Closed today';
 	},
 	getHours:function(){
+		var time = Template.instance().timeChecked.get();
 		var hours = getTodaysHours();
 		if(hours && hours.openHour){
 			return hours.openHour+':00 AM - '+(hours.closeHour-12)+':00 PM';
