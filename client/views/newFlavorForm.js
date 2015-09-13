@@ -202,6 +202,7 @@ Template.newFlavorForm.events({
 					console.log('DELETE ERROR',err);
 				} else {
 					Session.set('flavorFormOpened',{opened:true,_id:''});
+					Growler.success("Flavor Deleted",'Success!');
 				}
 			});
 		}
