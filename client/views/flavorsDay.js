@@ -7,8 +7,8 @@ Template.flavorsDay.helpers({
 		return Flavors.getFlavorsOfDay();
 	},
 	getFlavorImg:function(data){
-		var imgPath = data ? data.imgPath : 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
-		return imgPath;
+		var imgPath = data && data.images.thumbnail.url;
+		return imgPath || 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
 	}
 });
 

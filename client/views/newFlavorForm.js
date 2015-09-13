@@ -17,6 +17,13 @@ Template.newFlavorForm.onCreated(function(){
 		}
 		return '';
 	}
+
+	this.getAssetInfo = function(){
+		var editId = Session.get('flavorFormOpened')._id;
+		var info = Flavors.findOne({_id:editId});
+		return info || {_id:''};
+	}
+
 	Session.setDefault('flavorFormOpened',{opened:false,_id:''});
 
 });
@@ -31,7 +38,6 @@ Template.newFlavorForm.onRendered(function(){
 			this.$('#new-flavor-name-input').val(flavorData.flavorName).change();
 			var descript = flavorData.description || '';
 			this.$('#new-flavor-descript').val(descript).change();
-			console.log('NEW FLAVOR AUTORUN');
 			this.injectS3Data(flavorData.images);
 		} else {
 			this.$('#new-flavor-name-input').val('').change();
@@ -86,6 +92,7 @@ Template.newFlavorForm.events({
 		Session.set('flavorFormOpened',{opened:false,_id:''});
 	},
 	'click #submit-flavor-form':function(){
+		var isNewForm = Session.get('flavorFormOpened')._id ? false : true;
 		var _self = Template.instance();
 		var flavorName = _self.newFlavorName.get();
 		if(!flavorName){
@@ -93,40 +100,64 @@ Template.newFlavorForm.events({
 			_self.errorMsg.set('flavor name is required');
 			return false;
 		}
-		if(isDuplicate(flavorName)){
+		if(isNewForm && isDuplicate(flavorName)){
 			_self.highlightNameField.set(true);
 			_self.errorMsg.set('duplicate flavor name');
 			return false
 		}
-		_self.createStatus.set('creating');
+		if(isNewForm){
+			_self.createStatus.set('creating');
+		} else {
+			_self.createStatus.set('saving');
+		}
 
 		var newFileName = _self.newFlavorFileName.get();
 		_self.uploadImage(newFileName).then(function(assets){
-			var images = lodash.reduce(assets,function(prev,next){
-				prev[next.key] = lodash.omit(next,'key');
-				return prev;
-			},{})
-			var data = {
-				flavorName:_self.find('#new-flavor-name-input').value,
-				images:images || {},
-				seasonal:false,
-				description:_self.find('textarea[name="new-flavor-descript"]').value
-			};
-			return new Promise(function(resolve,reject){
-				Meteor.call('createNewFlavor',data,function(err,res){
-					if(err){
-						console.log('ERROR',err);
-						reject(err);
-					} else {
-						_self.createStatus.set('created');
-						console.log('SUCCESS',res);
-						resolve();
+				var images = lodash.reduce(assets,function(prev,next){
+					prev[next.key] = lodash.omit(next,'key');
+					return prev;
+				},{})
+				var data = {
+					flavorName:_self.find('#new-flavor-name-input').value,
+					images:images || {},
+					seasonal:false,
+					description:_self.find('textarea[name="new-flavor-descript"]').value,
+					_id:Session.get('flavorFormOpened')._id
+				};
+				if(isNewForm){
+					return new Promise(function(resolve,reject){
+						Meteor.call('createNewFlavor',data,function(err,res){
+							if(err){
+								console.log('ERROR',err);
+								reject(err);
+							} else {
+								_self.createStatus.set('created');
+								console.log('SUCCESS',res);
+								resolve('create');
+							}
+						});
+					});
+				} else {
+					if(!_self.imgUploaderisDirty()){
+						data.images = _self.getAssetInfo().images;
 					}
-				});
-			});
-		}).then(function(){
+					return new Promise(function(resolve,reject){
+						Meteor.call('saveFlavorChanges',data,function(err,res){
+							if(err){
+								console.log('ERROR',err);
+								reject(err);
+							} else {
+								_self.createStatus.set('saved');
+								console.log('SUCCESS',res);
+								resolve('save');
+							}
+						});
+					});
+				}
+				
+		}).then(function(returnStatus){
 			Meteor.setTimeout(function(){					//RESET METHOD
-				_self.createStatus.set('create');			//reset create button
+				_self.createStatus.set(returnStatus);		//reset create or save button
 				_self.resetUploader();						//child created this
 				_self.$('form')[0].reset();					//reset input fields
 				_self.newFlavorName.set('');
@@ -143,6 +174,10 @@ Template.newFlavorForm.events({
 		var specialCharRegex = /\W+/g;
 		var cleanVal = dirtyVal.replace(/\s/g,'_').replace(specialCharRegex,'');
 		Template.instance().newFlavorFileName.set(cleanVal.toLowerCase());
+		Template.instance().isDirty.set(true);
+	},
+	'change #new-flavor-descript':function(){
+		Template.instance().isDirty.set(true);
 	},
 	'focus #flavor-name-field':function(){
 		Template.instance().highlightNameField.set(false);

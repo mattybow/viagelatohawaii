@@ -16,6 +16,11 @@ Template.imgUploader.onCreated(function(){
 	this.data.parent.uploadImage = function(fileName){
 		if(Meteor.userId()){
 			var files = _self.stagedFiles;
+			if(lodash.isEmpty(files)){
+				return Promise.resolve(lodash.map(_self.data.resolutions,function(resolution){
+					return {key:resolution.key, url:null};
+				}));
+			}
 			return Promise.all(
 				_.map(files,function(file){
 					return new Promise(function(resolve,reject){
@@ -89,6 +94,7 @@ Template.imgUploader.onCreated(function(){
 					});
 				}.bind(this))
 			);
+
 		} else {
 			return Promise.reject('you are not authorized');
 		}
@@ -113,6 +119,10 @@ Template.imgUploader.onCreated(function(){
 
 	this.data.parent.resetUploader = this.resetUploader;
 
+	this.data.parent.imgUploaderisDirty = function(){
+		return this.imgDirty.get();
+	}.bind(this);
+
 	this.data.parent.injectS3Data = function(images){
 		var _this = this;
 		lodash.each(images,function(data,k){
@@ -135,6 +145,8 @@ Template.imgUploader.onCreated(function(){
 	this.base64Url = new ReactiveVar('');
 	this.progress = new ReactiveVar(0);
 	this.overallUploadStatus = new ReactiveVar(0);
+	this.imgDirty = new ReactiveVar(false);
+	this.stagedFiles = [];
 
 	this.getInitialResolutions = function(){
 		return lodash.map(this.data.resolutions,function(resolution){
@@ -159,17 +171,20 @@ Template.imgUploader.onCreated(function(){
 			return resolution.key === key;
 		});
 	};
-	
-});
 
-Template.imgUploader.onRendered(function(){
 	this.autorun(function(){
-		if(Session.get('flavorFormOpened')._id){
+		if(this.data.parent.getAssetInfo()._id){
 			Session.set('displayExistingImg',true);
 		} else {
 			Session.set('displayExistingImg',false);
 		}
-	});
+		this.imgDirty.set(false);
+	}.bind(this));
+	
+});
+
+Template.imgUploader.onRendered(function(){
+
 })
 
 Template.imgUploader.helpers({
@@ -181,17 +196,26 @@ Template.imgUploader.helpers({
 		return Template.instance().overallUploadStatus.get()>0 ? "hidden" : "";
 	},
 	hasImagePreview:function(){
-		if (Template.instance().base64Url.get() || (Session.get('flavorFormOpened')._id && Session.get('displayExistingImg'))){
+		var parentInfo = this.parent.getAssetInfo();
+		var editId = parentInfo._id;
+		var hasImgUrl;
+		if(editId){
+			hasImgUrl = parentInfo.images && parentInfo.images.standard_resolution.url && !Template.instance().imgDirty.get();
+		}
+		if (Template.instance().base64Url.get() || hasImgUrl){
 			return 'selection-made'
 		}
 		return '';
 	},
 	getImagePreview:function(){
-		var editId = Session.get('flavorFormOpened')._id;
-		if(editId){
-			return Flavors.getFlavorById(editId).images.standard_resolution.url;
+		var editId = this.parent.getAssetInfo()._id;
+		var localPrev = Template.instance().base64Url.get();
+		var existPrev = editId && this.parent.getAssetInfo().images && this.parent.getAssetInfo().images.standard_resolution.url;
+		console.log('IMGDIRTY', Template.instance().imgDirty.get());
+		if(editId && !Template.instance().imgDirty.get()){
+			return existPrev;
 		}
-		return Template.instance().base64Url.get();
+		return localPrev;
 	},
 	getUploadDatas:function(){
 		return Template.instance().uploadData.get();
@@ -202,6 +226,10 @@ Template.imgUploader.events({
 	'click .flavor-upload-preview-holder':function(e){		//remove file preview
 		preventAndStop(e);
 		Template.instance().resetUploader();
+		if(this.parent.getAssetInfo()._id){
+			Template.instance().data.parent.isDirty.set(true);
+			Template.instance().imgDirty.set(true);
+		}
 	},
 	'click #addFlavorPhotoDropzone':function(e){
 		preventAndStop(e);
@@ -233,21 +261,24 @@ Template.imgUploader.events({
 });
 
 function processDrop(e,context){
-	console.log(e);
 	var files = e.currentTarget.files || e.originalEvent.dataTransfer.files;
 	if(files.length === 1){
 		var file = files[0];
 		var fileReader = new FileReader();
 		fileReader.onload = function(){
-			context.base64Url.set(fileReader.result);
 			processFileExt(file.name);
-			resizeImages(file,context);
+			resizeImages(file,context).then(function(){
+				console.log('field is dirty');
+				context.imgDirty.set(true);
+				context.base64Url.set(fileReader.result);
+				context.data.parent.isDirty.set(true);
+			});
 		}
 		fileReader.readAsDataURL(file);
 	} else if(files.length > 1) {
-		console.log('only one file allowed');
+		Growler.error("only one file allowed",'Sorry');
 	} else {
-		console.log('no files supplied');
+		Growler.error('no files supplied','Sorry');
 	}
 }
 
@@ -258,23 +289,28 @@ function processFileExt(filename){
 
 function resizeImages(file,context){
 	context.stagedFiles = [];	//init and clear previous junk
-	_.each(context.data.resolutions,function(resolution){
-		Resizer.resize(file, {
-	        width: resolution.size,	// maximum width
-	        height: 800, 			// maximum height
-	        cropSquare: resolution.square || false
-	    }, function(err, newFile) {
-	        if(!err){
-	        	console.log(resolution.key, 'COMPLETE');
-	        	context.stagedFiles.push({
-	        		key:resolution.key,
-	        		file:newFile
-	        	});
-	        } else {
-	        	console.log(err);
-	        }
-	    }.bind(this));
-	}.bind(this))
+	return Promise.all(
+		_.map(context.data.resolutions,function(resolution){
+			return new Promise(function(resolve,reject){
+				Resizer.resize(file, {
+		        width: resolution.size,	// maximum width
+		        height: 800, 			// maximum height
+		        cropSquare: resolution.square || false
+		    }, function(err, newFile) {
+		        if(!err){
+		        	console.log(resolution.key, 'COMPLETE');
+		        	context.stagedFiles.push({
+		        		key:resolution.key,
+		        		file:newFile
+		        	});
+		        	resolve();
+		        } else {
+		        	reject(err);
+		        }
+		    });
+			})
+		})
+	);
 }
 
 function preventAndStop(e){

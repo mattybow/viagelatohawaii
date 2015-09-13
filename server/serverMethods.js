@@ -62,6 +62,36 @@ Meteor.methods({
     }
   },
 
+  saveFlavorChanges:function(data){
+    this.unblock();
+    if(data._id){
+      try{
+        var userData = Meteor.user();
+        var doc;
+        if(userData && userData.authorizations.indexOf('flavors') >= 0){
+          var images = data.images;
+          var time = new Date().valueOf();
+          var seasonal = data.seasonal ? true : false;
+          var descript = data.description ? data.description : null;
+          var updateData = {
+            flavorName:data.flavorName,
+            description:descript,
+            images:images,
+            lastUpdated:time,
+            seasonal:seasonal
+          };
+          doc = Flavors.update({_id:data._id}, {$set:updateData});
+        }
+        return doc;
+      } catch (e){
+        console.error(e);
+        return false;
+      }
+    } else {
+      return {errMsg:'save did not execute, not enough data'};
+    }
+  },
+
   deleteFlavor:function(id){
     this.unblock();
     if(id){
