@@ -69,6 +69,24 @@
 	}
 }
 
+@media (max-width:768px) and (orientation:portrait){
+	.slide-holder{
+		max-width: 160px;
+		height: 220px;
+		margin: 0 10px;
+		&.vert{
+			max-width: 150px;
+			height: 220px;
+			margin: 0 20px;
+			.press-pub-title{
+				min-width:130px;
+				left:0px;
+			}
+		}
+		  
+	}
+}
+
 @media (max-width:414px) and (orientation:portrait){
 	.slide-holder{
 		max-width: 130px;

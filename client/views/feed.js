@@ -8,13 +8,21 @@ Template.feed.onCreated(function(){
 		}.bind(this));
 	}.bind(this));
 
+	this.reloadSly = function(){
+		this.slyFeed.reload();
+	}.bind(this);
+
 });
 
 Template.feed.onRendered(function(){
-	/*Meteor.call('checkInstagram',function(err,res){
-		console.log(err,res);
-	});*/
+	window.addEventListener("orientationchange", this.reloadSly, false);
+	window.addEventListener("resize", this.reloadSly, false);
 
+});
+
+Template.feed.onDestroyed(function(){
+	window.removeEventListener("orientationchange", this.reloadSly, false);
+	window.removeEventListener("resize", this.reloadSly, false);
 });
 
 Template.feed.helpers({
@@ -74,6 +82,15 @@ Template.feed.events({
 		if(oldPos !== newPos){
 			self.slyPos.set(newPos)
 			sly.slideTo(sly.items[newPos].start + 4*newPos);
+		}
+	},
+	"touchend .feed-slides":function(){
+		var self = Template.instance();
+		var newPos = self.slyFeed.rel.firstItem;
+		console.log(newPos);
+		var oldPos = self.slyPos.get();
+		if(oldPos !== newPos){
+			self.slyPos.set(newPos);
 		}
 	}
 });

@@ -51,6 +51,7 @@
 .slide{
 	position: relative;
 	background-size:cover;
+	background-position: center 0%;
 	background-repeat:norepeat;
 	
 	img{
@@ -129,7 +130,7 @@
  */
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
   #slideshow, .slide {
-    height: 768px; //1024*.75
+    height: 512px; //1024*.75
   }
 }
  
