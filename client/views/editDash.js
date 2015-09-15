@@ -1,7 +1,7 @@
 var tabNames = {
 	flavors:{templateName:'editFlavors'},
 	press:{templateName:'editPress'},
-	text:{templateName:'editText'},
+	hours:{templateName:'editHours'},
 	users:{templateName:'editUsers'}
 };
 

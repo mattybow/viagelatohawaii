@@ -1,5 +1,13 @@
 Template.flavorsDay.onCreated(function(){
 	this.subscribe('flavorsOfTheDay');
+	this.autorun(function(){
+		var isModalOpen = Session.get('activeModal');
+		if(isModalOpen){
+			$('body').addClass('modal-open');
+		} else {
+			$('body').removeClass('modal-open');
+		}
+	});
 });
 
 Template.flavorsDay.helpers({
@@ -15,6 +23,11 @@ Template.flavorsDay.helpers({
 Template.flavorsDay.events({
 	'click #read-only-flavor-library':function(){
 		Session.set('activeModal','library');
-		$('body').addClass('modal-open');
 	}
-})
+});
+
+
+function bodyNoScroll(e){
+	e.stopPropagation();
+	e.preventDefault();
+}

@@ -38,7 +38,7 @@
 		text-align:right;
 	}
 	.form-input,textarea{
-		background-color:rgba(255,255,255,.2);
+		background-color:rgba(255,255,255,.5);
 		border:1px solid white;
 		outline:none;
 		padding:10px;
@@ -158,6 +158,7 @@
   			display:block;
   			margin-bottom:5px;
   			text-align:left;
+  			width:100%;
   		}
 
   		.form-input,textarea{

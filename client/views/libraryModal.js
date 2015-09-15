@@ -6,11 +6,14 @@ Template.libraryModal.helpers({
 	getAllFlavors:function(){
 		return Flavors.getAll();
 	},
-})
+});
 
 Template.libraryModal.events({
-	'click .modal-close-icon':function(){
+	'click .modal-close-icon, click #libraryModal':function(e){
+		e.stopPropagation();
 		Session.set('activeModal','');
-		$('body').removeClass('modal-open');
+	},
+	'click .lib-flavor-item':function(e){
+		e.stopPropagation();
 	}
-})
+});

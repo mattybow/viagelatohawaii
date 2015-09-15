@@ -20,9 +20,6 @@ Template.header.events({
 	},
 	'click .desktop-nav-link':function(){
 		Session.set('isNavHidden',true);
-	},
-	'touchmove .mobile-nav-contents>ul':function(e){
-		e.stopPropagation();
 	}
 });
 
@@ -31,14 +28,15 @@ Template.header.onCreated(function(){
 	this.autorun(function(){
 		var isMenuOpen = Session.get('isMenuOpen');
 		if(isMenuOpen){
-			$('body').addClass('modal-open').on('touchmove',bodyNoScroll);
+			$('body').addClass('modal-open');
 		} else {
-			$('body').removeClass('modal-open').off('touchmove',bodyNoScroll);
+			$('body').removeClass('modal-open');
 		}
 	})
 });
 
 function bodyNoScroll(e){
+	//e.stopPropagation();
 	e.preventDefault();
 }
 

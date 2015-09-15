@@ -3,6 +3,8 @@
 	transition:transform 400ms cubic-bezier(.19,1,.22,1) 0ms;
 	transform:translateX(100%);
 	position:relative;
+	height:100%;
+	overflow:auto;
 
 	&.open{
 		transform:translateX(0%);

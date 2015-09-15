@@ -34,3 +34,7 @@ Meteor.publish('pressMedia',function(){
 Meteor.publish('hours',function(){
   return Hours.getHours();
 });
+
+Meteor.publish('existingUsers',function(){
+  return Meteor.users.find({},{fields:{username:1, createdAt:1, authorizations:1}});
+});
