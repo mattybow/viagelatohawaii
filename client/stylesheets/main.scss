@@ -240,6 +240,20 @@ button>span{
   padding:0;
   margin:0;
 }
+.btn-line{
+  &.selected{
+    background-color:rgba(0,0,0,.2);
+    color:#fff;
+  }
+  &.unselected{
+    opacity:.7;
+  }
+  &.delete{
+    color: #ff6d6d;
+    border: 1px solid #ff6d6d;
+  }
+}
+
 .right-form-ctrls{
   text-align: right;
 }

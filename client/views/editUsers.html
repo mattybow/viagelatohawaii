@@ -1,48 +1,77 @@
 <template name="editUsers">
 	<div id="edit-users">
-		<div class="top-bar">
-			<div class="left-form-ctrls sm-screen" id="new-form-ctrls">
-				<button class="btn-no-line cancel-create-flavor">
-					<span class="icon-arrow icon-180"></span>
-					<span class="mobile-back-action-title">cancel</span>
-				</button>
+		<div class="admin-content">
+			<div class="split-sub-header">
+				<div class="left-side">
+					<h3 style="margin:0;">New User</h3>
+				</div>
+				<div class="right-side">
+					<button class="btn-line" id="create-user">create</button>
+				</div>
 			</div>
-			<div class="form-title">
-				<h3>Create New User</h3>
-			</div>
-			<div class="right-form-ctrls" id="new-form-ctrls">
-				<button class="btn-line" id="create-user">create</button>
+			<form action="" class="via-edit-form via-form-content dark-inputs" id="new-user-form">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="new-flavor-name form-item">
+							<label for="new-username">username</label>
+							<input class="form-input is-required" type="text" id="input-new-username" name="new-username">
+						</div>
+						<div class="form-item">
+							<label for="new-password">password</label>
+							<input class="form-input" type="password" id="input-new-password" name="new-password">
+						</div>
+						<div class="form-item {{passwordsMatch}}">
+							<label for="confirm-pass">confirm pass</label>
+							<input class="form-input" type="password" id="input-confirm-password" name="confirm-pass">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-item" id="new-authorizations">
+							<label for="new-press-name">authorizations</label>
+							<ul class="auth-checkboxes">
+								{{#each authItems}}
+									<li class="auth-item">
+										<div class="auth-item-content">
+											<span class="check-box {{checked name}}">
+												<span class="check-box-bg"></span>
+												<span class="check-mark-holder flex-parent-row">
+													<span class="icon-check-mark"></span>
+												</span>
+												
+											</span>
+											<span class="auth-item-name flex-child-expand">{{name}}</span>
+										</div>
+									</li>
+								{{/each}}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+			<h3>Existing Users</h3>
+			<div class="user-records">
+				{{#each existingUsers}}
+					<div class="user-item">
+						<div class="user-data flex-child-expand">
+							<div>{{username}}</div>
+							<div>Created: {{createdReadable}}</div>
+							<div class="authorizations">
+								{{#each getAuthorizations}}
+									{{> choice type='button' text=name}}
+								{{/each}}
+							</div>
+						</div>
+						<div class="user-data-ctrls">
+							<button class="btn-line">update</button>
+							<button class="btn-line delete delete-username">
+								<span class="icon-trash-bin"></span>
+								<span>delete</span>
+							</button>
+						</div>
+					</div>
+				{{/each}}
 			</div>
 		</div>
-		<form action="" class="via-edit-form via-form-content dark-inputs" id="new-user-form">
-			<div class="new-flavor-name form-item">
-				<label for="new-press-name">username</label>
-				<input class="form-input is-required" type="text" id="input-press-title" name="new-press-title">
-			</div>
-			<div class="form-item {{pubInvalid}}">
-				<label for="new-press-name">password</label>
-				<input class="form-input" type="password" name="input-press-publication">
-			</div>
-			<div class="form-item">
-				<label for="new-press-name">confirm password</label>
-				<input class="form-input" type="password" name="input-press-author">
-			</div>
-		</form>
-		<div class="top-bar">
-			<div class="left-form-ctrls sm-screen" id="new-form-ctrls">
-				<button class="btn-no-line cancel-create-flavor">
-					<span class="icon-arrow icon-180"></span>
-					<span class="mobile-back-action-title">cancel</span>
-				</button>
-			</div>
-			<div class="form-title">
-				<h3>Existing Users</h3>
-			</div>
-		</div>
-		{{#each existingUsers}}
-			<div>{{username}}</div>
-			<div>{{createdAt.$date}}</div>
-			<div>{{authorizations}}</div>
-		{{/each}}
+		
 	</div>
 </template>

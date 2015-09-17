@@ -28,8 +28,8 @@ Template.editDash.helpers({
 	},
 	getTabs:function(){
 		var user = Meteor.user();
-		if('authorizations' in user){
-			return user.authorizations.map(function(auth){
+		if('authorizations' in user.profile){
+			return user.profile.authorizations.map(function(auth){
 				return {
 					tabName:auth,
 					templateName:tabNames[auth].templateName

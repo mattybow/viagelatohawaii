@@ -1,3 +1,14 @@
+Accounts.config({
+  forbidClientAccountCreation:true
+});
+
+Accounts.validateNewUser(function (user) {
+  if(checkAuth('users')){
+    return true;
+  }
+  throw new Meteor.Error(403, "Username must have at least 3 characters");
+});
+
 Meteor.methods({
   checkInstagram: function () {
     this.unblock();
@@ -16,7 +27,7 @@ Meteor.methods({
     try {
       var userData = Meteor.user();
       var docs;
-      if(userData && userData.authorizations.indexOf('flavors') >= 0){
+      if(checkAuth('flavors')){
         Flavors.update({},{$set:{day:false}},{multi:true});
         docs = Flavors.update({_id:{$in:data.data}},
                               {$set:{day:true}},
@@ -34,7 +45,7 @@ Meteor.methods({
       try{
         var userData = Meteor.user();
         var doc;
-        if(userData && userData.authorizations.indexOf('flavors') >= 0){
+        if(checkAuth('flavors')){
           var images = data.images;
           var time = new Date().valueOf();
           var seasonal = data.seasonal ? true : false;
@@ -68,7 +79,7 @@ Meteor.methods({
       try{
         var userData = Meteor.user();
         var doc;
-        if(userData && userData.authorizations.indexOf('flavors') >= 0){
+        if(checkAuth('flavors')){
           var images = data.images;
           var time = new Date().valueOf();
           var seasonal = data.seasonal ? true : false;
@@ -159,12 +170,26 @@ Meteor.methods({
     console.log('attempting to send email',confirmationEmail);
     Email.send(confirmationEmail);
     return {ok:true};
+  },
+  createNewUser:function(options){
+    if(checkAuth('users')){
+      this.unblock();
+      return Accounts.createUser(options);
+    } else {
+      throw new Meteor.Error(403, 'NOT AUTHORIZED');
+    }
+  },
+  deleteUser:function(id){
+    if(checkAuth('users')){
+      return Meteor.users.remove({_id:id});
+    }
+    throw new Meteor.Error(403, 'NOT AUTHORIZED');
   }
 });
 
 function checkAuth(cred){
   var userData = Meteor.user();
-  if(userData && userData.authorizations.indexOf(cred) >= 0){
+  if(userData && userData.profile.authorizations.indexOf(cred) >= 0){
     return true;
   }
   return false;

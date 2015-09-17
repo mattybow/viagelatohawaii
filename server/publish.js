@@ -17,7 +17,7 @@ Meteor.publish('flavorsOfTheDay', function () {
 Meteor.publish("userAuth", function () {
   if (this.userId) {
     return Meteor.users.find({_id: this.userId},
-                             {fields: {'authorizations':1}});
+                             {fields: {'profile':1}});
   } else {
     this.ready();
   }
@@ -36,5 +36,5 @@ Meteor.publish('hours',function(){
 });
 
 Meteor.publish('existingUsers',function(){
-  return Meteor.users.find({},{fields:{username:1, createdAt:1, authorizations:1}});
+  return Meteor.users.find({},{fields:{username:1, createdAt:1, profile:1}});
 });
