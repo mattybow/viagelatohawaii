@@ -190,7 +190,7 @@ Template.editUsers.events({
 	},
 	'click .delete-username':function(){
 		if (this.username === 'master') {
-			Growler.fail('You cannot the master','SORRY!');
+			Growler.fail('You cannot delete the master','SORRY!');
 		} else if (this._id === Meteor.user()._id){
 			Growler.fail('You cannot delete yourself','SORRY!');
 		} else {
@@ -198,6 +198,10 @@ Template.editUsers.events({
 		}
 	},
 	'click .update-user':function(){
+		if(this.username==='master'){
+			Growler.fail('You cannot make changes to master', 'FAILURE!');
+			return false;
+		}
 		var data = {
 			id:this._id,
 			authorizations: this.userAuths.get().sort()

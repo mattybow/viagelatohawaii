@@ -14,6 +14,7 @@ $edit-nav-height-mobile:50px;
 	padding-top:$edit-nav-height;
 	position:relative;
 	letter-spacing:0;
+	background-color:$via-yellow;
 	.btn-line, .btn-solid{
 		border-radius:2px;
 	}
@@ -253,6 +254,7 @@ $edit-nav-height-mobile:50px;
 	left: 0;
 	right: 0;
 	bottom: 0;
+	background-color:#F5F3F3;
 }
 
 .active-tab{

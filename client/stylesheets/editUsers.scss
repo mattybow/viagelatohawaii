@@ -185,7 +185,7 @@ li.auth-item:first-child{
 	}
 }
 .user-data-username{
-	font-size:1.2em;
+	font-size:1.5em;
 	line-height:2em;
 }
 span.label{
@@ -210,10 +210,46 @@ span.label{
 }
 
 @media (max-width:414px) and (orientation:portrait){
+	.admin-content{
+		padding:15px 25px;
+	}
+	.user-item{
+		position:relative;
+		padding:0 5px 55px;
+		&:hover{
+			background-color:transparent;
+		}
+	}
+	.user-data-ctrls{
+		text-align:right;
+		padding-top:5px;
+		.btn-line{
+			padding:5px 10px;
+		}
+	}
+	.validation-indicator-holder{
+		align-items:flex-end;
+	}
+	.validation-indicator{
+		margin-bottom:.25em;
+	}
+	.authorizations{
+		position:absolute;
+		bottom:.5em;
+		left:0;
+		padding:5px;
+	}
+	span.label{
+		width:100%;
+	}
 	#edit-users{
 		.via-form-content{
 			padding: 20px 0;
 		}
+	}
+	.btn-choice{
+		margin-bottom:2px;
+		margin-top:2px;
 	}
 	#create-new-user{
 		width:100%;

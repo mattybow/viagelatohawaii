@@ -70,9 +70,11 @@
 							<div><span class="label">Created:</span> {{createdReadable}}</div>
 							<div class="authorizations">
 								<span class="label">Authorizations: </span>
-								{{#each getAuthorizations}}
-									{{> choice type='button' name=name}}
-								{{/each}}
+								<span class="choices">
+									{{#each getAuthorizations}}
+										{{> choice type='button' name=name}}
+									{{/each}}
+								</span>
 							</div>
 						</div>
 						<div class="user-data-ctrls">
