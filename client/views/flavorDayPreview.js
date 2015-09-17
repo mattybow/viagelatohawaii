@@ -10,14 +10,21 @@ Template.flavorDayPreview.helpers({
 	},
 	getFlavorImg:function(){
 		var id = Template.instance().data;
-		var imgPath = 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
+		var placeholderPath = 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
 		var doc = Flavors.findOne({_id:id});
 		if(doc){
-			imgPath = doc.imgPath || doc.images.thumbnail.url;
-
+			return doc.images.thumbnail.url || placeholderPath;
 		}
-		return imgPath;
-	}
+		return placeholderPath;
+	},
+	isPlaceholder:function(){
+		var id = Template.instance().data;
+		var doc = Flavors.findOne({_id:id});
+		if(doc){
+			return doc.images.thumbnail.url ? '' : 'placeholder';
+		}
+		return 'placeholder';
+	},
 });
 
 Template.flavorDayPreview.events({

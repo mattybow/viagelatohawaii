@@ -23,7 +23,6 @@ $edit-nav-height-mobile:50px;
 	width: 100%;
 	display: block;
 	position: relative;
-	cursor:pointer;
 
 	.icon-angle-right{
 		position:absolute;
@@ -40,6 +39,7 @@ $edit-nav-height-mobile:50px;
 	width:100%;
 	top:0;
 	left:0;
+	background-color:$via-yellow;
 
 	.login-msg{
 		height:100%;
@@ -71,6 +71,14 @@ $edit-nav-height-mobile:50px;
 	padding:8px 1em;
 	overflow:hidden;
 }
+#login-touch-area{
+	position:absolute;
+	height:40px;
+	top:0;
+	cursor:pointer;
+	right:0;
+	width:100%;
+}
 .show-inputs {
 	.logged-in.login-ctrls{
 		height:100px;
@@ -85,7 +93,7 @@ $edit-nav-height-mobile:50px;
 }
 #edit-nav{
 	height:$edit-nav-height;
-	background-color:$via-blue;
+	background-color:$via-blue-trans;
 	position:fixed;
 	top:0;
 	left:0;
@@ -272,6 +280,7 @@ $edit-nav-height-mobile:50px;
 		top:5px;
 		width:$login-width-md;
 		right:10px;
+		padding-top: 10px;
 	}
 	.tab{
 		padding:5px 0;

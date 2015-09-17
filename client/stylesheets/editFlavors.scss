@@ -230,8 +230,10 @@ button{
 .lib-flavor-img-holder{
 	width:100px;
 	height:100px;
-	display:inline-block;
-	vertical-align:middle;
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+	justify-content:center;
 	margin-right:10px;
 	overflow: hidden;
   	border-radius: 100px;
@@ -239,6 +241,13 @@ button{
 	img{
 		width:100px;
 		height:auto;
+	}
+	img[src$="cone.png"]{
+		width:30px;
+		opacity:.3;
+	}
+	&.placeholder{
+		border:1px solid rgba(0,0,0,.2);
 	}
 	.edit-annotation-for-mobile{
 		text-align:center;

@@ -5,6 +5,7 @@ $via-yellow:#fffdf2;
 $via-dark-yellow:#fef3c8;
 $via-green:#e7f5ee;
 $via-offwhite:#FAFAFA;
+$via-blue-trans:rgba(226, 240, 250, 0.95);
 body{
 	font-family: 'Lato', sans-serif;
   letter-spacing:1px;
@@ -30,7 +31,7 @@ body{
 	background-color:$via-blue;
 }
 .via-blue-trans{
-  background-color:rgba(226, 240, 250, 0.95);
+  background-color:$via-blue-trans;
 }
 .via-green{
 	background-color:$via-green;
@@ -241,6 +242,10 @@ button>span{
   margin:0;
 }
 .btn-line{
+  &.disabled{
+    opacity:.5;
+    pointer-events:none;
+  }
   &.selected{
     background-color:rgba(0,0,0,.2);
     color:#fff;

@@ -8,7 +8,11 @@ Template.libFlavorListView.helpers({
 		return session.indexOf(id) >= 0 ? 'remove' : '';
 	},
 	getImgPath:function(){
-		return Template.instance().data ? this.imgPath  || this.images.thumbnail.url : 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
+		var coneUrl = 'https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png';
+		return Template.instance().data ? this.images.thumbnail.url  || coneUrl : coneUrl;
+	},
+	isPlaceholder:function(){
+		return Template.instance().data ? (this.images.thumbnail.url  ? '' : 'placeholder') : 'placeholder';
 	},
 	getMobileEditClass:function(){
 		if(window.innerWidth <= 414){

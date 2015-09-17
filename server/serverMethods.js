@@ -184,6 +184,12 @@ Meteor.methods({
       return Meteor.users.remove({_id:id});
     }
     throw new Meteor.Error(403, 'NOT AUTHORIZED');
+  },
+  updateUserAuths:function(data){
+    if(checkAuth('users')){
+      return Meteor.users.update({_id:data.id}, {$set:{'profile.authorizations':data.authorizations}});
+    }
+    throw new Meteor.Error(403, 'NOT AUTHORIZED');
   }
 });
 

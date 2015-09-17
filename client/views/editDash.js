@@ -53,7 +53,7 @@ Template.editDash.helpers({
 });
 
 Template.editDash.events({
-	'click #show-login-ctrls-button':function(e){
+	'click #login-touch-area':function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		var oldState = Template.instance().showInputCtrls.get();
