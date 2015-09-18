@@ -224,7 +224,7 @@ Template.editUsers.events({
 		},[]);
 		var options = {
 			username:temp.usernameInput.get().username,
-			password:temp.password.get(),
+			password:temp.passwordInput.get().password,
 			profile:{
 				authorizations:authorizations
 			}
