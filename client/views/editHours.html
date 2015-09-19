@@ -1,15 +1,71 @@
 <template name="editHours">
-	<div class="top-bar">
-		<div class="left-form-ctrls sm-screen" id="new-form-ctrls">
-			<button class="btn-line cancel-create-flavor">
-				cancel
-			</button>
-		</div>
-		<div class="form-title">
-			<h3>Hours</h3>
-		</div>
-		<div class="right-form-ctrls" id="new-form-ctrls">
-			<button class="btn-line" id="create-user">save</button>
+	<div id="edit-hours">
+		<div class="admin-content">
+			<div class="row">
+				<div class="col-sm-8">
+					<h3 style="margin-top:.5em;">Exceptions</h3>
+					<form action="" class="via-edit-form dark-inputs flex-parent-row" id="new-hours-exception-form">
+						<div class="form-item flex-child-expand">
+							<label for="input-exception-date">date</label>
+							<input class="form-input" type="date" name="input-exception-date" id="exception-input-date">
+						</div>
+						<div class="form-item flex-child-expand">
+							<div class="hours-checkbox flex-parent-row">
+								<span class="check-box">
+									<span class="check-box-bg"></span>
+									<span class="check-mark-holder flex-parent-row">
+										<span class="icon-check-mark"></span>
+									</span>
+								</span>
+								<span class="item-name">open</span>
+								<span class="hour-exception-inputs flex-parent-row">
+									<span class="hour-exception-input flex-parent-row">
+										<input class="form-input sq" type="number" name="input-exception-date" id="exception-input-open-hour">
+									</span>
+									<span class="hour-exception-input flex-parent-row">
+										<label for="new-flavor-name">to</label>
+										<input class="form-input sq" type="number" name="input-exception-date" id="exception-input-close-hour">
+									</span>
+								</span>
+							</div>
+							<div class="hours-checkbox flex-parent-row" id="closed-checkbox">
+								<span class="check-box">
+									<span class="check-box-bg"></span>
+									<span class="check-mark-holder flex-parent-row">
+										<span class="icon-check-mark"></span>
+									</span>
+								</span>
+								<span class="item-name flex-child-expand">closed</span>
+							</div>
+						</div>
+						<div class="form-item" style="text-align:right">
+							<button class="btn-line" style="min-width:70px;">add</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<h3 style="margin-top:.5em;">Regular Hours</h3>
+					<div class="reg-hours">
+						<ul style="list-style:none; padding:0; margin:0;">
+							{{#each getRegularHours}}
+								<li class="reg-hour-item flex-parent-row">
+									<span class="reg-hour-day-text flex-child-expand">
+										{{dayConverter day}}
+									</span>
+									<span class="reg-hour-hour-text">
+										<div class="hour-number">{{hourConverter openHour}}</div>
+										<div class="hour-ampm">{{ampmConverter openHour}}</div>
+									</span>
+									<span class="reg-hour-hour-text">
+										<div class="hour-number">{{hourConverter closeHour}}</div>
+										<div class="hour-ampm">{{ampmConverter closeHour}}</div>
+									</span>
+								</li>
+							{{/each}}
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

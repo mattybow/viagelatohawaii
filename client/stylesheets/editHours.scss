@@ -1,0 +1,97 @@
+#edit-hours{
+	background-color:#F5F3F3;
+}
+
+.reg-hour-item{
+	padding:15px 0;
+	align-items:center;
+	margin-bottom:1px;
+	.reg-hour-day-text{
+		min-width:50px;
+		text-align:right;
+		margin-right:5px;
+		border-bottom: 1px solid rgba(0,0,0,.1);
+	}
+	.reg-hour-hour-text{
+		min-width:60px;
+		text-align:center;
+		margin-right:1px;
+	}
+}
+.reg-hours, #new-hours-exception-form{
+	margin-top:20px;
+	padding: 20px 0;
+	border-top:1px solid rgba(0,0,0,0.2);
+}
+.hour-number{
+	font-size:1.7em;
+	color:#A9A9A9;
+	line-height:1em;
+}
+.hour-ampm{
+	font-size:.8em;
+}
+#new-hours-exception-form{
+	justify-content:flex-start;
+	align-items:flex-start;
+
+	label[for="input-exception-date"]{
+		width:50px;
+		margin-bottom:0;
+	}
+	label[for="input-exception-date"] + input{
+		width: calc(100% - 54px);
+	}
+	.form-item{
+		margin-right:20px;
+		&:last-child{
+			margin-right:0;
+		}
+	}
+}
+#closed-checkbox{
+	padding-top:20px;
+}
+.hours-checkbox{
+	align-items:center;
+	justify-content:flex-start;
+}
+.form-input.sq{
+	width:2.75em;
+}
+.hour-exception-inputs{
+	margin-left:20px;
+}
+.hour-exception-input{
+	align-items:center;
+	label{
+		width:auto;
+		padding:5px;
+		margin:0;
+	}
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+@media (max-width:768px) and (orientation:portrait){
+	#new-hours-exception-form{
+		flex-flow:row wrap;
+		.form-item{
+			width:100%;
+			margin-right:0;
+		}
+		label[for="input-exception-date"] + input{
+			width: 100%;
+		}
+		label{
+			text-align:left;
+		}
+	}
+	#closed-checkbox{
+		padding-top:10px;
+	}
+
+}
