@@ -48,10 +48,60 @@
 			margin-right:0;
 		}
 	}
+
+}
+#closed-checkbox-container{
+	padding-top:20px;
+	cursor:pointer;
 }
 #closed-checkbox{
-	padding-top:20px;
+	.check-box-bg{
+		background-color:$not-ok-red;
+	}
 }
+#open-checkbox-container{
+	cursor:pointer;
+}
+.exception-entry{
+	padding:10px 20px;
+	border-top:1px solid rgba(0,0,0,0.1);
+	display:flex;
+	flex-flow: row wrap;
+	align-items:center;
+	justify-content:space-between;
+	&.APPLIED{
+		.display-exception-date-holder, .display-exception-hours{
+			opacity:.7;
+		}
+		.display-exception-date, .display-exception-wkday, .display-exception-hours{
+			font-style:italic;
+			text-decoration:line-through;
+		}
+	}
+}
+.delete-button-holder{
+	text-align:right;
+}
+.delete{
+	border-color:$not-ok-red;
+	color:$not-ok-red;
+}
+.display-exception-date-holder{
+	align-items:center;
+}
+.display-exception-date{
+	min-width:100px;
+}
+.display-exception-wkday{
+	min-width:75px;
+	margin-right:10px;
+	text-align:right;
+}
+.display-exception-hours, .display-exception-status{
+	text-align:center;
+	min-width:120px;
+}
+
 .hours-checkbox{
 	align-items:center;
 	justify-content:flex-start;
@@ -61,14 +111,22 @@
 }
 .hour-exception-inputs{
 	margin-left:20px;
+	align-items:center;
 }
 .hour-exception-input{
-	align-items:center;
+	text-align:center;
 	label{
 		width:auto;
 		padding:5px;
 		margin:0;
 	}
+}
+.offset-flex{
+	margin-bottom:1em;
+}
+.to-el{
+	margin-left:5px;
+	margin-right:5px;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -93,5 +151,29 @@ input[type=number]::-webkit-outer-spin-button {
 	#closed-checkbox{
 		padding-top:10px;
 	}
-
+	.exception-entry{
+		padding:10px;
+	}
+	.display-exception-status{
+		min-width:10px;
+	}
+}
+@media (max-width:768px) and (orientation:portrait) and (min-width:415px){
+	.delete-button-holder{
+		flex:1 1 auto;
+	}
+}
+@media (max-width:414px) and (orientation:portrait){
+	.exception-entry{
+		padding:10px 0;
+	}
+	.display-exception-hours, .display-exception-status{
+		min-width:100px;
+	}
+	.display-exception-hours{
+		text-align:right;
+	}
+	#delete-exception{
+		transform:translateY(-2.4em);
+	}
 }

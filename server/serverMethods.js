@@ -190,7 +190,20 @@ Meteor.methods({
       return Meteor.users.update({_id:data.id}, {$set:{'profile.authorizations':data.authorizations}});
     }
     throw new Meteor.Error(403, 'NOT AUTHORIZED');
+  },
+  createException:function(data){
+    if(checkAuth('hours') && data){
+      var record = lodash.assign(data,{created:new Date().valueOf()});
+      return Hours.insert(record);
+    }
+  },
+  deleteException:function(id){
+    if(checkAuth('hours')){
+      return Hours.remove({_id:id});
+    }
+    throw new Meteor.Error(403, 'NOT AUTHORIZED');
   }
+
 });
 
 function checkAuth(cred){

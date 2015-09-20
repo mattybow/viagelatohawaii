@@ -35,6 +35,10 @@ Meteor.publish('hours',function(){
   return Hours.getHours();
 });
 
+Meteor.publish('allHours',function(){
+  return Hours.getAllHours();
+});
+
 Meteor.publish('existingUsers',function(){
   return Meteor.users.find({},{fields:{username:1, createdAt:1, profile:1}});
 });

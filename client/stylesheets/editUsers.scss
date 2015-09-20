@@ -146,7 +146,9 @@ li.auth-item:first-child{
 	}
 }
 
-
+.check-box-bg.close-color{
+	background-color:$not-ok-red;
+}
 
 
 .authorizations{
@@ -161,7 +163,7 @@ li.auth-item:first-child{
 .user-item{
 	display:flex;
 	flex-flow:row nowrap;
-	border-top:1px solid rgba(0,0,0,0.2);
+	border-top:1px solid rgba(0,0,0,0.1);
 	padding:10px 20px 15px;
 	background-color:transparent;
 	transition:background-color .2s ease;

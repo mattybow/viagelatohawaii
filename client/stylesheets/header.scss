@@ -198,6 +198,9 @@ $burger-size-open:28px;
 }
 
 @media (min-width: 768px){
+  .minimized#header{
+    pointer-events:none;
+  }
   .mobile-burger{
     display:none;
   }
