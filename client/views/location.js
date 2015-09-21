@@ -18,6 +18,31 @@ Template.location.helpers({
 		} else {
 			return '0 0 792 612'
 		}
+	},
+	fillSvg:function(){
+		return Template.instance().showSvgFill.get() ? 'fill-in' : '';
 	}
+});
+
+Template.location.onCreated(function(){
+	var _self = this;
+	this.autorun(function(c){
+		if(Session.get('drawLocation')){
+			_self.locationSvg.draw();
+			console.log("DRAW");
+			Meteor.setTimeout(function(){
+				_self.showSvgFill.set(true);
+			},1000);
+			c.stop();
+		}
+	});
+	this.showSvgFill = new ReactiveVar(false);
+});
+
+Template.location.onRendered(function(){
+	this.locationSvg = new Walkway({
+		selector: '#svg-map',
+		duration: '1500'
+	});
 });
 

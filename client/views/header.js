@@ -45,6 +45,7 @@ Template.header.onRendered(function(){
 });
 
 var prevScrollPos = 0;
+Session.setDefault('drawLocation',false);
 
 function updatePage(){
 	var scrollPos = window.scrollY;
@@ -69,10 +70,17 @@ function updateLocation(dir){
 		}) || "/";
 	if(hash !== (window.location.hash || '/')){
 		if (history && history.replaceState) {
+			var locationDrawn = Tracker.nonreactive(function(){
+				return Session.get('drawLocation');
+			});
+			if((hash === '#story' || hash === '#location') && !locationDrawn){
+				Session.set('drawLocation',true);
+			}
 			history.replaceState({}, "", hash);
 		}
 	}
 }
+
 
 $.Velocity.RegisterEffect('upAndInNav', {
     defaultDuration: 1200,

@@ -48,6 +48,15 @@
 		stroke: #000000;
 		stroke-width: .5px;
 	}
+	path {
+		fill-opacity: 0;
+		transition: fill-opacity .3s ease;
+	}
+}
+.fill-in #svg-map{
+	path {
+		fill-opacity: 1;
+	}
 }
 @media (min-width: 1024px){
 	#location{
