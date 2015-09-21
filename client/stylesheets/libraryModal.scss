@@ -1,0 +1,52 @@
+#libraryModal{
+	background-color:rgba(220, 233, 239,0.95);
+	transition:transform 400ms cubic-bezier(.19,1,.22,1) 0ms;
+	transform:translateX(100%);
+	position:relative;
+	height:100%;
+	overflow:auto;
+
+	&.open{
+		transform:translateX(0%);
+	}
+}
+.cone-icon-sm{
+	width:25px;
+	height:25px;
+}
+.lib-flavor-list{
+	padding:0 30%;
+	list-style:none;
+	text-align:left;
+}
+
+.lib-flavor-item{
+	padding: 10px 30px 10px 0;
+	border-bottom:1px solid rgba(50,50,50,.1);
+	position:relative;
+	img{
+		position:absolute;
+		top:.4em;
+		right:0;
+		height:25px;
+		width:auto;
+	}
+}
+
+@media (max-width:768px){
+	.lib-flavor-list{
+		padding:0 20%;
+	}
+	.lib-flavor-item img{
+		height:20px;
+	}
+}
+
+@media (max-width:414px){
+	.lib-flavor-list{
+		padding:0 10%;
+	}
+	.lib-flavor-item img{
+		height:20px;
+	}
+}

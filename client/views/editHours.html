@@ -1,0 +1,108 @@
+<template name="editHours">
+	<div id="edit-hours">
+		<div class="admin-content">
+			<div class="row">
+				<div class="col-sm-8">
+					<h3 style="margin-top:.5em;">Exceptions</h3>
+					<form action="" class="via-edit-form dark-inputs flex-parent-row" id="new-hours-exception-form">
+						<div class="form-item flex-child-expand">
+							<label for="input-exception-date">date</label>
+							<input class="form-input" type="date" name="input-exception-date" id="exception-input-date" placeholder="MM/DD/YYYY">
+						</div>
+						<div class="form-item flex-child-expand">
+							<div class="hours-checkbox flex-parent-row" id="open-checkbox-container">
+								<span class="check-box offset-flex {{isNewOpen}}" id="open-checkbox">
+									<span class="check-box-bg"></span>
+									<span class="check-mark-holder flex-parent-row">
+										<span class="icon-check-mark"></span>
+									</span>
+								</span>
+								<span class="item-name offset-flex">OPEN</span>
+								<span class="hour-exception-inputs flex-parent-row">
+									<span class="hour-exception-input">
+										<input class="form-input sq" type="number" name="input-exception-date" id="exception-input-open-hour" value="{{getNewOpenHr}}">
+										<div>AM</div>
+									</span>
+									<span class="to-el offset-flex">to</span>
+									<span class="hour-exception-input">
+										<input class="form-input sq" type="number" name="input-exception-date" id="exception-input-close-hour" value="{{getNewCloseHr}}">
+										<div>PM</div>
+									</span>
+								</span>
+							</div>
+							<div class="hours-checkbox flex-parent-row" id="closed-checkbox-container">
+								<span class="check-box {{isNewClosed}}" id="closed-checkbox">
+									<span class="check-box-bg"></span>
+									<span class="check-mark-holder flex-parent-row">
+										<span class="icon-close"></span>
+									</span>
+								</span>
+								<span class="item-name flex-child-expand">CLOSED</span>
+							</div>
+						</div>
+						<div class="form-item" style="text-align:right">
+							<button class="btn-line {{formValid}}" style="min-width:70px;" id="add-exception">add</button>
+						</div>
+					</form>
+					<div id="existing-exceptions">
+						{{#each getExceptions}}
+							<div class="exception-entry {{exceptionApplicationStatus}}">
+								<div class="display-exception-date-holder flex-parent-row">
+									<span class="check-box checked">
+										<span class="check-box-bg {{openOrClose 'color'}}"></span>
+										<span class="check-mark-holder flex-parent-row">
+											<span class="{{openOrClose 'icon'}}"></span>
+										</span>
+									</span>
+									<div class="display-exception-wkday">{{humanWkDay date}}</div>
+									<div class="display-exception-date">{{humanDate date}}</div>
+								</div>
+								<div class="display-exception-hours">
+									{{#if openOrClose}}
+										<span>{{hourConverter openHour}} {{ampmConverter openHour}}</span>
+										<span class="to-el">to</span>
+										<span>{{hourConverter closeHour}} {{ampmConverter closeHour}}</span>
+									{{else}}
+										<span>CLOSED</span>
+									{{/if}}
+								</div>
+								<div class="display-exception-status">{{exceptionApplicationStatus}}</div>
+								<div class="delete-button-holder">
+									<button class="btn-line delete" id="delete-exception">
+										delete
+									</button>
+								</div>
+								
+							</div>
+						{{/each}}
+						{{#if noExceptionsFound}}
+							<div class="exception-entry">There are no exceptions registered</div>
+						{{/if}}
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<h3 style="margin-top:.5em;">Regular Hours</h3>
+					<div class="reg-hours">
+						<ul style="list-style:none; padding:0; margin:0;">
+							{{#each getRegularHours}}
+								<li class="reg-hour-item flex-parent-row">
+									<span class="reg-hour-day-text flex-child-expand">
+										{{dayConverter day}}
+									</span>
+									<span class="reg-hour-hour-text">
+										<div class="hour-number">{{hourConverter openHour}}</div>
+										<div class="hour-ampm">{{ampmConverter openHour}}</div>
+									</span>
+									<span class="reg-hour-hour-text">
+										<div class="hour-number">{{hourConverter closeHour}}</div>
+										<div class="hour-ampm">{{ampmConverter closeHour}}</div>
+									</span>
+								</li>
+							{{/each}}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

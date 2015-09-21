@@ -2,16 +2,57 @@
 	height:75vh;
 }
 #slideshow{
-	margin-top: 160px;
+	margin-top: 128px;
 	position:relative;
+}
+#slideshow-arrow-holder{
+	position:absolute;
+	width:100%;
+	height:100%;
+	display:flex;
+	flex-flow:row nowrap;
+	&>*{
+		flex:1 1 auto;
+		height:100%;
+	}
+
+}
+.slideshow-arrow-svg-holder{
+	height:100px;
+	width:50px;
+	opacity:.4;
+	transition:opacity .3s ease;
+}
+.slideshow-arrow:hover{
+	.slideshow-arrow-svg-holder{
+		opacity:1;
+	}
+}
+#slideshow-prev-arrow{
+	justify-content:flex-start;
+	margin-left:20px;
+}
+#slideshow-next-arrow{
+	justify-content:flex-end;
+	margin-right:20px;
+}
+#slideshow-prev-arrow, #slideshow-next-arrow{
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+}
+.no-touch #slideshow-arrow-holder{
+	z-index:1;
 }
 #slickSlides{
 	margin-bottom:0;
-	overflow:hidden;
 }
 
 .slide{
 	position: relative;
+	background-size:cover;
+	background-position: center center;
+	background-repeat:norepeat;
 	
 	img{
 		width: auto;
@@ -24,15 +65,64 @@
 	position: absolute;
   	top: 0;
   	width:100%;
+  	height:0;
 }
 #openSign{
 	padding: 3px 10px;
-	background-color: rgba(255,255,255,.2);
-	border-radius: 0 0 4px 4px;
 	margin:auto;
-	width: 150px;
+	width: 250px;
   	text-align: center;
   	font-size:24px;
+  	position:relative;
+  	pointer-events:none;
+}
+.open-text-container{
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+}
+.open-text{
+	text-align:center;
+	width:100%;
+	padding-top:20px;
+}
+.open-hours{
+	font-size:12px;
+	letter-spacing:1px;
+	font-weight:500;
+}
+
+.slick-dots{
+	z-index:99;
+	li {
+		padding:7px;
+		button{
+			border:1px solid rgba(0,0,0,.3);
+			border-radius:50px;
+			height: 100%;
+	  		width: 100%;
+	  		padding:1px;
+			&:before{
+				content: "";			//open dot
+				opacity:1;
+			}
+		}
+	}
+	li.slick-active {
+		button{
+			background-color:#7e7d78;
+			&:before{  //solid dot
+				content: "";
+				font-size: 20px;
+				transform: translateY(-2px);
+			}
+		}
+	}
 }
 
 /** 
@@ -40,7 +130,7 @@
  */
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
   #slideshow, .slide {
-    height: 768px; //1024*.75
+    height: 512px; //1024*.75
   }
 }
  
@@ -56,12 +146,72 @@
 /**
  * iPhone 6
  */
-@media screen and (device-aspect-ratio: 375/667) {
-  #slideshow, .slide {
-    height: 267px;  //667*.4
-  }
-}
+// @media screen and (device-aspect-ratio: 375/667) {
+  
+// }
  
+
+
+/**
+ * iPhone 4
+ */
+// @media screen and (device-aspect-ratio: 320/480) {
+  
+// }
+
+/* iPhone 6 and below */
+@media (max-width : 768px){
+	#slideshow{
+		margin-top: 110px;
+	}
+}
+
+@media (max-width:414px) and (orientation: portrait), (max-width:736px) and (orientation: landscape){
+	#slideshow, .slide {
+		height: 300px;  //667*.4
+	}
+	#openSign{
+		width:150px;
+		img{
+			width:130px;
+		}
+	}
+	.open-text{
+		padding-top:15px;
+	}
+	.open-msg{
+		font-size:16px;
+	}
+	.open-hours{
+		font-size:8px;
+	}
+	.slick-dots{
+		bottom:-35px;
+		li{
+			margin:0;
+		}
+	}
+	.slick-dots li.slick-active button:before {
+		font-size:10px;
+		padding-bottom:2px;
+		transform: translateY(-1px);
+	}
+	.slick-dots li button:before{
+		font-size:4px;
+	}
+	#slideshow{
+		margin-top: 70px;
+	}
+	#slideshow, .slide {
+		height: 267px;  //667*.4
+	}
+}
+
+@media (max-width:667px) and (orientation: landscape){
+	#slideshow, .slide {
+		height: 270px;  //667*.4
+	}
+}
 /**
  * iPhone 5
  */
@@ -71,18 +221,32 @@
   }
 }
 
-/**
- * iPhone 4
- */
-@media screen and (device-aspect-ratio: 320/480) {
-  #slideshow, .slide {
-    height: 192px;  //480*.4
-  }
+@media(max-width: 480px){
+	#openSign{
+		max-height:80px;
+	}
 }
 
-/* iPhone 6 and below */
-@media (max-width : 768px){
-	#slideshow{
-		margin-top: 110px;
+@media (max-width:320px){
+	#slideshow, .slide {
+		height: 192px;  //480*.4
+	}
+	.open-text{
+		padding-top:12px;
+	}
+	.open-msg{
+		font-size:14px;
+	}
+	.open-hours{
+		font-size:6px;
+	}
+	#openSign {
+		img{
+			width:100px;
+		}
+		.open-text-container{
+			align-items:flex-start;
+			padding:13px;
+		}
 	}
 }

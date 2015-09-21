@@ -9,32 +9,48 @@
 			</svg>	
 		</div>
 		<div class="section-header">Contact us</div>
-		<div class="section-subheader">Please follow us on Instagram, Twitter &amp; Facebook for daily flavor updates</div>
 		<div class="section-content">
 			<h5 class="no-margin-bottom"><b>FOR GENERAL INQUIRIES:</b></h5>
-			<div>Please call us at 808-732-2800 or send us a message</div>
+			<div>Please call us at <a class="dotted" href="tel:808-732-2800">808-732-2800</a> or send us a message</div>
 			<form action="#" id="contact-form">
-				<div class="row">
+				<div class="row name-and-email">
 					<div class="col-sm-6">
 						<label for="input-name">NAME</label>
-						<input id="input-name" type="text">
+						<input id="input-name" class="{{nameValid}}" type="text">
+						<div class="error-msg">{{nameError}}</div>
 					</div>
 					<div class="col-sm-6">
 						<label for="input-email">EMAIL</label>
-						<input id="input-email" type="text">
+						<input id="input-email" class="{{emailValid}}" type="email" spellcheck="false">
+						<div class="error-msg">{{emailError}}</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row comment">
 					<div class="col-sm-12">
 						<label for="input-comment">COMMENT</label>
-						<textarea name="" id="input-comment" cols="30" rows="5"></textarea>
+						<textarea name="" id="input-comment" class="{{commentValid}}" cols="30" rows="5"></textarea>
+						<div class="error-msg">{{commentError}}</div>
 					</div>
 				</div>
-				<button type="submit">SUBMIT</button>
+				<div class="submission-feedback-container {{hasFeedback}}">
+					<div class="submission-feedback {{feedbackType}}">{{submissionFeedback}}</div>
+				</div>
+				<div class="extended-content-container">
+					<div id="submit-container">
+						<div class="submit-contents  {{showRecaptcha}}">
+							<div id="submit-button-holder">
+								<button id="email-submit" type="submit">SUBMIT</button>
+							</div>
+							<div class="recaptcha">
+								{{> recaptcha parent=passParentRef}}
+							</div>
+						</div>
+					</div>
+				</div>
 			</form>
 		</div>
 		<div class="lines">
-			<img src="images/line7.svg" alt="">
+			<img src="https://s3-us-west-2.amazonaws.com/viagelato/images/line7.svg" alt="">
 		</div>
 	</div>
 </template>

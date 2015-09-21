@@ -1,6 +1,7 @@
 .flavors{
 	margin-left:-15px;
 	margin-right:-15px;
+	letter-spacing:0;
 }
 .flavor-slide{
 	display:inline-block;
@@ -10,30 +11,82 @@
 }
 .day-flavor{
 	width:150px;
+	max-width:150px;
 	margin-bottom:20px;
+	position:relative;
+}
+.day-flavor-descript {
+  max-height: 4.5em;
+  line-height: 1.5em;
+  overflow: hidden;
+  word-wrap:break-word;
+  padding:0 5px;
 }
 .day-flavor-image{
 	width:80%;
 	margin:auto;
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+	justify-content:center;
 	border-radius:100px;
-	background-color:rgba(0,0,0,.1);
+	overflow:hidden;
+	position:relative;
+	z-index:0;
+	background-color:transparent;
+
+	img{
+		width:100%;
+		height:auto;
+	}
+	
+	&.placeholder{
+		border:1px solid rgba(0,0,0,0.2);
+
+		img{
+			width:30%;
+		}
+	}
+
+	
 }
 .day-flavor-image:before{
 	content:'';
 	display:block;
 	padding-top:100%;
 }
-#cones-icon{
-	height:80px;
-	width:auto;
-}
+
 .flavors{
+	margin-top:50px;
+	margin-bottom:30px;
 	display:flex;
 	flex-flow:row wrap;
 	justify-content:center;
 }
-@media(max-width:375px){
+
+
+
+@media(max-width:768px) and (orientation: portrait), (max-width:1024px) and (orientation: landscape){
 	.day-flavor{
-		width:100px;
+		width:150px;
 	}
+
 }
+
+@media(max-width:667px) and (orientation: landscape){
+	.day-flavor{
+		width:21%;
+	}
+
+}
+/*6plus*/
+@media(max-width:414px) and (orientation: portrait){
+	.flavors{
+		margin-top:20px;
+	}
+	.day-flavor{
+		width:33%;
+	}
+
+}
+

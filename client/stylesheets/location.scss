@@ -1,27 +1,95 @@
 #handrawn-map{
 	width:100%;
-	height:60vh;
+	height:75vh;
 }
 .inline-icon{
-	width:30px;
-	height:30px;
-	margin-right:10px;
+	width:1.8em;
+	height:1.8em;
+	margin:auto;
+	margin-bottom:.5em;
 }
-#store-hours-header > *{
-	display:inline-block;
-	vertical-align:middle;
+.hours-text{
+	margin-top:1em;
+	p{
+		margin:0;
+		margin-bottom:.2em;
+	}
 }
-#handrawn-map{
-	background-image:url('images/map.png');
-	background-position:50% 50%;
-	background-size:contain;
-	background-repeat:no-repeat;
-	margin:20px 0;
+.hours-flex-parent{
+	display:flex;
+	flex-flow: row nowrap;
+	width:100%;
+	justify-content:center;
+	&>*{
+		flex:1 1 150px;
+	}
+}
+.hours-left{
+	text-align:right;
+	margin-right:5px;
+}
+.hours-right{
+	text-align:left;
+	margin-left:5px;
+}
+.hours-divider{
+	height:1px;
+	width:5%;
+	background-color:rgba(0,0,0,.3);
+	margin:auto;
+	margin-top:.5em;
 }
 
-@media (max-width:375px){
-  #handrawn-map{
+#handrawn-map{
+	margin:20px 0;
+}
+#svg-map{
+	path, line, polyline {
+		stroke: #000000;
+		stroke-width: .5px;
+	}
+	path {
+		fill-opacity: 0;
+		transition: fill-opacity .3s ease;
+	}
+}
+.fill-in #svg-map{
+	path {
+		fill-opacity: 1;
+	}
+}
+@media (min-width: 1024px){
+	#location{
+		padding:5% 10%;
+	}
+}
+
+@media (max-width:768px) and (min-width:415px) and (orientation:portrait){
+	#location{
+		padding:40px 10%;
+	}
+}
+
+@media (max-width:414px) and (orientation:portrait){
+	#handrawn-map{
 		background-position:20% 50%;
 		background-size:cover;
+		height:280px;
+	}
+}
+
+@media (max-width:736px) and (orientation:landscape){
+	#handrawn-map{
+		height:375px;
+	}
+}
+
+@media (max-width:320px) and (orientation:portrait){
+	#handrawn-map{
+		height:240px;
+	}
+	#address-text{
+		max-width: 180px;
+		margin: auto;
 	}
 }

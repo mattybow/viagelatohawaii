@@ -1,0 +1,93 @@
+<template name="editUsers">
+	<div id="edit-users">
+		<div class="admin-content">
+			<div class="split-sub-header">
+				<div class="left-side">
+					<h3 style="margin:0;">New User</h3>
+				</div>
+				<div class="right-side">
+					<button class="btn-line {{formIsValid}}" id="create-user">create</button>
+				</div>
+			</div>
+			<form action="" class="via-edit-form via-form-content dark-inputs" id="new-user-form">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="new-flavor-name form-item">
+							<label for="new-username">username</label>
+							<input class="form-input is-required" type="text" id="input-new-username" name="new-username">
+							<div class="validation-indicator-holder flex-parent-row {{usernameOk}}">
+								<div class="validation-indicator">
+									<span class="{{usernameIconStatus}}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="validation-error">{{usernameError}}</div>
+						<div class="form-item">
+							<label for="new-password">password</label>
+							<input class="form-input" type="password" id="input-new-password" name="new-password">
+						</div>
+						<div class="validation-error"></div>
+						<div class="form-item">
+							<label for="confirm-pass">confirm pass</label>
+							<input class="form-input" type="password" id="input-confirm-password" name="confirm-pass">
+							<div class="validation-indicator-holder flex-parent-row {{passwordsOk}}">
+								<div class="validation-indicator">
+									<span class="{{passwordIconStatus}}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="validation-error">{{passwordError}}</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-item" id="new-authorizations">
+							<label for="new-press-name">authorizations</label>
+							<ul class="auth-checkboxes">
+								{{#each authItems}}
+									<li class="auth-item">
+										<div class="auth-item-content">
+											<span class="check-box {{checked name}}">
+												<span class="check-box-bg"></span>
+												<span class="check-mark-holder flex-parent-row">
+													<span class="icon-check-mark"></span>
+												</span>
+												
+											</span>
+											<span class="auth-item-name flex-child-expand">{{name}}</span>
+										</div>
+									</li>
+								{{/each}}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+			<h3>Existing Users</h3>
+			<div class="user-records">
+				{{#each existingUsers}}
+					<div class="user-item">
+						<div class="user-data flex-child-expand">
+							<div class="user-data-username">{{username}}</div>
+							<div><span class="label">Created:</span> {{createdReadable}}</div>
+							<div class="authorizations">
+								<span class="label">Authorizations: </span>
+								<span class="choices">
+									{{#each getAuthorizations}}
+										{{> choice type='button' name=name}}
+									{{/each}}
+								</span>
+							</div>
+						</div>
+						<div class="user-data-ctrls">
+							<button class="btn-line {{isDirty}} update-user" >update</button>
+							<button class="btn-line delete delete-username">
+								<span class="icon-trash-bin"></span>
+								<span>delete</span>
+							</button>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		
+	</div>
+</template>

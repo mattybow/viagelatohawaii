@@ -1,0 +1,272 @@
+$ok-green:#72E4A0;
+$not-ok-red: #ff6d6d;
+.admin-content{
+	padding:20px 40px;
+}
+.split-sub-header{
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+	.left-side{
+		flex:1 1 auto;
+	}
+	.right-side{
+		flex:1 1 auto;
+		text-align:right;
+	}
+}
+#edit-users{
+	background-color: #F5F3F3;
+	min-height:100%;
+	.via-form-content{
+		padding:20px 0 30px;
+		border-top: 1px solid rgba(0,0,0,0.1);
+  		margin-top: 10px;
+	}
+}
+#new-user-form{
+
+	.form-item{
+		width:100%;
+		margin-right:20px;
+		margin-bottom:0;
+		position:relative;
+		input{
+			min-width:200px;
+		}
+	}
+}
+.validation-error{
+	margin-bottom:10px;
+	text-align:right;
+	padding:0 1em;
+	font-style:italic;
+	color:$not-ok-red;
+	font-size:.8em;
+}
+.validation-indicator{
+	transition:transform .2s ease;
+	transform:translateX(100%);
+}
+.validation-indicator-holder{
+	position:absolute;
+	right:2px;
+	bottom:0;
+	height:100%;
+	width:1.5em;
+	overflow:hidden;
+	align-items:center;
+	font-size:2em;
+	&.ok{
+		color:$ok-green;
+	}
+	&.not-ok{
+		color:$not-ok-red;
+	}
+	&.ok, &.not-ok{
+		.validation-indicator{
+			transform:translateX(0);
+		}
+	}
+}
+
+#new-authorizations label{
+	margin-top:10px;
+}
+.auth-checkboxes{
+	padding:0;
+	margin:0;
+	display:inline-block;
+	width:50%;
+	vertical-align:top;
+}
+
+li.auth-item{
+	padding:5px 0 0 0;
+	list-style:none;
+	width:100%;
+	cursor:pointer;
+}
+.auth-item-content{
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+}
+.auth-item-name{
+	border-bottom:1px solid rgba(0,0,0,.1);
+	padding:10px 5px 15px;
+}
+li.auth-item:first-child{
+	padding-top:0;
+}
+.check-box-bg{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background-color:$ok-green;
+	transition:transform .2s ease, opacity .3s ease;
+	transform-origin:50% 50%;
+	transform: scale(0,0);
+	border-radius:30px;
+	opacity:0;
+}
+
+.check-mark-holder{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	color:#fff;
+	align-items:center;
+	opacity:0;
+}
+
+.check-box{
+	width:30px;
+	height:30px;
+	min-width: 30px;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-radius: 30px;
+	display:inline-block;
+	margin-right:10px;
+	position:relative;
+	overflow:hidden;
+	&.checked{
+		border-color:transparent;
+		.check-box-bg{
+			transform: scale(1,1);
+			opacity:1;
+		}
+		.check-mark-holder{
+			opacity:1;
+		}
+	}
+}
+
+.check-box-bg.close-color{
+	background-color:$not-ok-red;
+}
+
+
+.authorizations{
+	.btn-line{
+		padding:2px 15px;
+		margin: 0 2px 0 0;
+	}
+}
+.user-records{
+	padding:5px 0;
+}
+.user-item{
+	display:flex;
+	flex-flow:row nowrap;
+	border-top:1px solid rgba(0,0,0,0.1);
+	padding:10px 20px 15px;
+	background-color:transparent;
+	transition:background-color .2s ease;
+	&:hover{
+		background-color:rgba(255,255,255,.6);
+	}
+}
+.user-data-ctrls{
+	.btn-line{
+		margin-top:5px;
+		min-width:100px;
+
+		&.disabled{
+			opacity:.5;
+			pointer-events:none;
+		}
+
+		&.enabled{
+			opacity:1;
+			pointer-events:auto;
+		}
+	}
+}
+.user-data-username{
+	font-size:1.5em;
+	line-height:2em;
+}
+span.label{
+	display:inline-block;
+	min-width:100px;
+}
+.btn-choice{
+	background-color:#ADADAD;
+	padding:1px 5px;
+	border-radius:2px;
+	min-width:60px;
+	font-weight:300;
+	color:$via-text-grey;
+	&.unselected{
+		opacity:.5;
+		color:#fff;
+	}
+	&.selected{
+		opacity:1;
+		background-color:#CCE7FB;
+	}
+}
+
+@media (max-width:414px) and (orientation:portrait){
+	.admin-content{
+		padding:15px 25px;
+	}
+	.user-item{
+		position:relative;
+		padding:0 5px 55px;
+		&:hover{
+			background-color:transparent;
+		}
+	}
+	.user-data-ctrls{
+		text-align:right;
+		padding-top:5px;
+		.btn-line{
+			padding:5px 10px;
+		}
+	}
+	.validation-indicator-holder{
+		align-items:flex-end;
+	}
+	.validation-indicator{
+		margin-bottom:.25em;
+	}
+	.authorizations{
+		position:absolute;
+		bottom:.5em;
+		left:0;
+		padding:5px;
+	}
+	span.label{
+		width:100%;
+	}
+	#edit-users{
+		.via-form-content{
+			padding: 20px 0;
+		}
+	}
+	.btn-choice{
+		margin-bottom:2px;
+		margin-top:2px;
+	}
+	#create-new-user{
+		width:100%;
+		text-align:center;
+		margin:0;
+	}
+	#new-user-form{
+		.form-item{
+			display:block;
+			width:100%;
+			margin-right:0;
+		}
+	}
+	.auth-checkboxes{
+		width:100%;
+	}
+}

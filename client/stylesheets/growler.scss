@@ -1,0 +1,57 @@
+#growler{
+	position:fixed;
+	top:20px;
+	right:0;
+	padding-right:20px;
+	width:25%;
+	height:50%;
+	overflow:hidden;
+	pointer-events:none;
+	z-index:100;
+}
+
+.growler-container{
+	display:flex;
+	flex-flow:row nowrap;
+	align-items:center;
+	background-color:rgba(0,0,0,.5);
+	border-radius:2px;
+	transition:transform .3s ease;
+	transform:translateX(150%);
+}
+
+.show{
+	.growler-container{
+		transform:translateX(0);
+	}
+}
+
+
+.growler-icon{
+	width:20%;
+	text-align:center;
+	font-size:30px;
+	color:white;
+}
+.growler-text{
+	color:white;
+	border-left:1px solid rgba(223, 204, 204, 0.32);
+	width:70%;
+	padding-left:20px;
+
+	h3{
+		margin-bottom:10px;
+	}
+
+	p{
+		margin-top:0;
+	}
+}
+
+@media(max-width:414px){
+	#growler{
+		top:10px;
+		padding-right:10px;
+		width:70%;
+	}
+}

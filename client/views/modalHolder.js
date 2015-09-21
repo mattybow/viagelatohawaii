@@ -4,13 +4,14 @@ Template.modalHolder.helpers({
 	},
 	isActive:function(){
 		return Session.get('activeModal') ? 'active' : '';
+	},
+	nothing:function(){
+		return '';
 	}
 });
 
 Template.modalHolder.events({
-	'click':function(){
-		Session.set('activeModal','');
-	}
+	
 })
 
 Template.modalHolder.rendered=function(){

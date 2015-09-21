@@ -1,8 +1,8 @@
 .slide_holder{
-	background-color:rgba(0,0,0,.1);
-	width:200px;
+	background-color:rgba(255,255,255,.6);
+	width:25%;
 	height:auto;
-	margin-right:20px;
+	margin-right:5px;
 	display:inline-block;
 	padding: 10px 10px;
 
@@ -10,20 +10,165 @@
 		width: 100%;
 	}
 }
-.press-slides{
+.feed-slides{
 	margin: 40px 0;
+	padding-right: 30px;
 	width: 100%;
 	overflow: hidden;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	position:relative;
+
+	&:hover{
+		cursor:grab;
+	}
 }
 #instafeed{
-	padding-left:20px;
-	padding-right:20px;
+	padding-left:90px;
+	padding-right:90px;
+	.feed-nav{
+		position:absolute;
+		top:0;
+		
+		height:100%;
+		display:flex;
+		flex-flow:row nowrap;
+		align-items:center;
+		font-size:4em;
+		cursor:pointer;
+	}
+
+	.feed-nav-right{
+		right: 0%;
+  		margin-right: -1em;
+	}
+
+	.feed-nav-left{
+		left: 0%;
+		margin-left: -1em;
+	}
+
+	.transparent{
+		cursor:auto;
+	}
+	.svg-holder{
+		width:30px;
+	}
+
 }
+.transparent{
+	opacity:0;
+}
+.opaque{
+	opacity:1;
+}
+
+
 .insta-text{
 	white-space: normal;
-	text-align: left;
-	font-size: .8em;
+	text-align: center;
+	font-size: 1.2em;
 }
 #feed-slide-wrapper{
 	white-space:nowrap;
+
 }
+
+@media(max-width:414px){
+	.press-slides{
+		margin: 20px 0;
+	}
+}
+
+@media(max-width : 768px) and (orientation: portrait) {
+	.slide_holder{
+		width:260px;
+	}
+	#instafeed{
+		padding-left:55px;
+		padding-right:55px;
+		.feed-nav-left{
+			margin-left:-40px;
+		}
+		.feed-nav-right{
+			margin-right:-40px
+		}
+	}	
+}
+
+@media(max-width : 1024px) and (orientation: landscape) {
+	.slide_holder{
+		width:250px;
+	}
+	#instafeed{
+		padding-left:70px;
+		padding-right:70px;
+
+		.feed-nav-left{
+			margin-left:-45px;
+		}
+		.feed-nav-right{
+			margin-right:-45px
+		}
+	}
+}
+
+@media(max-width : 736px) and (orientation: landscape) {
+	.slide_holder{
+		width:180px;
+	}
+	#instafeed{
+		padding-left:40px;
+		padding-right:40px;
+	}
+}
+
+@media(max-width : 414px) and (orientation: portrait), (max-width : 667px) and (orientation: landscape) {
+	.slide_holder{
+		width:170px;
+	}
+	#instafeed{
+		padding-left:40px;
+		padding-right:40px;
+		.svg-holder{
+			width:20px;
+		}
+		.feed-nav-left{
+			margin-left:-30px;
+		}
+		.feed-nav-right{
+			margin-right:-30px
+		}
+	}
+}
+
+@media(max-width : 667px) and (orientation: landscape) {
+	.slide_holder{
+		width:182px;
+	}
+	#instafeed{
+		padding-left:50px;
+		padding-right:50px;
+	}
+}
+
+@media(max-width : 320px) and (orientation: portrait) {
+	.slide_holder{
+		width:150px;
+	}
+	#instafeed{
+		padding-left:30px;
+		padding-right:30px;
+		.svg-holder{
+			width:15px;
+		}
+		.feed-nav-left{
+			margin-left:-23px;
+		}
+		.feed-nav-right{
+			margin-right:-23px
+		}
+	}
+}
+

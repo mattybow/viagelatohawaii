@@ -2,6 +2,13 @@
 	<div class="modalHolder {{isActive}}">
 		{{#if isModal "packages"}}
 			{{> packagesModal}}
+		{{else}}
+			{{nothing}}
+		{{/if}}
+		{{#if isModal "library"}}
+			{{> libraryModal}}
+		{{else}}
+			{{nothing}}
 		{{/if}}
 	</div>
 </template>

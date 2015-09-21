@@ -1,33 +1,67 @@
-@import url(http://fonts.googleapis.com/css?family=Dawning+of+a+New+Day);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,600);
 $via-text-grey:#6c6861;
-$via-blue:#e2f0f7;
+$via-text-black:#1A1816;
+$via-blue:#E2F0FA;
+$via-yellow:#fffdf2;
+$via-dark-yellow:#fef3c8;
+$via-green:#e7f5ee;
+$via-offwhite:#FAFAFA;
+$via-blue-trans:rgba(226, 240, 250, 0.95);
 body{
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Lato', sans-serif;
+  letter-spacing:1px;
 	font-weight:400;
 	color:$via-text-grey;
+  background-color:$via-yellow;
+  background-image:url('https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png');
+  background-position:50% 20px;
+  background-repeat:no-repeat;
+  background-size:30px 30px;
+  &.modal-open{
+    overflow:hidden;
+  }
 }
 
 .via-yellow{
-	background-color:#fffdf2;
+	background-color:$via-yellow;
 }
 .via-dark-yellow{
-  background-color:#fef3c8;
+  background-color:$via-dark-yellow;
 }
 .via-blue{
 	background-color:$via-blue;
 }
+.via-blue-trans{
+  background-color:$via-blue-trans;
+}
 .via-green{
-	background-color:#e7f5ee;
+	background-color:$via-green;
 }
 .via-purple{
-	background-color:#C9D7F8;
+	background-color:#eee7f4;
 }
 .via-pink{
   background-color:#fed3d2;
 }
+.via-offwhite{
+  background-color:$via-offwhite;
+}
+
+a{
+  color:$via-text-grey;
+  &:visited{
+    color:$via-text-grey;
+  }
+  &:hover, &:focus{
+    color:$via-text-grey;
+    text-decoration:none;
+  }
+  &.dotted{
+    border-bottom: 1px dotted rgba(0,0,0,.3);
+  }
+}
 
 .handwriting{
+  letter-spacing:0px;
   color:#2b2f2d;
 	font-family: 'Dawning of a New Day', cursive;
 }
@@ -43,14 +77,17 @@ button{
 button:focus, button:active{
   outline:none;
 }
+.btn-light-border{
+  border:1px solid #B1B1B1;
+}
 
 @font-face {
   font-family: 'fontello';
-  src: url('font/fontello.eot?45292298');
-  src: url('font/fontello.eot?45292298#iefix') format('embedded-opentype'),
-       url('font/fontello.woff?45292298') format('woff'),
-       url('font/fontello.ttf?45292298') format('truetype'),
-       url('font/fontello.svg?45292298#fontello') format('svg');
+  src: url('font/fontello.eot?16820627');
+  src: url('font/fontello.eot?16820627#iefix') format('embedded-opentype'),
+       url('font/fontello.woff?16820627') format('woff'),
+       url('font/fontello.ttf?16820627') format('truetype'),
+       url('font/fontello.svg?16820627#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -60,7 +97,7 @@ button:focus, button:active{
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?45292298#fontello') format('svg');
+    src: url('../font/fontello.svg?16820627#fontello') format('svg');
   }
 }
 */
@@ -105,8 +142,32 @@ button:focus, button:active{
 .icon-facebook:before { content: '\e802'; } /* '' */
 .icon-right-dir:before { content: '\e803'; } /* '' */
 .icon-angle-right:before { content: '\e804'; } /* '' */
-.icon-close:before { content: '\e807'; } /* '' */
-.icon-arrow:before { content: '\e808'; } /* '' */
+.icon-star:before { content: '\e805'; } /* '' */
+.icon-arrow:before { content: '\e806'; } /* '' */
+.icon-check-mark:before { content: '\e807'; } /* '' */
+.icon-magnifying-glass:before { content: '\e808'; } /* '' */
+.icon-close:before { content: '\e809'; } /* '' */
+.icon-download:before { content: '\e80a'; } /* '' */
+.icon-upload:before { content: '\e80b'; } /* '' */
+.icon-trash-bin:before { content: '\e80c'; } /* '' */
+.icon-notifications:before { content: '\e80d'; } /* '' */
+.icon-mail:before { content: '\e80e'; } /* '' */
+.icon-camera:before { content: '\e80f'; } /* '' */
+.icon-home:before { content: '\e810'; } /* '' */
+.icon-label:before { content: '\e811'; } /* '' */
+.icon-key:before { content: '\e812'; } /* '' */
+.icon-repeat:before { content: '\e813'; } /* '' */
+.icon-plus:before { content: '\e814'; } /* '' */
+.icon-minus:before { content: '\e815'; } /* '' */
+.icon-heart:before { content: '\e816'; } /* '' */
+
+.icon-90:before{
+  transform:rotateZ(90deg);
+}
+
+.icon-180:before{
+  transform:rotateZ(180deg);
+}
 
 .section{
 	padding:5% 15%;
@@ -114,6 +175,7 @@ button:focus, button:active{
   position:relative;
 }
 .section-header{
+  letter-spacing:0px;
 	font-family: 'Dawning of a New Day', cursive;
 	font-size:2em;
 }
@@ -121,11 +183,13 @@ button:focus, button:active{
 	font-weight:400;
 	line-height:2em;
 	font-size:1em;
+  position:relative;
 }
 .section-icon{
   height:60px;
   width:auto;
 	margin: auto;
+  position:relative;
 }
 .lines{
   position:absolute;
@@ -134,9 +198,9 @@ button:focus, button:active{
   bottom:0;
   img{
     position:relative;
-    bottom:-20px;
+    bottom:-25px;
     z-index:99;
-    opacity:0.5;
+    opacity:0.3;
   }
 }
 b{
@@ -150,22 +214,89 @@ b{
   text-align: left;
 }
 
-@media (max-width:375px){
-  .section{
-    padding:20px 10%;
+label{
+  margin:0;
+}
+
+button>span{
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.btn-solid{
+  padding:10px;
+  background-color:rgba(110,110,110,.2);
+  border: 1px solid transparent;
+  border-radius:0;
+}
+.btn-line, .btn-no-line{
+  margin-left:5px;
+  padding:10px;
+  border:1px solid rgba(0,0,0,.2);
+  border-radius:0;
+  display:inline-block;
+}
+.btn-no-line{
+  border:none;
+  padding:0;
+  margin:0;
+}
+.btn-line{
+  &.disabled{
+    opacity:.5;
+    pointer-events:none;
   }
-  body{
-    font-size:12px;
-    font-weight:400;
+  &.selected{
+    background-color:rgba(0,0,0,.2);
+    color:#fff;
   }
-  .section-header{
-    font-size:2.5em;
+  &.unselected{
+    opacity:.7;
   }
-  .section-icon{
-    width: 40px;
-    height: 40px;
-  }
-  .lines img{
-    bottom:-10px;
+  &.delete{
+    color: #ff6d6d;
+    border: 1px solid #ff6d6d;
   }
 }
+
+.right-form-ctrls{
+  text-align: right;
+}
+.left-form-ctrls{
+  text-align:left;
+}
+.half-top-margin{
+  margin-top:.5em;
+  line-height:1em;
+}
+.single-line-height{
+  line-height:1em;
+}
+.mobile-back-action-title{
+  margin-left:-9px;
+}
+.flex-parent-row{
+  display:flex;
+  flex-flow:row nowrap;
+  justify-content:center;
+}
+.flex-child-expand{
+  flex: 1 1 auto;
+}
+input,textarea{
+  -webkit-appearance:none;
+  border-radius:0px;
+}
+
+@media (max-width:736px) and (orientation:landscape), (max-width:768px) and (min-width:321px) and (orientation:portrait){
+  .lines img{
+    bottom:-15px
+  }
+}
+
+@media (max-width:568px) and (orientation:landscape){
+  .lines img{
+    bottom:-10px
+  }
+}
+

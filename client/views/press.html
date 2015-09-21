@@ -35,15 +35,14 @@
 		<div class="section-subheader">We've been featured in many magazines, newspapers, and blogs!</div>
 		<div class="section-content">
 			<div class="press-slides">
-				<div class="slide_holder"></div>
-				<div class="slide_holder"></div>
-				<div class="slide_holder"></div>
-				<div class="slide_holder"></div>
-				<div class="slide_holder"></div>
+				{{#each getPressMedia}}
+					{{> pressSlide}}
+				{{/each}}
 			</div>
 		</div>
+		<div id="imageLightbox-overlay"  class="{{showOverlay}}"></div>
 		<div class="lines">
-			<img src="images/line8.svg" alt="">
+			<img src="https://s3-us-west-2.amazonaws.com/viagelato/images/line8.svg" alt="">
 		</div>
 	</div>
 </template>

@@ -1,0 +1,22 @@
+<template name="libraryModal">
+	<div class="section modal" id="libraryModal">
+		<div class="section-header">Flavor Library</div>
+		<div class="section-subheader">Check back for our newest additions to this list</div>
+		<div>
+			<img class="cone-icon-sm" src="https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png" alt=""><i> denotes a flavor of the day</i>
+		</div>
+		<ul class="lib-flavor-list">
+			{{#each getAllFlavors}}
+				<li class="lib-flavor-item">
+					{{flavorName}}
+					{{#if day}}
+						<img class="cone-icon-sm" src="https://s3-us-west-2.amazonaws.com/viagelato/flavors/cone.png" alt="">
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+		<div class="modal-close-icon">
+			<div class="icon-close"></div>
+		</div>
+	</div>
+</template>

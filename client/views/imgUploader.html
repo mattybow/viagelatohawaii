@@ -1,0 +1,27 @@
+<template name="imgUploader">
+	<div class="img-uploader">
+		<div class="dz-preview {{hasImagePreview}}">
+			<div class="flavor-upload-preview-holder">
+				<img src="{{getImagePreview}}" alt="">
+			</div>
+			<span class="icon-close"></span>
+		</div>
+		<div class="input-holder">
+			<input type="file" class="hidden-input" id="hidden-file-input">
+		</div>
+		<div id="addFlavorPhotoDropzone" class="{{isDragEnter}}">
+			<div class="dz-window">
+				<div class="dz-holder {{displayDefaultMsg}}">
+					<div class="dz-message">
+						<div class="icon-camera"></div>
+						<div>upload an image</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		{{#each getUploadDatas}}
+			{{> uploaderFileProgress}}
+		{{/each}}
+	</div>
+</template>

@@ -15,4 +15,12 @@ http
 stevezhu:lodash
 momentjs:moment
 accounts-password
-accounts-ui
+accounts-ui-unstyled
+reactive-var
+edgee:slingshot
+mvrx:bluebird
+email
+meteorhacks:fast-render
+thinksoftware:image-resize-client
+gadicohen:phantomjs
+spiderable

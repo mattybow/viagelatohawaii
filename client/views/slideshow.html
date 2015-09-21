@@ -1,19 +1,51 @@
 <template name="slideshow">
 	<div class="via-yellow" id="slideshow">
+		<div id="slideshow-arrow-holder">
+			<div id="slideshow-prev-arrow" class="slideshow-arrow desktop">
+				<div class="slideshow-arrow-svg-holder">
+					<svg width="100%" height="100%" viewBox="0 0 29 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+					    <g transform="matrix(1,0,0,1,-0,-1)">
+					        <g transform="matrix(-1,3.21625e-16,-3.21625e-16,-1,31.4208,60.1972)">
+					            <g id="Layer1">
+					                <path d="M3.565,2.508L30,30L3.565,57.886" style="fill:none;stroke-width:1px;stroke:white"/>
+					            </g>
+					        </g>
+					    </g>
+					</svg>
+				</div>
+			</div>
+			<div id="slideshow-next-arrow" class="slideshow-arrow desktop">
+				<div class="slideshow-arrow-svg-holder">
+					<svg width="100%" height="100%" viewBox="0 0 29 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+					    <g transform="matrix(1,0,0,1,-0,-1)">
+					        <g transform="matrix(1,0,0,1,-2.14402,-0.197166)">
+					            <g id="Layer1">
+					                <path d="M3.565,2.508L30,30L3.565,57.886" style="fill:none;stroke-width:1px;stroke:white;"/>
+					            </g>
+					        </g>
+					    </g>
+					</svg>
+				</div>
+			</div>
+		</div>
 		<div id="slickSlides">
-			<div class="slide"><img src="images/via_slideshow_1.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_2.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_3.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_4.jpg" alt=""></div>
-			<div class="slide"><img src="images/via_slideshow_5.jpg" alt=""></div>
+			{{#each getSlideshowImgs}}
+				<div class="slide" style="background-image: url('{{this}}');"></div>
+			{{/each}}
 		</div>
 		<div class="abs-full-width">
-			<div id="openSign" class="handwriting">
-				We&apos;re Open
+			<div id="openSign">
+				<img src="https://s3-us-west-2.amazonaws.com/viagelato/images/paperNote.svg" alt="">
+				<div class="open-text-container">
+					<div class="open-text">
+						<div class="open-msg handwriting">{{openOrClosed}}</div>
+						<div class="open-hours">{{getHours}}</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="lines">
-			<img src="images/line2.svg" alt="">
+			<img src="https://s3-us-west-2.amazonaws.com/viagelato/images/line2.svg" alt="">
 		</div>
 	</div>
 </template>

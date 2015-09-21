@@ -1,0 +1,21 @@
+<template name="editFlavorLibrary">
+	<div id="editFlavorLibrary">
+		<div class="top-bar">
+			<div id="lib-title">
+				<b>Library</b>
+			</div>
+			<div id="flavor-library-ctrls">
+				<button class="btn-line {{isDisabled}}" id="clear-all-selected-flavors">clear all</button>
+				<button class="btn-line" id="new-flavor-button">new</button>
+			</div>
+		</div>
+		
+		<div class="content">
+			<div class="flavor-list">
+				{{#each allFlavors}}
+					{{> libFlavorListView }}
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</template>

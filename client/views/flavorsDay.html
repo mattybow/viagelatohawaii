@@ -1,5 +1,5 @@
 <template name="flavorsDay">
-	<div class="via-green section" id="flavorsDay">
+	<div class="via-yellow section" id="flavorsDay">
 		<div class="section-icon" id="cones-icon">
 			<svg width="100%" height="100%" viewBox="0 0 60 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
 			    <g>
@@ -19,18 +19,24 @@
 		</div>
 		<div class="section-header">Flavors of the day</div>
 		<div class="section-content">
-			<p>Our flavors vary day to day.  Follow our instagram or check back to see our current flavors for the day</p>
+			<p>Our flavors vary day to day.  Follow our <a class="dotted" href="https://instagram.com/viagelatohawaii/" target="_blank"><b>instagram</b></a> or check back to see our current flavors for the day</p>
 			<div class="flavors">
 				{{#each getFlavors}}
 					<div class="day-flavor">
-						<div class="day-flavor-image"></div>
+						<div class="day-flavor-image">
+							<img src="{{getFlavorImg this}}" alt="oops">
+						</div>
 						<div class="day-flavor-descript">{{flavorName}}</div>
 					</div>
 				{{/each}}
 			</div>
+			<button id="read-only-flavor-library">
+				<span>FLAVOR LIBRARY</span>
+				<span class="icon-right-dir"></span>
+			</button>
 		</div>
 		<div class="lines">
-			<img src="images/line4.svg" alt="">
+			<img src="https://s3-us-west-2.amazonaws.com/viagelato/images/line4.svg" alt="">
 		</div>
 	</div>
 </template>
