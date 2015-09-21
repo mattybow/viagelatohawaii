@@ -33,6 +33,7 @@ $edit-nav-height-mobile:50px;
 		transition:transform .3s ease;
 	}
 }
+
 .login-msg-container{
 	height:100vh;
 	position:absolute;
@@ -59,6 +60,11 @@ $edit-nav-height-mobile:50px;
 		}
 	}
 	
+}
+
+.not-auth-msg-container{
+	height:100%;
+	width:100%;
 }
 .login-ctrls{
 	position:absolute;

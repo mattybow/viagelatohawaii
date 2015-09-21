@@ -7,7 +7,7 @@ MEDIA_BREAK_POINTS = {
 
 Template.slideshow.onCreated(function(){
 	var self = this;
-	this.subscribe('hours');
+	this.subscribe('allHours');
 	this.subscribe('slideshowMedia',function(){
 		Tracker.afterFlush(function(){
 				self.$('#slickSlides').slick({
@@ -75,13 +75,38 @@ Template.slideshow.helpers({
 });
 
 function getTodaysHours(){
-	var dayIndex = new Date().getDay();
+	var exception = getTodaysException();
+	if(exception){
+		return exception;
+	}
+	var dayIndex = getDateInHawaii().getDay();
 	var hours = Hours.findOne({dayIndex:dayIndex});
 	return hours;
 }
 
+function getTodaysException(){
+	var todayDate = getDateInHawaii().toISOString();
+	var exception = Hours.find({$and:[
+		{date:{$lte:todayDate}}, 
+		{type:'exception'}
+		]},
+		{sort:{date:-1},
+		limit:1}).fetch();
+	if(!lodash.isEmpty(exception)){
+		var exceptionRecord = exception[0];
+		var exceptionDate = moment(new Date(exceptionRecord.date));
+		var diff = moment(todayDate).diff(exceptionDate,'days',true);
+		if(diff >= 0 && diff < 1){
+			return exceptionRecord;
+		}
+	}
+	return null;
+}
 
-
+function getDateInHawaii(){
+	var dateNum = new Date().setUTCHours(10);
+	return new Date(dateNum);
+}
 
 
 

@@ -51,7 +51,11 @@
 				{{/each}}
 			</div>
 			<div class="tab-content">
-				{{>Template.dynamic template=getTabTemplate}}
+				{{#if authorizedToView}}
+					{{>Template.dynamic template=getTabTemplate}}
+				{{else}}
+					{{> editNotAuthorized}}
+				{{/if}}
 			</div>
 		{{else}}
 			<div class="login-msg-container">

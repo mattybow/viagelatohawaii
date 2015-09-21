@@ -181,24 +181,35 @@ Meteor.methods({
   },
   deleteUser:function(id){
     if(checkAuth('users')){
+      this.unblock();
       return Meteor.users.remove({_id:id});
     }
     throw new Meteor.Error(403, 'NOT AUTHORIZED');
   },
   updateUserAuths:function(data){
     if(checkAuth('users')){
+      this.unblock();
       return Meteor.users.update({_id:data.id}, {$set:{'profile.authorizations':data.authorizations}});
     }
     throw new Meteor.Error(403, 'NOT AUTHORIZED');
   },
   createException:function(data){
     if(checkAuth('hours') && data){
-      var record = lodash.assign(data,{created:new Date().valueOf()});
-      return Hours.insert(record);
+      this.unblock();
+      var dateVal = new Date().valueOf();
+      var existingRecord = Hours.findOne({date:data.date, type:'exception'});
+      if(existingRecord){
+        record = lodash.assign(data,{modified:dateVal});
+        return Hours.update({_id:existingRecord._id},{$set:record});
+      } else {
+        record = lodash.assign(data,{created:dateVal});
+        return Hours.insert(record);
+      }
     }
   },
   deleteException:function(id){
     if(checkAuth('hours')){
+      this.unblock();
       return Hours.remove({_id:id});
     }
     throw new Meteor.Error(403, 'NOT AUTHORIZED');

@@ -9,7 +9,7 @@ Router.route('/',function(){
 	waitOn: function(){
 		return [Meteor.subscribe('flavorsOfTheDay'),
 				Meteor.subscribe('slideshowMedia'),
-				Meteor.subscribe('hours')
+				Meteor.subscribe('allHours')
 		];
 	},
 	onRun:function(){						//on initial load, will scrollTo hash

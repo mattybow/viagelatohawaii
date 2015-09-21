@@ -2,8 +2,8 @@ Template.editHours.onCreated(function(){
 	this.subscribe('allHours');
 	this.newException = new ReactiveVar({
 		open:true,
-		openHr:10,
-		closeHr:11
+		openHr:11,
+		closeHr:10
 	});
 	this.newExceptionDate = new ReactiveVar('');
 	var _self = this;
@@ -161,7 +161,11 @@ Template.editHours.events({
 				Growler.fail('Exception Not Created', 'Failure!');
 				console.log(err);
 			} else {
-				Growler.success('Create Exception', 'Success!');
+				if(lodash.isNumber(res)){
+					Growler.success('Updated Existing Exception', 'Success!');
+				} else {
+					Growler.success('Created Exception', 'Success!');
+				}
 			}
 		});
 	},

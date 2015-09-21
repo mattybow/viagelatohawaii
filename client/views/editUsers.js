@@ -1,4 +1,20 @@
 var PASSWORD_MATCH_ERR_MSG = 'passwords do not match';
+function getInitialPassData(){
+	return {
+		password:'',
+		confirm:'',
+		isOk:false,
+		errMsg:''
+	};
+}
+function getInitialUsernameData(){
+	return {
+		username:'',
+		isOk:false,
+		errMsg:''
+	};
+}
+
 Template.editUsers.onCreated(function(){
 	var _self = this;
 	this.subscribe('existingUsers');
@@ -35,6 +51,14 @@ Template.editUsers.onCreated(function(){
 			};
 		});
 		_self.authChoices.set(updatedChoices);
+	}
+	this.clearAuthInputs = function(){
+		this.find('#input-new-username').value = '';
+		this.find('#input-new-password').value = '';
+		this.find('#input-confirm-password').value = '';
+		_self.passwordInput.set(getInitialPassData());
+		_self.usernameInput.set(getInitialUsernameData());
+		console.log(_self.passwordInput.get());
 	}
 	this.setUserInput = function(value){
 		var data = {
@@ -75,17 +99,8 @@ Template.editUsers.onCreated(function(){
 			_self.passwordInput.set(checkPassEquality(prevDataCopy));
 		}
 	}
-	this.passwordInput = new ReactiveVar({
-		password:'',
-		confirm:'',
-		isOk:false,
-		errMsg:''
-	});
-	this.usernameInput = new ReactiveVar({
-		username:'',
-		isOk:false,
-		errMsg:''
-	});
+	this.passwordInput = new ReactiveVar(getInitialPassData());
+	this.usernameInput = new ReactiveVar(getInitialUsernameData());
 })
 
 Template.editUsers.helpers({
@@ -236,6 +251,7 @@ Template.editUsers.events({
 			} else {
 				Growler.success('User Created', 'SUCCESS!');
 				temp.clearAuthChoices();
+				temp.clearAuthInputs();
 			}
 		});
 	}

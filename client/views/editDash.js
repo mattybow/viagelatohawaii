@@ -49,6 +49,14 @@ Template.editDash.helpers({
 	getTabTemplate:function(){
 		var activeTabName = Template.instance().activeTab.get();
 		return tabNames[activeTabName].templateName;
+	},
+	authorizedToView:function(){
+		var tab = Template.instance().activeTab.get();
+		var auths = Meteor.user().profile.authorizations;
+		if(auths.indexOf(tab) >= 0){
+			return true;
+		}
+		return false;
 	}
 });
 
