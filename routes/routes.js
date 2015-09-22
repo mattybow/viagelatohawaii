@@ -1,9 +1,7 @@
 Router.configure({
   notFoundTemplate: 'notFound'
 });
-Router.route('/',function(){
-	this.render('Via');
-},{
+Router.route('/',{
 	name:'home',
 	fastRender:true,
 	waitOn: function(){
@@ -18,20 +16,43 @@ Router.route('/',function(){
 			viaScrollTo(hash);
 		});
 		this.next();
+	},
+	onAfterAction: function(){
+		setAdminTitle('Via Gelato Hawaii')
+	},
+	action:function(){
+		this.render('Via');
 	}
 });
-Router.route('/edit',function(){
-	this.render('editDash');
+
+Router.route('/edit',{
+	onAfterAction: function(){
+		setAdminTitle('Via Admin')
+	},
+	action:function(){
+		this.render('editDash');
+	}
 });
-Router.route('/edit/:tab',function(){
-	var tab = this.params.tab;
-	this.render('editDash',{data:{tab:tab}});
+Router.route('/edit/:tab',{
+	onAfterAction: function(){
+		setAdminTitle('Via Admin')
+	},
+	action:function(){
+		var tab = this.params.tab;
+		this.render('editDash',{data:{tab:tab}});
+	}
+});
+
+Router.route('/test',function(){
+	this.render('test');
 });
 
 if(Meteor.isClient){
 	Router._scrollToHash = viaScrollTo;
 }
-
+function setAdminTitle(title){
+	document.title = title;
+}
 function viaScrollTo(hash) {
   var section = $(hash);
   if (section.length) {
