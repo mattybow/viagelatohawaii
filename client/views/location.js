@@ -26,6 +26,7 @@ Template.location.helpers({
 
 Template.location.onCreated(function(){
 	var _self = this;
+	Session.set('drawLocation',false);
 	this.autorun(function(c){
 		if(Session.get('drawLocation')){
 			_self.locationSvg.draw();

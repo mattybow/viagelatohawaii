@@ -169,11 +169,26 @@ input[type=number]::-webkit-outer-spin-button {
 	}
 	.display-exception-hours, .display-exception-status{
 		min-width:100px;
+		flex: 1 1 auto;
+	}
+	.display-exception-status{
+		margin-right: 30px;
+		text-align:left;
 	}
 	.display-exception-hours{
 		text-align:right;
+		margin-right: 10px;
+		max-width: 115px;
+	}
+	.display-exception-date-holder{
+		  width:100%;
+		  justify-content:flex-start;
+	}
+	.delete-button-holder{
+		height: 1px;
+  		width: 100%
 	}
 	#delete-exception{
-		transform:translateY(-2.4em);
+		transform:translateY(-4.0em)
 	}
 }
