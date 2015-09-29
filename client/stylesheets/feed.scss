@@ -1,6 +1,5 @@
 .slide_holder{
 	background-color:rgba(255,255,255,.6);
-	width:25%;
 	height:auto;
 	margin-right:5px;
 	display:inline-block;
@@ -9,10 +8,14 @@
 	img{
 		width: 100%;
 	}
+
+	&:first-child{
+		transform:translateX(0px);
+	}
 }
 .feed-slides{
 	margin: 40px 0;
-	padding-right: 30px;
+	padding-right: 15px;
 	width: 100%;
 	overflow: hidden;
 	display: flex;
@@ -71,13 +74,19 @@
 	font-size: 1.2em;
 }
 #feed-slide-wrapper{
-	white-space:nowrap;
-
+	display:flex;
+	flex-flow:row nowrap;
 }
 
 @media(max-width:414px){
 	.press-slides{
 		margin: 20px 0;
+	}
+}
+
+@media(min-width:769px){
+	.slide_holder{
+		min-width:25%;
 	}
 }
 
@@ -126,7 +135,7 @@
 
 @media(max-width : 414px) and (orientation: portrait), (max-width : 667px) and (orientation: landscape) {
 	.slide_holder{
-		width:170px;
+		min-width:290px;
 	}
 	#instafeed{
 		padding-left:40px;
@@ -155,7 +164,7 @@
 
 @media(max-width : 320px) and (orientation: portrait) {
 	.slide_holder{
-		width:150px;
+		min-width:260px;
 	}
 	#instafeed{
 		padding-left:30px;
