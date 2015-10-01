@@ -3,6 +3,8 @@ Template.press.onCreated(function(){
 	this.subscribe('pressMedia',function(){
 		var media = SiteMedia.getPressMedia().fetch();
 		_self.imageLightbox = $( 'a.press-lightbox-img' ).imageLightbox({
+			selector: 'id="imageLightbox"',
+			appendSelector: '#lightbox-image-holder',
 			quitOnDocClick: false,
 			onEnd:function(){
 				console.log('end event', arguments);

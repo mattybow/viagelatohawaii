@@ -33,8 +33,17 @@
 		margin:0;
 	}
 }
+#imageLightbox-caption{
+	position:absolute;
+	width:100%;
+	bottom:0;
+	left:0;
+	text-align:center;
+	color:#fff;
+	margin-bottom:2em;
+}
 
-#imagelightbox
+#imageLightbox
 {
     position: fixed;
     z-index: 9999;

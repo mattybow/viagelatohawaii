@@ -128,7 +128,7 @@ Available for use under the MIT License
                     image = $('<img ' + options.selector + ' />')
                         .attr('src', target.attr('href'))
                         .load(function() {
-                            image.appendTo('body');
+                            image.appendTo(options.appendSelector);
                             setImage();
 
                             var params = {
