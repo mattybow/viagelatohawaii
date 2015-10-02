@@ -4,7 +4,8 @@
 	transform:translateX(100%);
 	position:relative;
 	height:100%;
-	overflow:auto;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 
 	&.open{
 		transform:translateX(0%);

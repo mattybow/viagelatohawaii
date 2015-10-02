@@ -41,11 +41,16 @@ function bodyNoScroll(e){
 }
 
 Template.header.onRendered(function(){
-	scrollIntervalID = Meteor.setInterval(updatePage, 1000/60);
+	raf();
 });
 
 var prevScrollPos = 0;
 Session.setDefault('drawLocation',false);
+
+function raf(){
+	window.requestAnimationFrame(raf);
+	updatePage();
+}
 
 function updatePage(){
 	var scrollPos = window.scrollY;
