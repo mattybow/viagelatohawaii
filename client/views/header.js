@@ -11,7 +11,7 @@ Template.header.events({
 	'click .burger-touch-area, click .mobile-nav-text':function(){
 		var state = !Session.get('isMenuOpen');
 		Session.set('isMenuOpen',state);
-		
+
 		if(state){
 			$('#mobile-nav .mobile-nav-text').velocity('upAndInNav',{stagger:50, delay:100});
 		} else {
@@ -89,13 +89,13 @@ function updateLocation(dir){
 
 $.Velocity.RegisterEffect('upAndInNav', {
     defaultDuration: 1200,
-    calls: [ 
+    calls: [
         [ { translateY: 0, opacity:1 }, 0.16]
     ]
 });
 $.Velocity.RegisterEffect('byeByeNav', {
     defaultDuration: 1200,
-    calls: [ 
+    calls: [
         [ {translateY:50, opacity:0}, 0.16]
     ]
 });

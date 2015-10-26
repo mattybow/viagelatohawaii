@@ -53,7 +53,7 @@
 	background-size:cover;
 	background-position: center center;
 	background-repeat:norepeat;
-	
+
 	img{
 		width: auto;
 		height: 100%;
@@ -98,24 +98,33 @@
 }
 
 .slick-dots{
-	z-index:99;
+	z-index:100;
 	li {
-		padding:7px;
+		padding:1px;
+		border:1px solid #7e7d78;
+		border-radius:50px;
+		height: 6px;
+		width: 6px;
+		margin: 0 10px;
 		button{
-			border:1px solid rgba(0,0,0,.3);
-			border-radius:50px;
-			height: 100%;
-	  		width: 100%;
-	  		padding:1px;
+			height: 26px;
+		  width: 26px;
+		  padding: 1px;
+		  position: absolute;
+		  top: -10px;
+		  left: -10px;
+			padding:1px;
 			&:before{
 				content: "";			//open dot
 				opacity:1;
+				height: 100%;
+			  width: 100%;
 			}
 		}
 	}
 	li.slick-active {
+		background-color:#7e7d78;
 		button{
-			background-color:#7e7d78;
 			&:before{  //solid dot
 				content: "";
 				font-size: 20px;
@@ -125,7 +134,7 @@
 	}
 }
 
-/** 
+/**
  * iPad with portrait orientation.
  */
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
@@ -133,8 +142,8 @@
     height: 512px; //1024*.75
   }
 }
- 
-/** 
+
+/**
  * iPad with landscape orientation.
  */
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
@@ -147,16 +156,16 @@
  * iPhone 6
  */
 // @media screen and (device-aspect-ratio: 375/667) {
-  
+
 // }
- 
+
 
 
 /**
  * iPhone 4
  */
 // @media screen and (device-aspect-ratio: 320/480) {
-  
+
 // }
 
 /* iPhone 6 and below */
@@ -188,16 +197,8 @@
 	.slick-dots{
 		bottom:-35px;
 		li{
-			margin:0;
+			margin:0 7px;
 		}
-	}
-	.slick-dots li.slick-active button:before {
-		font-size:10px;
-		padding-bottom:2px;
-		transform: translateY(-1px);
-	}
-	.slick-dots li button:before{
-		font-size:4px;
 	}
 	#slideshow{
 		margin-top: 70px;

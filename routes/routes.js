@@ -60,7 +60,6 @@ function viaScrollTo(hash) {
     $("html, body").animate({
       scrollTop: sectionTop
     }, 350,function(){
-    	console.log('HIDE NAV');
     	Meteor.setTimeout(function(){
     		Session.set('isNavHidden',true);
     	},10);
