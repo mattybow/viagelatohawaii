@@ -2,7 +2,7 @@ MEDIA_BREAK_POINTS = {
 	mobile:414,
 	tablet:768,
 	laptop:1420,
-	desktop:1600 
+	desktop:1600
 }
 
 Template.slideshow.onCreated(function(){
@@ -15,7 +15,7 @@ Template.slideshow.onCreated(function(){
 					prevArrow:'#slideshow-prev-arrow',
 					nextArrow:'#slideshow-next-arrow',
 					autoplay: true,
-  					autoplaySpeed: 3000,
+  					autoplaySpeed: 5000,
   					cssEase:'ease-in-out',
   					pauseOnDotsHover:true
 				});
@@ -55,7 +55,7 @@ Template.slideshow.helpers({
 				return record.imgPath.replace(regex,replacementVal);
 			});
 		}
-		
+
 		return imgs;
 	},
 	openOrClosed:function(){
@@ -64,7 +64,7 @@ Template.slideshow.helpers({
 		return hours.openHour ? 'Open today!' : 'Closed today';
 	},
 	getHours:function(){
-		var time = Template.instance().timeChecked.get();
+		var time = Template.instance().timeChecked.get();	//hack to get time to change
 		var hours = getTodaysHours();
 		if(hours && hours.openHour){
 			return hours.openHour+':00 AM - '+(hours.closeHour-12)+':00 PM';
@@ -87,7 +87,7 @@ function getTodaysHours(){
 function getTodaysException(){
 	var todayDate = getDateInHawaii().toISOString();
 	var exception = Hours.find({$and:[
-		{date:{$lte:todayDate}}, 
+		{date:{$lte:todayDate}},
 		{type:'exception'}
 		]},
 		{sort:{date:-1},
@@ -107,7 +107,3 @@ function getDateInHawaii(){
 	var dateNum = new Date().setUTCHours(10);
 	return new Date(dateNum);
 }
-
-
-
-

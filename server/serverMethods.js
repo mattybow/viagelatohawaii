@@ -149,7 +149,7 @@ Meteor.methods({
     if(verifyCaptchaResponse.data.success === false){
       return {ok:false, err:'could not verify captcha response'};
     }
-    var subjectLine = 'TESTING: '+ name + ' writes from via-dev.viagelatohawaii.com';
+    var subjectLine = name + ' writes from viagelatohawaii.com';
     var emailToVia = {
       to: to,
       from: fromAddress,
@@ -158,7 +158,7 @@ Meteor.methods({
     };
 
     var confirmationSubjectLine = 'Thanks for contacting Via Gelato Hawaii'
-    var confirmationText = '<div style="font-size:2em; font-weight:300;">Hi ' + name + ',</div><p>Thanks for contacting Via Gelato Hawaii.</p><p>If you made an inquiry, we will get back to you shortly.</p><br><br><br><hr><div class="footer" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-flow: row nowrap; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -webkit-box-pack: start; -webkit-justify-content: flex-start; -ms-flex-pack: start; justify-content: flex-start; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; width: 100%; "><img style="max-height:70px;" src="https://s3-us-west-2.amazonaws.com/viagelato/images/via-logo-sm.png" alt=""> <div class="via-info"><div>Via Gelato Hawaii</div><div>1142 12th Ave Honolulu, HI 96816</div><div>808-732-2800</div><div><a href="http://viagelatohawaii.com/">viagelatohawaii.com</a></div></div></div>';
+    var confirmationText = '<div style="font-size:2em; font-weight:300;">Hi ' + name + ',</div><p>Thanks for contacting Via Gelato Hawaii.</p><p>If you made an inquiry, we will get back to you within 1 business day.  Note, we are closed on Mondays.</p><br><br><br><hr><div class="footer" style="display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-flow: row nowrap; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -webkit-box-pack: start; -webkit-justify-content: flex-start; -ms-flex-pack: start; justify-content: flex-start; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; width: 100%; "><img style="max-height:70px;" src="https://s3-us-west-2.amazonaws.com/viagelato/images/via-logo-sm.png" alt=""> <div class="via-info"><div>Via Gelato Hawaii</div><div>1142 12th Ave Honolulu, HI 96816</div><div>808-732-2800</div><div><a href="http://viagelatohawaii.com/">viagelatohawaii.com</a></div></div></div>';
     var confirmationEmail = {
       to: fromAddress,
       from: to,
@@ -236,7 +236,7 @@ function verifyCaptcha(clientIP, response) {
       'secret=' + captcha_data.privatekey +
       '&remoteip=' + captcha_data.remoteip +
       '&response=' + captcha_data.response;
-      
+
   var captchaVerificationResult = null;
 
   try {

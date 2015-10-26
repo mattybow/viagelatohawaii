@@ -4,7 +4,8 @@
 	transform:translateX(100%);
 	position:relative;
 	height:100%;
-	overflow:auto;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 
 	&.open{
 		transform:translateX(0%);
@@ -21,12 +22,12 @@
 }
 
 .lib-flavor-item{
-	padding: 10px 30px 10px 0;
+	padding: 1em 30px 1em 0;
 	border-bottom:1px solid rgba(50,50,50,.1);
 	position:relative;
 	img{
 		position:absolute;
-		top:.4em;
+		top:.8em;
 		right:0;
 		height:25px;
 		width:auto;

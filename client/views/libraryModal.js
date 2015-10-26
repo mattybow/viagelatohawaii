@@ -1,5 +1,8 @@
 Template.libraryModal.onCreated(function(){
-	this.subscribe('allFlavors');
+	console.log('here');
+	this.subscribe('allFlavors',function(){
+		console.log('FLAVORS',Flavors.getAll().count());
+	});
 });
 
 Template.libraryModal.helpers({

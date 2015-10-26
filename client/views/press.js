@@ -1,5 +1,17 @@
 Template.press.onCreated(function(){
-	this.subscribe('pressMedia');
+	var _self = this;
+	this.subscribe('pressMedia',function(){
+		var media = SiteMedia.getPressMedia().fetch();
+		_self.imageLightbox = $( 'a.press-lightbox-img' ).imageLightbox({
+			selector: 'id="imageLightbox"',
+			appendSelector: '#lightbox-image-holder',
+			quitOnDocClick: false,
+			onEnd:function(){
+				console.log('end event', arguments);
+				Session.set('showLightboxOverlay',false);
+			}
+		});
+	});
 	this.subscribe('frames');
 });
 
@@ -10,23 +22,6 @@ Template.press.helpers({
 	showOverlay:function(){
 		return Session.get('showLightboxOverlay') ? 'show-overlay' : '';
 	}
-})
-
-Template.press.onRendered(function(){
-	var _self = this;
-	this.autorun(function(c){
-		var media = SiteMedia.getPressMedia().fetch();
-		if(!lodash.isEmpty(media)){
-			_self.imageLightbox = $( 'a.press-lightbox-img' ).imageLightbox({
-				quitOnDocClick: false,
-				onEnd:function(){
-					Session.set('showLightboxOverlay',false);
-				}
-			});
-			c.stop();
-		}
-		
-	});
 });
 
 Template.press.events({
