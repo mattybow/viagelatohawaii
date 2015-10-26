@@ -149,7 +149,7 @@ Meteor.methods({
     if(verifyCaptchaResponse.data.success === false){
       return {ok:false, err:'could not verify captcha response'};
     }
-    var subjectLine = 'TESTING: '+ name + ' writes from via-dev.viagelatohawaii.com';
+    var subjectLine = name + ' writes from viagelatohawaii.com';
     var emailToVia = {
       to: to,
       from: fromAddress,
@@ -236,7 +236,7 @@ function verifyCaptcha(clientIP, response) {
       'secret=' + captcha_data.privatekey +
       '&remoteip=' + captcha_data.remoteip +
       '&response=' + captcha_data.response;
-      
+
   var captchaVerificationResult = null;
 
   try {
