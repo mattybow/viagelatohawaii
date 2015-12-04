@@ -61,6 +61,19 @@ Router.route('/edit/:tab',{
 	}
 });
 
+Router.route('/test',function(){
+	this.render('test');
+});
+
+Router.route('/sitemap', { where: 'server' })
+  .get(function () {
+    this.response.writeHead(200, {
+      "Content-Type": "text/plain"
+    });
+    this.response.end("http://www.viagelatohawaii.com/#flavorsDay\nhttp://www.viagelatohawaii.com/#story\nhttp://www.viagelatohawaii.com/#location\nhttp://www.viagelatohawaii.com/#hours\nhttp://www.viagelatohawaii.com/#contact\nhttp://www.viagelatohawaii.com/#press");
+  });
+
+
 Router.route('/:legacyRoute',{
 	action:function(){
     console.log('detect legacy route');
@@ -75,10 +88,6 @@ Router.route('/:legacyRoute',{
     }
     this.render('notFound');
 	}
-});
-
-Router.route('/test',function(){
-	this.render('test');
 });
 
 if(Meteor.isClient){
