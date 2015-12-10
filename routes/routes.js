@@ -29,7 +29,7 @@ Router.route('/',{
 	},
 	onAfterAction: function(){
 		setAdminTitle('Via Gelato Hawaii');
-    console.log('after action');
+    // console.log('after action');
     var hash = getUrlFragment();
     if(scrollPending){
       Meteor.setTimeout(function(){
@@ -38,7 +38,7 @@ Router.route('/',{
     }
 	},
 	action:function(){
-    console.log('run VIA route');
+    // console.log('run VIA route');
 		this.render('Via');
 	}
 });
@@ -76,7 +76,7 @@ Router.route('/sitemap', { where: 'server' })
 
 Router.route('/:legacyRoute',{
 	action:function(){
-    console.log('detect legacy route');
+    //console.log('detect legacy route');
     var htmlRoute = this.params.legacyRoute;
     var htmlRegex = /\.html/;
     if(htmlRoute.match(htmlRegex)){
@@ -103,11 +103,11 @@ function getUrlFragment(){
 
 function viaScrollTo(hash) {
   var section = $(hash);
-  console.log(hash, section.length, document.getElementById('flavorsDay'));
+  //console.log(hash, section.length, document.getElementById('flavorsDay'));
   if (section.length) {
     var sectionTop = section.offset().top + 5;
     scrollPending = false;
-    console.log(sectionTop);
+    //console.log(sectionTop);
     $("html, body").animate({
       scrollTop: sectionTop
     }, 350,function(){

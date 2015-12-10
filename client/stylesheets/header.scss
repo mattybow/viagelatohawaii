@@ -76,7 +76,7 @@ $burger-size:24px;
 $burger-size-open:28px;
 .burger-touch-area{
   position: absolute;
-  left: 5%;
+  right: 22px;
   width: 40px;
   height: 40px;
   padding-top: 6px;
@@ -225,7 +225,7 @@ $burger-size-open:28px;
 }
 
 /*iPad in portrait and below*/
-@media (max-width : 768px) and (orientation: portrait) , (max-width:736px) and (orientation: landscape){ 
+@media (max-width : 768px) and (orientation: portrait) , (max-width:736px) and (orientation: landscape){
   .desktop{
     display:none;
   }
