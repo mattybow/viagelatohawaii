@@ -6,8 +6,11 @@ Template.giftCards.helpers({
     if(Meteor.isClient){
   		var mediaWidth = window.innerWidth;
   		if(mediaWidth <= MEDIA_BREAK_POINTS.mobile){
-  			resolution = "-mobile"
+  			resolution = "-mobile";
   		}
+      if(window.devicePixelRatio === 2){
+        resolution += "-retina";
+      }
   	}
     return url + resolution + ext;
   }
