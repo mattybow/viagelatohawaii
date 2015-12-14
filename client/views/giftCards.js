@@ -7,10 +7,10 @@ Template.giftCards.helpers({
   		var mediaWidth = window.innerWidth;
   		if(mediaWidth <= MEDIA_BREAK_POINTS.mobile){
   			resolution = "-mobile";
+        if(window.devicePixelRatio === 2){
+          resolution += "-retina";
+        }
   		}
-      if(window.devicePixelRatio === 2){
-        resolution += "-retina";
-      }
   	}
     return url + resolution + ext;
   }
