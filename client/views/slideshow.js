@@ -104,6 +104,6 @@ function getTodaysException(){
 }
 
 function getDateInHawaii(){
-	var dateNum = new Date().setUTCHours(10);
+	var dateNum = new Date().setUTCHours(-10);
 	return new Date(dateNum);
 }
