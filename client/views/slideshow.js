@@ -107,5 +107,3 @@ function getDateInHawaii(){
 	var dateNum = new Date().setUTCHours(-10);
 	return new Date(dateNum);
 }
-
-//build new version
