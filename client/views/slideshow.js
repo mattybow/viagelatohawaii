@@ -81,6 +81,7 @@ function getTodaysHours(){
 	}
 	var dayIndex = getDateInHawaii().getDay();
 	var hours = Hours.findOne({dayIndex:dayIndex});
+	console.log(hours.day, getDateInHawaii(), dayIndex);
 	return hours;
 }
 
@@ -104,6 +105,8 @@ function getTodaysException(){
 }
 
 function getDateInHawaii(){
-	var dateNum = new Date().setUTCHours(-10);
-	return new Date(dateNum);
+	var offset = -10;
+	var d = new Date();
+  var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  return new Date( utc + 3600000 * offset);
 }
