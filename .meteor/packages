@@ -21,7 +21,6 @@ email
 meteorhacks:fast-render
 thinksoftware:image-resize-client
 gadicohen:phantomjs
-spiderable
 standard-minifiers
 meteor-base
 mobile-experience
@@ -39,3 +38,4 @@ check
 fourseven:scss
 
 
+ongoworks:spiderable
