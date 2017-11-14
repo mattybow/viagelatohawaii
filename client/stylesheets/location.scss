@@ -1,6 +1,7 @@
-#handrawn-map{
+.handrawn-map{
 	width:100%;
-	height:75vh;
+	margin:20px 0;
+	margin-bottom: 10rem;
 }
 .inline-icon{
 	width:1.8em;
@@ -40,9 +41,6 @@
 	margin-top:.5em;
 }
 
-#handrawn-map{
-	margin:20px 0;
-}
 #svg-map{
 	path, line, polyline {
 		stroke: #000000;
@@ -68,30 +66,18 @@
 	#location{
 		padding:40px 10%;
 	}
-	#handrawn-map{
-		height: 55vh;
+	.handrawn-map{
 		margin:0;
 	}
 }
 
 @media (max-width:414px) and (orientation:portrait){
-	#handrawn-map{
-		background-position:20% 50%;
-		background-size:cover;
-		height:280px;
-	}
-}
-
-@media (max-width:736px) and (orientation:landscape){
-	#handrawn-map{
-		height:375px;
+	.handrawn-map{
+		margin-bottom: 3rem;
 	}
 }
 
 @media (max-width:320px) and (orientation:portrait){
-	#handrawn-map{
-		height:240px;
-	}
 	#address-text{
 		max-width: 180px;
 		margin: auto;
