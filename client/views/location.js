@@ -16,7 +16,7 @@ Template.location.helpers({
 			/*case 'Android':
 				return 'comgooglemaps://?q=Via+Gelato+Hawaii&center=21.2821321,-157.7992884';*/
 			default:
-				return '//goo.gl/maps/bRgurwEXBeK2';
+				return '//www.google.com/maps/place/Via+Gelato/@21.2929114,-157.8521765,15z/data=!4m5!3m4!1s0x0:0x58a52d7570978229!8m2!3d21.2929114!4d-157.8521765?hl=en';
 		}
 	}
 });
